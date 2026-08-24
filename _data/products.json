@@ -1,0 +1,56 @@
+[
+  {
+    "id": "sports-runner-001",
+    "name": "Men's Sports Running Shoe",
+    "category": "Sports Shoes",
+    "image": "https://via.placeholder.com/600x400?text=Running+Shoe",
+    "description": "Lightweight running shoe with breathable mesh upper and durable rubber outsole. Suitable for daily training and casual wear.",
+    "priceRange": "$5 - $8 / pair (depending on quantity)",
+    "featured": true
+  },
+  {
+    "id": "women-sandal-002",
+    "name": "Women's Summer Sandal",
+    "category": "Sandals & Slippers",
+    "image": "https://via.placeholder.com/600x400?text=Summer+Sandal",
+    "description": "Elegant summer sandal with soft insole and anti-slip sole. Perfect for hot climates and daily use.",
+    "priceRange": "$3 - $5 / pair",
+    "featured": true
+  },
+  {
+    "id": "work-boot-003",
+    "name": "Safety Work Boot",
+    "category": "Work & Safety Shoes",
+    "image": "https://via.placeholder.com/600x400?text=Work+Boot",
+    "description": "Steel toe work boot with puncture-resistant sole, meeting international safety standards for industrial use.",
+    "priceRange": "$8 - $12 / pair",
+    "featured": false
+  },
+  {
+    "id": "men-casual-004",
+    "name": "Men's Casual Leather Shoe",
+    "category": "Men's Shoes",
+    "image": "https://via.placeholder.com/600x400?text=Casual+Leather+Shoe",
+    "description": "Classic casual leather shoe with comfortable lining and durable sole. Suitable for business and daily wear.",
+    "priceRange": "$6 - $9 / pair",
+    "featured": true
+  },
+  {
+    "id": "women-boot-005",
+    "name": "Women's Fashion Boot",
+    "category": "Boots",
+    "image": "https://via.placeholder.com/600x400?text=Fashion+Boot",
+    "description": "Stylish fashion boot with quality synthetic leather and warm lining. Ideal for autumn and winter seasons.",
+    "priceRange": "$7 - $10 / pair",
+    "featured": false
+  },
+  {
+    "id": "kids-sneaker-006",
+    "name": "Kids' Sports Sneaker",
+    "category": "Kids' Shoes",
+    "image": "https://via.placeholder.com/600x400?text=Kids+Sneaker",
+    "description": "Comfortable and durable sneaker for children. Lightweight with non-slip sole, perfect for active kids.",
+    "priceRange": "$3 - $5 / pair",
+    "featured": true
+  }
+]
