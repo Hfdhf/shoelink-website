@@ -1,0 +1,59 @@
+backend:
+  name: github
+  repo: Hfdhf/shoelink-website   # 例如 zhangsan/shoelink-website
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "products"
+    label: "Products"
+    files:
+      - name: "products"
+        label: "Products List"
+        file: "_data/products.json"
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Unique identifier, e.g., sports-runner-001" }
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Category", name: "category", widget: "string", hint: "Must match category name exactly" }
+              - { label: "Image", name: "image", widget: "image", hint: "Upload product image" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Price Range", name: "priceRange", widget: "string", hint: "e.g., $5 - $8 / pair" }
+              - { label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Show on homepage if enabled" }
+              
+  - name: "categories"
+    label: "Categories"
+    files:
+      - name: "categories"
+        label: "Categories List"
+        file: "_data/categories.json"
+        fields:
+          - label: "Categories"
+            name: "categories"
+            widget: "list"
+            field: { label: "Category Name", name: "name", widget: "string" }
+            
+  - name: "site_settings"
+    label: "Site Settings"
+    files:
+      - name: "site"
+        label: "Site Information"
+        file: "_data/site.json"
+        fields:
+          - { label: "Brand Name", name: "brandName", widget: "string" }
+          - { label: "Contact Email", name: "contactEmail", widget: "string" }
+          - { label: "WhatsApp Number", name: "whatsapp", widget: "string", hint: "Include country code, e.g., +8613800138000" }
+          - { label: "Address", name: "address", widget: "string" }
+          - label: "Social Links"
+            name: "socialLinks"
+            widget: "object"
+            fields:
+              - { label: "Facebook", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "LinkedIn", name: "linkedin", widget: "string", required: false }
+          - { label: "Tawk.to ID", name: "tawkToId", widget: "string", required: false, hint: "Your Tawk.to property ID for live chat" }
