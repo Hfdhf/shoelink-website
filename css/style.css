@@ -1,0 +1,91 @@
+/* 全局样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.hero {
+    padding-top: 76px; /* 补偿固定导航栏 */
+}
+.card {
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.btn-warning {
+    background-color: #C9A24B;
+    border-color: #C9A24B;
+    color: #1F3A5F;
+}
+.btn-warning:hover {
+    background-color: #b8913d;
+    border-color: #b8913d;
+    color: #1F3A5F;
+}
+a {
+    color: #1F3A5F;
+}
+footer a {
+    text-decoration: none;
+}
+/* 产品卡片图片固定高度 */
+.product-img {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+/* 分类卡片样式 */
+.category-card {
+    background-color: #1F3A5F;
+    color: white;
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+    height: 100%;
+}
+.category-card:hover {
+    background-color: #C9A24B;
+    color: #1F3A5F;
+    transform: translateY(-5px);
+}
+.category-card h5 {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+/* 产品卡片 */
+.product-card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    height: 100%;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+.product-card .card-body {
+    padding: 20px;
+}
+/* 表单样式 */
+.form-control:focus {
+    border-color: #C9A24B;
+    box-shadow: 0 0 0 0.2rem rgba(201, 162, 75, 0.25);
+}
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 60vh !important;
+    }
+    .display-4 {
+        font-size: 2rem;
+    }
+}
