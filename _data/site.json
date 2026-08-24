@@ -1,0 +1,12 @@
+{
+  "brandName": "ShoeLink",
+  "contactEmail": "info@shoelink.com",
+  "whatsapp": "+123456789",
+  "address": "ShoeLink Footwear Co., Ltd.",
+  "socialLinks": {
+    "facebook": "https://facebook.com/yourpage",
+    "instagram": "https://instagram.com/yourpage",
+    "linkedin": "https://linkedin.com/company/yourpage"
+  },
+  "tawkToId": "YOUR_TAWK_ID"
+}
