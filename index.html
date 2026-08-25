@@ -20,8 +20,6 @@
             font-family: 'Inter', 'Segoe UI', sans-serif;
             color: #2d3748;
         }
-        
-        /* Hero 美化 */
         .hero {
             background: linear-gradient(135deg, #0f1a2e 0%, #1F3A5F 40%, #2a4a6f 70%, #3a5a7f 100%);
             position: relative;
@@ -83,8 +81,6 @@
             transform: translateY(-2px);
             background: rgba(255,255,255,0.1);
         }
-        
-        /* 统计徽章 */
         .hero-stats {
             margin-top: 40px;
             display: flex;
@@ -105,8 +101,6 @@
             color: rgba(255,255,255,0.7);
             letter-spacing: 0.5px;
         }
-        
-        /* Why Choose Us 美化 */
         .why-card {
             background: white;
             border-radius: 16px;
@@ -156,8 +150,6 @@
             font-size: 0.95rem;
             line-height: 1.6;
         }
-        
-        /* Featured Categories 美化 */
         .category-card-featured {
             background: white;
             border-radius: 16px;
@@ -222,8 +214,6 @@
             background: #C9A24B;
             color: #1F3A5F;
         }
-        
-        /* CTA 美化 */
         .cta-section {
             background: linear-gradient(135deg, #1F3A5F 0%, #2a4a6f 100%);
             position: relative;
@@ -247,16 +237,19 @@
             font-weight: 800;
             letter-spacing: -0.5px;
         }
-        
-        /* 页脚 */
         footer {
             background: #0f1a2e;
         }
-        footer p {
-            margin-bottom: 5px;
+        footer .social-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
         }
-        
-        /* 响应式 */
+        footer .social-links a:hover {
+            color: #C9A24B;
+        }
         @media (max-width: 768px) {
             .hero {
                 min-height: auto !important;
@@ -306,19 +299,8 @@
                         <a href="products.html" class="btn btn-warning btn-lg text-dark fw-bold me-3">View Products</a>
                         <a href="contact.html" class="btn btn-outline-light btn-lg">Get a Quote</a>
                     </div>
-                    <div class="hero-stats">
-                        <div class="hero-stat-item">
-                            <span class="hero-stat-number">10+</span>
-                            <span class="hero-stat-label">Partner Factories</span>
-                        </div>
-                        <div class="hero-stat-item">
-                            <span class="hero-stat-number">7</span>
-                            <span class="hero-stat-label">Product Categories</span>
-                        </div>
-                        <div class="hero-stat-item">
-                            <span class="hero-stat-number">5+</span>
-                            <span class="hero-stat-label">Export Regions</span>
-                        </div>
+                    <div class="hero-stats" id="heroStats">
+                        <!-- 由 JS 从 site.json 动态加载 -->
                     </div>
                 </div>
             </div>
@@ -329,28 +311,8 @@
     <section class="py-5 bg-light" style="background: #f8fafc !important;">
         <div class="container py-3">
             <h2 class="text-center mb-5 fw-bold" style="color:#1F3A5F;">Why Choose Us</h2>
-            <div class="row g-4">
-                <div class="col-md-4 mb-3">
-                    <div class="why-card text-center">
-                        <div class="why-icon">🏭</div>
-                        <h5>Strong Production Capacity</h5>
-                        <p>Partnered with 10+ factories, ensuring timely delivery for large orders and consistent quality control.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="why-card text-center">
-                        <div class="why-icon">👟</div>
-                        <h5>Wide Product Range</h5>
-                        <p>From sports shoes to boots, sandals, and safety shoes — we cover all major footwear categories.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="why-card text-center">
-                        <div class="why-icon">🌍</div>
-                        <h5>Global Export Experience</h5>
-                        <p>Serving clients in Middle East, Russia, Africa, and Americas with custom solutions and competitive pricing.</p>
-                    </div>
-                </div>
+            <div class="row g-4" id="whyChooseUs">
+                <!-- 由 JS 从 site.json 动态加载 -->
             </div>
         </div>
     </section>
@@ -361,7 +323,7 @@
             <h2 class="text-center mb-3 fw-bold" style="color:#1F3A5F;">Featured Categories</h2>
             <p class="text-center text-muted mb-5">Click "View Details" to explore our products</p>
             <div class="row g-4" id="featuredCategories">
-                <!-- 由 JS 动态渲染分类卡片 -->
+                <!-- 由 JS 从 categories.json 动态加载 -->
             </div>
         </div>
     </section>
@@ -380,6 +342,9 @@
     <footer class="text-white py-4">
         <div class="container text-center">
             <p class="mb-1 fw-bold" style="letter-spacing:0.5px;">ShoeLink</p>
+            <div class="social-links mb-2" id="footerSocial">
+                <!-- 由 JS 从 site.json 动态加载 -->
+            </div>
             <p class="small mb-2 opacity-75">&copy; 2025 ShoeLink. All rights reserved.</p>
             <p class="small mb-0 opacity-50" id="footerContact">Contact us: info@shoelink.com | WhatsApp: +123456789</p>
         </div>
@@ -387,13 +352,73 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+    let siteData = {};
+
     async function loadSiteInfo() {
         try {
             const res = await fetch('_data/site.json');
-            const data = await res.json();
-            document.querySelectorAll('.navbar-brand').forEach(el => el.textContent = data.brandName || 'ShoeLink');
-            document.getElementById('footerContact').textContent = 'Contact us: ' + (data.contactEmail || '') + ' | WhatsApp: ' + (data.whatsapp || '');
-        } catch(e) {}
+            siteData = await res.json();
+            
+            // 品牌名
+            document.querySelectorAll('.navbar-brand').forEach(el => el.textContent = siteData.brandName || 'ShoeLink');
+            
+            // 页脚联系方式
+            document.getElementById('footerContact').textContent = 'Contact us: ' + (siteData.contactEmail || '') + ' | WhatsApp: ' + (siteData.whatsapp || '');
+            
+            // 社媒链接
+            renderFooterSocial(siteData.socialLinks || {});
+            
+            // Hero 统计
+            renderHeroStats(siteData.heroStats || []);
+            
+            // Why Choose Us
+            renderWhyChooseUs(siteData.whyChooseUs || []);
+            
+        } catch(e) {
+            console.error('Failed to load site data:', e);
+        }
+    }
+
+    function renderFooterSocial(social) {
+        const container = document.getElementById('footerSocial');
+        let html = '';
+        if (social.facebook && social.facebook !== '#') {
+            html += '<a href="' + social.facebook + '" target="_blank">Facebook</a>';
+        }
+        if (social.instagram && social.instagram !== '#') {
+            html += '<a href="' + social.instagram + '" target="_blank">Instagram</a>';
+        }
+        if (social.linkedin && social.linkedin !== '#') {
+            html += '<a href="' + social.linkedin + '" target="_blank">LinkedIn</a>';
+        }
+        container.innerHTML = html;
+    }
+
+    function renderHeroStats(stats) {
+        const container = document.getElementById('heroStats');
+        let html = '';
+        stats.forEach(function(stat) {
+            html += '<div class="hero-stat-item">';
+            html += '  <span class="hero-stat-number">' + stat.number + '</span>';
+            html += '  <span class="hero-stat-label">' + stat.label + '</span>';
+            html += '</div>';
+        });
+        container.innerHTML = html;
+    }
+
+    function renderWhyChooseUs(items) {
+        const container = document.getElementById('whyChooseUs');
+        let html = '';
+        items.forEach(function(item) {
+            html += '<div class="col-md-4 mb-3">';
+            html += '  <div class="why-card text-center">';
+            html += '    <div class="why-icon">' + item.icon + '</div>';
+            html += '    <h5>' + item.title + '</h5>';
+            html += '    <p>' + item.description + '</p>';
+            html += '  </div>';
+            html += '</div>';
+        });
+        container.innerHTML = html;
     }
 
     async function loadCategories() {
@@ -412,17 +437,6 @@
         } catch(e) { return []; }
     }
 
-    // 图标映射
-    const categoryIcons = {
-        "Men's Shoes": "👞",
-        "Women's Shoes": "👠",
-        "Sports Shoes": "👟",
-        "Sandals & Slippers": "🩴",
-        "Boots": "🥾",
-        "Kids' Shoes": "👶",
-        "Work & Safety Shoes": "🛡️"
-    };
-
     async function renderFeaturedCategories() {
         const container = document.getElementById('featuredCategories');
         const categories = await loadCategories();
@@ -432,7 +446,7 @@
         categories.forEach(function(cat) {
             const catProducts = products.filter(function(p) { return p.category === cat.name; });
             const count = catProducts.length;
-            const icon = categoryIcons[cat.name] || '📦';
+            const icon = cat.icon || '📦';
             
             html += '<div class="col-md-3 col-sm-6 mb-4">';
             html += '  <div class="category-card-featured">';
@@ -451,9 +465,9 @@
         container.innerHTML = html;
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        loadSiteInfo();
-        renderFeaturedCategories();
+    document.addEventListener('DOMContentLoaded', async function() {
+        await loadSiteInfo();
+        await renderFeaturedCategories();
     });
     </script>
 </body>
