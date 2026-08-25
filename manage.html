@@ -12,19 +12,92 @@
         .section-title { color: #1F3A5F; font-weight: bold; margin-bottom: 20px; font-size: 1.3rem; }
         .btn-primary-custom { background-color: #1F3A5F; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
         .btn-primary-custom:hover { background-color: #152a47; }
-        .btn-success-custom { background-color: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
-        .btn-danger-custom { background-color: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+        .btn-success-custom { background-color: #28a745; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+        .btn-danger-custom { background-color: #dc3545; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
         .btn-warning-custom { background-color: #ffc107; color: #212529; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
-        .product-item { border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa; }
-        .product-image { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; }
         .status-msg { padding: 12px; border-radius: 6px; margin-bottom: 15px; display: none; }
         .status-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .status-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .subcategory-item { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
-        .subcategory-item input { flex: 1; }
         .help-text { font-size: 0.85rem; color: #666; }
         .nav-tabs .nav-link { color: #1F3A5F; font-weight: 500; }
         .nav-tabs .nav-link.active { background-color: #1F3A5F; color: white; }
+        
+        /* 树状结构样式 */
+        .tree-category {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #fafafa;
+            overflow: hidden;
+        }
+        .tree-category-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            cursor: pointer;
+            background: #f0f4f8;
+            transition: background 0.2s;
+        }
+        .tree-category-header:hover {
+            background: #e2e8f0;
+        }
+        .tree-category-header .toggle-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .tree-category-header .toggle-icon.expanded {
+            transform: rotate(90deg);
+        }
+        .tree-category-header .category-name-input {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 0.95rem;
+            background: white;
+        }
+        .tree-category-header .display-count-input {
+            width: 80px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            background: white;
+            margin-left: 10px;
+            text-align: center;
+        }
+        .tree-subcategories {
+            padding: 0 15px 15px 40px;
+            display: none;
+        }
+        .tree-subcategories.show {
+            display: block;
+        }
+        .subcategory-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .subcategory-row input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 0.9rem;
+            background: white;
+        }
+        .subcategory-label {
+            font-size: 0.85rem;
+            color: #555;
+            min-width: 60px;
+        }
+        .tree-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -37,13 +110,11 @@
     <div class="section-card bg-light">
         <h5>📖 使用说明</h5>
         <ol class="mb-0">
-            <li>在下方各标签页中修改内容</li>
-            <li>修改后点击 <strong>"生成代码"</strong> 按钮</li>
-            <li>点击 <strong>"复制代码"</strong> 按钮</li>
-            <li>点击 <strong>"打开 GitHub 文件"</strong>，粘贴代码并保存</li>
-            <li>等待 1-2 分钟，网站自动更新</li>
+            <li>点击分类名称可以<strong>展开/收起</strong>子类列表</li>
+            <li>在分类名称输入框中修改分类名称</li>
+            <li>在子类输入框中修改子类名称</li>
+            <li>修改后点击 <strong>"生成代码"</strong>，然后复制粘贴到 GitHub</li>
         </ol>
-        <p class="text-danger mt-2 mb-0">⚠️ 必须复制代码粘贴到 GitHub 对应文件才能生效。</p>
     </div>
 
     <ul class="nav nav-tabs mb-4" id="mainTabs">
@@ -56,8 +127,8 @@
     <div class="tab-content">
         <div class="tab-pane fade show active" id="tab-categories">
             <div class="section-card">
-                <h4 class="section-title">📂 分类与子类管理</h4>
-                <p class="help-text">管理网站分类和子类。每个分类下可以有多个子类，可以设置每个子类展示多少款产品。</p>
+                <h4 class="section-title">📂 分类与子类管理（树状结构）</h4>
+                <p class="help-text">点击分类展开子类。你可以增删改分类和子类。</p>
                 <div id="categoriesEditor"></div>
                 <button class="btn btn-success-custom mt-3" id="btnAddCategory">➕ 添加新分类</button>
                 <hr>
@@ -221,39 +292,55 @@ function renderCategories() {
     const container = document.getElementById('categoriesEditor');
     let html = '';
     
-    categoriesData.forEach((cat, i) => {
-        html += '<div class="border p-3 mb-3 rounded" style="background:#f9f9f9;">';
-        html += '<div class="row mb-2">';
-        html += '<div class="col-md-5">';
-        html += '<label class="form-label small fw-bold">分类名称</label>';
-        html += '<input type="text" class="form-control form-control-sm cat-name" data-index="' + i + '" value="' + (cat.name || '') + '">';
-        html += '</div>';
-        html += '<div class="col-md-4">';
-        html += '<label class="form-label small fw-bold">每子类展示数量</label>';
-        html += '<input type="number" class="form-control form-control-sm cat-count" data-index="' + i + '" value="' + (cat.displayCount || 20) + '" min="1" max="100">';
-        html += '</div>';
-        html += '<div class="col-md-3 text-end pt-4">';
-        html += '<button class="btn btn-danger-custom btn-sm btn-remove-cat" data-index="' + i + '">🗑️ 删除</button>';
-        html += '</div>';
-        html += '</div>';
-        
-        html += '<div class="subs-container" data-index="' + i + '">';
+    categoriesData.forEach(function(cat, i) {
         const subs = cat.subcategories || [];
-        subs.forEach((sub, j) => {
-            html += '<div class="subcategory-item">';
-            html += '<input type="text" class="form-control form-control-sm sub-name" data-cat="' + i + '" data-sub="' + j + '" value="' + sub + '">';
-            html += '<button class="btn btn-danger-custom btn-sm btn-remove-sub" data-cat="' + i + '" data-sub="' + j + '">🗑️</button>';
-            html += '</div>';
-        });
-        html += '</div>';
+        html += '<div class="tree-category">';
+        html += '  <div class="tree-category-header" data-index="' + i + '">';
+        html += '    <span class="toggle-icon" id="toggleIcon_' + i + '">▶</span>';
+        html += '    <input type="text" class="category-name-input cat-name" data-index="' + i + '" value="' + escapeHtml(cat.name || '') + '" placeholder="分类名称">';
+        html += '    <span class="subcategory-label" style="margin-left:10px;">展示数:</span>';
+        html += '    <input type="number" class="display-count-input cat-count" data-index="' + i + '" value="' + (cat.displayCount || 20) + '" min="1" max="100">';
+        html += '    <div class="tree-actions">';
+        html += '      <button class="btn btn-success-custom btn-add-sub" data-index="' + i + '">➕子类</button>';
+        html += '      <button class="btn btn-danger-custom btn-remove-cat" data-index="' + i + '">🗑️</button>';
+        html += '    </div>';
+        html += '  </div>';
+        html += '  <div class="tree-subcategories" id="subsContainer_' + i + '">';
         
-        html += '<button class="btn btn-success-custom btn-sm btn-add-sub" data-index="' + i + '">➕ 添加子类</button>';
+        subs.forEach(function(sub, j) {
+            html += '    <div class="subcategory-row">';
+            html += '      <span class="subcategory-label">子类 ' + (j+1) + ':</span>';
+            html += '      <input type="text" class="form-control sub-name" data-cat="' + i + '" data-sub="' + j + '" value="' + escapeHtml(sub) + '" placeholder="子类名称">';
+            html += '      <button class="btn btn-danger-custom btn-remove-sub" data-cat="' + i + '" data-sub="' + j + '">🗑️</button>';
+            html += '    </div>';
+        });
+        
+        html += '  </div>';
         html += '</div>';
     });
     
     container.innerHTML = html;
     
-    // 绑定删除分类按钮
+    // 绑定分类头部点击展开/收起
+    document.querySelectorAll('.tree-category-header').forEach(function(header) {
+        header.addEventListener('click', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+            const index = this.getAttribute('data-index');
+            const subsContainer = document.getElementById('subsContainer_' + index);
+            const toggleIcon = document.getElementById('toggleIcon_' + index);
+            if (subsContainer.classList.contains('show')) {
+                subsContainer.classList.remove('show');
+                toggleIcon.classList.remove('expanded');
+                toggleIcon.textContent = '▶';
+            } else {
+                subsContainer.classList.add('show');
+                toggleIcon.classList.add('expanded');
+                toggleIcon.textContent = '▼';
+            }
+        });
+    });
+    
+    // 绑定删除分类
     document.querySelectorAll('.btn-remove-cat').forEach(function(btn) {
         btn.addEventListener('click', function() {
             const index = parseInt(this.getAttribute('data-index'));
@@ -261,7 +348,7 @@ function renderCategories() {
         });
     });
     
-    // 绑定添加子类按钮
+    // 绑定添加子类
     document.querySelectorAll('.btn-add-sub').forEach(function(btn) {
         btn.addEventListener('click', function() {
             const index = parseInt(this.getAttribute('data-index'));
@@ -269,7 +356,7 @@ function renderCategories() {
         });
     });
     
-    // 绑定删除子类按钮
+    // 绑定删除子类
     document.querySelectorAll('.btn-remove-sub').forEach(function(btn) {
         btn.addEventListener('click', function() {
             const catIndex = parseInt(this.getAttribute('data-cat'));
@@ -279,10 +366,15 @@ function renderCategories() {
     });
 }
 
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function addCategory() {
     categoriesData.push({ name: '新分类', subcategories: [], displayCount: 20 });
     renderCategories();
-    showStatus('✅ 已添加新分类，请修改名称', 'success');
+    showStatus('✅ 已添加新分类，点击展开后修改名称', 'success');
 }
 
 function removeCategory(index) {
@@ -299,7 +391,7 @@ function addSubcategory(index) {
     }
     categoriesData[index].subcategories.push('新子类');
     renderCategories();
-    showStatus('✅ 已添加新子类，请修改名称', 'success');
+    showStatus('✅ 已添加新子类', 'success');
 }
 
 function removeSubcategory(catIndex, subIndex) {
@@ -315,14 +407,12 @@ function generateCategoriesJson() {
             categoriesData[index].name = input.value.trim() || '未命名分类';
         }
     });
-    
     document.querySelectorAll('.cat-count').forEach(function(input) {
         const index = parseInt(input.getAttribute('data-index'));
         if (categoriesData[index]) {
             categoriesData[index].displayCount = parseInt(input.value) || 20;
         }
     });
-    
     document.querySelectorAll('.sub-name').forEach(function(input) {
         const catIndex = parseInt(input.getAttribute('data-cat'));
         const subIndex = parseInt(input.getAttribute('data-sub'));
@@ -330,7 +420,6 @@ function generateCategoriesJson() {
             categoriesData[catIndex].subcategories[subIndex] = input.value.trim() || '未命名子类';
         }
     });
-    
     document.getElementById('categoriesJsonText').value = JSON.stringify({ categories: categoriesData }, null, 2);
     document.getElementById('categoriesJsonOutput').style.display = 'block';
     showStatus('✅ 代码已生成！', 'success');
@@ -344,58 +433,19 @@ function renderProducts() {
         html += '<div class="product-item">';
         html += '<div class="row align-items-center">';
         html += '<div class="col-md-2 text-center">';
-        html += '<img src="' + (p.image || 'https://placehold.co/80x80?text=No+Image') + '" class="product-image" alt="' + (p.name || '') + '">';
+        html += '<img src="' + (p.image || 'https://placehold.co/80x80?text=No+Image') + '" class="product-image" alt="">';
         html += '</div>';
         html += '<div class="col-md-10">';
         html += '<div class="row">';
-        
-        html += '<div class="col-md-4 mb-2">';
-        html += '<label class="form-label small">产品名称</label>';
-        html += '<input type="text" class="form-control form-control-sm prod-name" data-index="' + i + '" value="' + (p.name || '') + '">';
-        html += '</div>';
-        
-        html += '<div class="col-md-3 mb-2">';
-        html += '<label class="form-label small">分类</label>';
-        html += '<input type="text" class="form-control form-control-sm prod-cat" data-index="' + i + '" value="' + (p.category || '') + '">';
-        html += '</div>';
-        
-        html += '<div class="col-md-2 mb-2">';
-        html += '<label class="form-label small">子类</label>';
-        html += '<input type="text" class="form-control form-control-sm prod-sub" data-index="' + i + '" value="' + (p.subcategory || '') + '">';
-        html += '</div>';
-        
-        html += '<div class="col-md-3 mb-2">';
-        html += '<label class="form-label small">价格区间</label>';
-        html += '<input type="text" class="form-control form-control-sm prod-price" data-index="' + i + '" value="' + (p.priceRange || '') + '">';
-        html += '</div>';
-        
-        html += '<div class="col-md-4 mb-2">';
-        html += '<label class="form-label small">图片路径</label>';
-        html += '<input type="text" class="form-control form-control-sm prod-img" data-index="' + i + '" value="' + (p.image || '') + '">';
-        html += '</div>';
-        
-        html += '<div class="col-md-4 mb-2">';
-        html += '<label class="form-label small">产品编号</label>';
-        html += '<input type="text" class="form-control form-control-sm prod-id" data-index="' + i + '" value="' + (p.id || '') + '">';
-        html += '</div>';
-        
-        html += '<div class="col-md-4 mb-2">';
-        html += '<label class="form-label small">首页精选</label>';
-        html += '<select class="form-control form-control-sm prod-featured" data-index="' + i + '">';
-        html += '<option value="false"' + (!p.featured ? ' selected' : '') + '>否</option>';
-        html += '<option value="true"' + (p.featured ? ' selected' : '') + '>是</option>';
-        html += '</select>';
-        html += '</div>';
-        
-        html += '<div class="col-md-12 mb-2">';
-        html += '<label class="form-label small">描述</label>';
-        html += '<textarea class="form-control form-control-sm prod-desc" rows="2" data-index="' + i + '">' + (p.description || '') + '</textarea>';
-        html += '</div>';
-        
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
+        html += '<div class="col-md-4 mb-2"><label class="form-label small">产品名称</label><input type="text" class="form-control form-control-sm prod-name" data-index="' + i + '" value="' + escapeHtml(p.name || '') + '"></div>';
+        html += '<div class="col-md-3 mb-2"><label class="form-label small">分类</label><input type="text" class="form-control form-control-sm prod-cat" data-index="' + i + '" value="' + escapeHtml(p.category || '') + '"></div>';
+        html += '<div class="col-md-2 mb-2"><label class="form-label small">子类</label><input type="text" class="form-control form-control-sm prod-sub" data-index="' + i + '" value="' + escapeHtml(p.subcategory || '') + '"></div>';
+        html += '<div class="col-md-3 mb-2"><label class="form-label small">价格区间</label><input type="text" class="form-control form-control-sm prod-price" data-index="' + i + '" value="' + escapeHtml(p.priceRange || '') + '"></div>';
+        html += '<div class="col-md-4 mb-2"><label class="form-label small">图片路径</label><input type="text" class="form-control form-control-sm prod-img" data-index="' + i + '" value="' + escapeHtml(p.image || '') + '"></div>';
+        html += '<div class="col-md-4 mb-2"><label class="form-label small">产品编号</label><input type="text" class="form-control form-control-sm prod-id" data-index="' + i + '" value="' + escapeHtml(p.id || '') + '"></div>';
+        html += '<div class="col-md-4 mb-2"><label class="form-label small">首页精选</label><select class="form-control form-control-sm prod-featured" data-index="' + i + '"><option value="false"' + (!p.featured ? ' selected' : '') + '>否</option><option value="true"' + (p.featured ? ' selected' : '') + '>是</option></select></div>';
+        html += '<div class="col-md-12 mb-2"><label class="form-label small">描述</label><textarea class="form-control form-control-sm prod-desc" rows="2" data-index="' + i + '">' + escapeHtml(p.description || '') + '</textarea></div>';
+        html += '</div></div></div></div>';
     });
     
     container.innerHTML = html;
@@ -403,38 +453,37 @@ function renderProducts() {
 
 function generateProductsJson() {
     document.querySelectorAll('.prod-name').forEach(function(input) {
-        const index = parseInt(input.getAttribute('data-index'));
-        if (productsData[index]) productsData[index].name = input.value.trim();
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].name = input.value.trim();
     });
     document.querySelectorAll('.prod-cat').forEach(function(input) {
-        const index = parseInt(input.getAttribute('data-index'));
-        if (productsData[index]) productsData[index].category = input.value.trim();
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].category = input.value.trim();
     });
     document.querySelectorAll('.prod-sub').forEach(function(input) {
-        const index = parseInt(input.getAttribute('data-index'));
-        if (productsData[index]) productsData[index].subcategory = input.value.trim();
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].subcategory = input.value.trim();
     });
     document.querySelectorAll('.prod-price').forEach(function(input) {
-        const index = parseInt(input.getAttribute('data-index'));
-        if (productsData[index]) productsData[index].priceRange = input.value.trim();
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].priceRange = input.value.trim();
     });
     document.querySelectorAll('.prod-img').forEach(function(input) {
-        const index = parseInt(input.getAttribute('data-index'));
-        if (productsData[index]) productsData[index].image = input.value.trim();
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].image = input.value.trim();
     });
     document.querySelectorAll('.prod-id').forEach(function(input) {
-        const index = parseInt(input.getAttribute('data-index'));
-        if (productsData[index]) productsData[index].id = input.value.trim();
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].id = input.value.trim();
     });
     document.querySelectorAll('.prod-featured').forEach(function(select) {
-        const index = parseInt(select.getAttribute('data-index'));
-        if (productsData[index]) productsData[index].featured = select.value === 'true';
+        const i = parseInt(select.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].featured = select.value === 'true';
     });
     document.querySelectorAll('.prod-desc').forEach(function(textarea) {
-        const index = parseInt(textarea.getAttribute('data-index'));
-        if (productsData[index]) productsData[index].description = textarea.value.trim();
+        const i = parseInt(textarea.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].description = textarea.value.trim();
     });
-    
     document.getElementById('productsJsonText').value = JSON.stringify(productsData, null, 2);
     document.getElementById('productsJsonOutput').style.display = 'block';
     showStatus('✅ 代码已生成！', 'success');
@@ -480,10 +529,8 @@ function showStatus(msg, type) {
     setTimeout(function() { el.style.display = 'none'; }, 5000);
 }
 
-// 初始化
 document.addEventListener('DOMContentLoaded', function() {
     loadData();
-    
     document.getElementById('btnAddCategory').addEventListener('click', addCategory);
     document.getElementById('btnGenCategories').addEventListener('click', generateCategoriesJson);
     document.getElementById('btnCopyCategories').addEventListener('click', function() { copyText('categoriesJsonText'); });
