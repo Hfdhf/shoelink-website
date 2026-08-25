@@ -219,47 +219,62 @@ async function loadData() {
 
 function renderCategories() {
     const container = document.getElementById('categoriesEditor');
-    container.innerHTML = categoriesData.map((cat, i) => `
-        <div class="border p-3 mb-3 rounded" style="background:#f9f9f9;">
-            <div class="row mb-2">
-                <div class="col-md-5">
-                    <label class="form-label small fw-bold">分类名称</label>
-                    <input type="text" class="form-control form-control-sm cat-name" data-index="${i}" value="${cat.name || ''}">
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label small fw-bold">每子类展示数量</label>
-                    <input type="number" class="form-control form-control-sm cat-count" data-index="${i}" value="${cat.displayCount || 20}" min="1" max="100">
-                </div>
-                <div class="col-md-3 text-end pt-4">
-                    <button class="btn btn-danger-custom btn-sm btn-remove-cat" data-index="${i}">🗑️ 删除</button>
-                </div>
-            </div>
-            <div class="subs-container" data-index="${i}">
-                ${(cat.subcategories || []).map((sub, j) => `
-                    <div class="subcategory-item">
-                        <input type="text" class="form-control form-control-sm sub-name" data-cat="${i}" data-sub="${j}" value="${sub}">
-                        <button class="btn btn-danger-custom btn-sm btn-remove-sub" data-cat="${i}" data-sub="${j}">🗑️</button>
-                    </div>
-                `).join('')}
-            </div>
-            <button class="btn btn-success-custom btn-sm btn-add-sub" data-index="${i}">➕ 添加子类</button>
-        </div>
-    `).join('');
+    let html = '';
     
-    // 绑定事件
-    document.querySelectorAll('.btn-remove-cat').forEach(btn => {
+    categoriesData.forEach((cat, i) => {
+        html += '<div class="border p-3 mb-3 rounded" style="background:#f9f9f9;">';
+        html += '<div class="row mb-2">';
+        html += '<div class="col-md-5">';
+        html += '<label class="form-label small fw-bold">分类名称</label>';
+        html += '<input type="text" class="form-control form-control-sm cat-name" data-index="' + i + '" value="' + (cat.name || '') + '">';
+        html += '</div>';
+        html += '<div class="col-md-4">';
+        html += '<label class="form-label small fw-bold">每子类展示数量</label>';
+        html += '<input type="number" class="form-control form-control-sm cat-count" data-index="' + i + '" value="' + (cat.displayCount || 20) + '" min="1" max="100">';
+        html += '</div>';
+        html += '<div class="col-md-3 text-end pt-4">';
+        html += '<button class="btn btn-danger-custom btn-sm btn-remove-cat" data-index="' + i + '">🗑️ 删除</button>';
+        html += '</div>';
+        html += '</div>';
+        
+        html += '<div class="subs-container" data-index="' + i + '">';
+        const subs = cat.subcategories || [];
+        subs.forEach((sub, j) => {
+            html += '<div class="subcategory-item">';
+            html += '<input type="text" class="form-control form-control-sm sub-name" data-cat="' + i + '" data-sub="' + j + '" value="' + sub + '">';
+            html += '<button class="btn btn-danger-custom btn-sm btn-remove-sub" data-cat="' + i + '" data-sub="' + j + '">🗑️</button>';
+            html += '</div>';
+        });
+        html += '</div>';
+        
+        html += '<button class="btn btn-success-custom btn-sm btn-add-sub" data-index="' + i + '">➕ 添加子类</button>';
+        html += '</div>';
+    });
+    
+    container.innerHTML = html;
+    
+    // 绑定删除分类按钮
+    document.querySelectorAll('.btn-remove-cat').forEach(function(btn) {
         btn.addEventListener('click', function() {
-            removeCategory(parseInt(this.dataset.index));
+            const index = parseInt(this.getAttribute('data-index'));
+            removeCategory(index);
         });
     });
-    document.querySelectorAll('.btn-add-sub').forEach(btn => {
+    
+    // 绑定添加子类按钮
+    document.querySelectorAll('.btn-add-sub').forEach(function(btn) {
         btn.addEventListener('click', function() {
-            addSubcategory(parseInt(this.dataset.index));
+            const index = parseInt(this.getAttribute('data-index'));
+            addSubcategory(index);
         });
     });
-    document.querySelectorAll('.btn-remove-sub').forEach(btn => {
+    
+    // 绑定删除子类按钮
+    document.querySelectorAll('.btn-remove-sub').forEach(function(btn) {
         btn.addEventListener('click', function() {
-            removeSubcategory(parseInt(this.dataset.cat), parseInt(this.dataset.sub));
+            const catIndex = parseInt(this.getAttribute('data-cat'));
+            const subIndex = parseInt(this.getAttribute('data-sub'));
+            removeSubcategory(catIndex, subIndex);
         });
     });
 }
@@ -270,43 +285,52 @@ function addCategory() {
     showStatus('✅ 已添加新分类，请修改名称', 'success');
 }
 
-function removeCategory(i) {
+function removeCategory(index) {
     if (confirm('确定删除此分类？')) {
-        categoriesData.splice(i, 1);
+        categoriesData.splice(index, 1);
         renderCategories();
         showStatus('✅ 分类已删除', 'success');
     }
 }
 
-function addSubcategory(i) {
-    if (!categoriesData[i].subcategories) categoriesData[i].subcategories = [];
-    categoriesData[i].subcategories.push('新子类');
+function addSubcategory(index) {
+    if (!categoriesData[index].subcategories) {
+        categoriesData[index].subcategories = [];
+    }
+    categoriesData[index].subcategories.push('新子类');
     renderCategories();
     showStatus('✅ 已添加新子类，请修改名称', 'success');
 }
 
-function removeSubcategory(i, j) {
-    categoriesData[i].subcategories.splice(j, 1);
+function removeSubcategory(catIndex, subIndex) {
+    categoriesData[catIndex].subcategories.splice(subIndex, 1);
     renderCategories();
     showStatus('✅ 子类已删除', 'success');
 }
 
 function generateCategoriesJson() {
-    document.querySelectorAll('.cat-name').forEach(input => {
-        const i = parseInt(input.dataset.index);
-        if (categoriesData[i]) categoriesData[i].name = input.value.trim() || '未命名分类';
-    });
-    document.querySelectorAll('.cat-count').forEach(input => {
-        const i = parseInt(input.dataset.index);
-        if (categoriesData[i]) categoriesData[i].displayCount = parseInt(input.value) || 20;
-    });
-    document.querySelectorAll('.sub-name').forEach(input => {
-        const i = parseInt(input.dataset.cat);
-        const j = parseInt(input.dataset.sub);
-        if (categoriesData[i] && categoriesData[i].subcategories && categoriesData[i].subcategories[j] !== undefined) {
-            categoriesData[i].subcategories[j] = input.value.trim() || '未命名子类';
+    document.querySelectorAll('.cat-name').forEach(function(input) {
+        const index = parseInt(input.getAttribute('data-index'));
+        if (categoriesData[index]) {
+            categoriesData[index].name = input.value.trim() || '未命名分类';
         }
     });
+    
+    document.querySelectorAll('.cat-count').forEach(function(input) {
+        const index = parseInt(input.getAttribute('data-index'));
+        if (categoriesData[index]) {
+            categoriesData[index].displayCount = parseInt(input.value) || 20;
+        }
+    });
+    
+    document.querySelectorAll('.sub-name').forEach(function(input) {
+        const catIndex = parseInt(input.getAttribute('data-cat'));
+        const subIndex = parseInt(input.getAttribute('data-sub'));
+        if (categoriesData[catIndex] && categoriesData[catIndex].subcategories && categoriesData[catIndex].subcategories[subIndex] !== undefined) {
+            categoriesData[catIndex].subcategories[subIndex] = input.value.trim() || '未命名子类';
+        }
+    });
+    
     document.getElementById('categoriesJsonText').value = JSON.stringify({ categories: categoriesData }, null, 2);
     document.getElementById('categoriesJsonOutput').style.display = 'block';
     showStatus('✅ 代码已生成！', 'success');
@@ -314,89 +338,103 @@ function generateCategoriesJson() {
 
 function renderProducts() {
     const container = document.getElementById('productList');
-    container.innerHTML = productsData.map((p, i) => `
-        <div class="product-item">
-            <div class="row align-items-center">
-                <div class="col-md-2 text-center">
-                    <img src="${p.image || 'https://placehold.co/80x80?text=No+Image'}" class="product-image" alt="${p.name || ''}">
-                </div>
-                <div class="col-md-10">
-                    <div class="row">
-                        <div class="col-md-4 mb-2">
-                            <label class="form-label small">产品名称</label>
-                            <input type="text" class="form-control form-control-sm prod-name" data-index="${i}" value="${p.name || ''}">
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <label class="form-label small">分类</label>
-                            <input type="text" class="form-control form-control-sm prod-cat" data-index="${i}" value="${p.category || ''}">
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label class="form-label small">子类</label>
-                            <input type="text" class="form-control form-control-sm prod-sub" data-index="${i}" value="${p.subcategory || ''}">
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <label class="form-label small">价格区间</label>
-                            <input type="text" class="form-control form-control-sm prod-price" data-index="${i}" value="${p.priceRange || ''}">
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <label class="form-label small">图片路径</label>
-                            <input type="text" class="form-control form-control-sm prod-img" data-index="${i}" value="${p.image || ''}">
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <label class="form-label small">产品编号</label>
-                            <input type="text" class="form-control form-control-sm prod-id" data-index="${i}" value="${p.id || ''}">
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <label class="form-label small">首页精选</label>
-                            <select class="form-control form-control-sm prod-featured" data-index="${i}">
-                                <option value="false" ${!p.featured ? 'selected' : ''}>否</option>
-                                <option value="true" ${p.featured ? 'selected' : ''}>是</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 mb-2">
-                            <label class="form-label small">描述</label>
-                            <textarea class="form-control form-control-sm prod-desc" rows="2" data-index="${i}">${p.description || ''}</textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `).join('');
+    let html = '';
+    
+    productsData.forEach(function(p, i) {
+        html += '<div class="product-item">';
+        html += '<div class="row align-items-center">';
+        html += '<div class="col-md-2 text-center">';
+        html += '<img src="' + (p.image || 'https://placehold.co/80x80?text=No+Image') + '" class="product-image" alt="' + (p.name || '') + '">';
+        html += '</div>';
+        html += '<div class="col-md-10">';
+        html += '<div class="row">';
+        
+        html += '<div class="col-md-4 mb-2">';
+        html += '<label class="form-label small">产品名称</label>';
+        html += '<input type="text" class="form-control form-control-sm prod-name" data-index="' + i + '" value="' + (p.name || '') + '">';
+        html += '</div>';
+        
+        html += '<div class="col-md-3 mb-2">';
+        html += '<label class="form-label small">分类</label>';
+        html += '<input type="text" class="form-control form-control-sm prod-cat" data-index="' + i + '" value="' + (p.category || '') + '">';
+        html += '</div>';
+        
+        html += '<div class="col-md-2 mb-2">';
+        html += '<label class="form-label small">子类</label>';
+        html += '<input type="text" class="form-control form-control-sm prod-sub" data-index="' + i + '" value="' + (p.subcategory || '') + '">';
+        html += '</div>';
+        
+        html += '<div class="col-md-3 mb-2">';
+        html += '<label class="form-label small">价格区间</label>';
+        html += '<input type="text" class="form-control form-control-sm prod-price" data-index="' + i + '" value="' + (p.priceRange || '') + '">';
+        html += '</div>';
+        
+        html += '<div class="col-md-4 mb-2">';
+        html += '<label class="form-label small">图片路径</label>';
+        html += '<input type="text" class="form-control form-control-sm prod-img" data-index="' + i + '" value="' + (p.image || '') + '">';
+        html += '</div>';
+        
+        html += '<div class="col-md-4 mb-2">';
+        html += '<label class="form-label small">产品编号</label>';
+        html += '<input type="text" class="form-control form-control-sm prod-id" data-index="' + i + '" value="' + (p.id || '') + '">';
+        html += '</div>';
+        
+        html += '<div class="col-md-4 mb-2">';
+        html += '<label class="form-label small">首页精选</label>';
+        html += '<select class="form-control form-control-sm prod-featured" data-index="' + i + '">';
+        html += '<option value="false"' + (!p.featured ? ' selected' : '') + '>否</option>';
+        html += '<option value="true"' + (p.featured ? ' selected' : '') + '>是</option>';
+        html += '</select>';
+        html += '</div>';
+        
+        html += '<div class="col-md-12 mb-2">';
+        html += '<label class="form-label small">描述</label>';
+        html += '<textarea class="form-control form-control-sm prod-desc" rows="2" data-index="' + i + '">' + (p.description || '') + '</textarea>';
+        html += '</div>';
+        
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+    });
+    
+    container.innerHTML = html;
 }
 
 function generateProductsJson() {
-    document.querySelectorAll('.prod-name').forEach(input => {
-        const i = parseInt(input.dataset.index);
-        if (productsData[i]) productsData[i].name = input.value.trim();
+    document.querySelectorAll('.prod-name').forEach(function(input) {
+        const index = parseInt(input.getAttribute('data-index'));
+        if (productsData[index]) productsData[index].name = input.value.trim();
     });
-    document.querySelectorAll('.prod-cat').forEach(input => {
-        const i = parseInt(input.dataset.index);
-        if (productsData[i]) productsData[i].category = input.value.trim();
+    document.querySelectorAll('.prod-cat').forEach(function(input) {
+        const index = parseInt(input.getAttribute('data-index'));
+        if (productsData[index]) productsData[index].category = input.value.trim();
     });
-    document.querySelectorAll('.prod-sub').forEach(input => {
-        const i = parseInt(input.dataset.index);
-        if (productsData[i]) productsData[i].subcategory = input.value.trim();
+    document.querySelectorAll('.prod-sub').forEach(function(input) {
+        const index = parseInt(input.getAttribute('data-index'));
+        if (productsData[index]) productsData[index].subcategory = input.value.trim();
     });
-    document.querySelectorAll('.prod-price').forEach(input => {
-        const i = parseInt(input.dataset.index);
-        if (productsData[i]) productsData[i].priceRange = input.value.trim();
+    document.querySelectorAll('.prod-price').forEach(function(input) {
+        const index = parseInt(input.getAttribute('data-index'));
+        if (productsData[index]) productsData[index].priceRange = input.value.trim();
     });
-    document.querySelectorAll('.prod-img').forEach(input => {
-        const i = parseInt(input.dataset.index);
-        if (productsData[i]) productsData[i].image = input.value.trim();
+    document.querySelectorAll('.prod-img').forEach(function(input) {
+        const index = parseInt(input.getAttribute('data-index'));
+        if (productsData[index]) productsData[index].image = input.value.trim();
     });
-    document.querySelectorAll('.prod-id').forEach(input => {
-        const i = parseInt(input.dataset.index);
-        if (productsData[i]) productsData[i].id = input.value.trim();
+    document.querySelectorAll('.prod-id').forEach(function(input) {
+        const index = parseInt(input.getAttribute('data-index'));
+        if (productsData[index]) productsData[index].id = input.value.trim();
     });
-    document.querySelectorAll('.prod-featured').forEach(select => {
-        const i = parseInt(select.dataset.index);
-        if (productsData[i]) productsData[i].featured = select.value === 'true';
+    document.querySelectorAll('.prod-featured').forEach(function(select) {
+        const index = parseInt(select.getAttribute('data-index'));
+        if (productsData[index]) productsData[index].featured = select.value === 'true';
     });
-    document.querySelectorAll('.prod-desc').forEach(textarea => {
-        const i = parseInt(textarea.dataset.index);
-        if (productsData[i]) productsData[i].description = textarea.value.trim();
+    document.querySelectorAll('.prod-desc').forEach(function(textarea) {
+        const index = parseInt(textarea.getAttribute('data-index'));
+        if (productsData[index]) productsData[index].description = textarea.value.trim();
     });
+    
     document.getElementById('productsJsonText').value = JSON.stringify(productsData, null, 2);
     document.getElementById('productsJsonOutput').style.display = 'block';
     showStatus('✅ 代码已生成！', 'success');
@@ -426,9 +464,9 @@ function copyText(id) {
     const textarea = document.getElementById(id);
     textarea.select();
     textarea.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(textarea.value).then(() => {
+    navigator.clipboard.writeText(textarea.value).then(function() {
         showStatus('✅ 已复制！', 'success');
-    }).catch(() => {
+    }).catch(function() {
         document.execCommand('copy');
         showStatus('✅ 已复制！', 'success');
     });
@@ -439,10 +477,10 @@ function showStatus(msg, type) {
     el.textContent = msg;
     el.className = 'status-msg ' + (type === 'success' ? 'status-success' : 'status-error');
     el.style.display = 'block';
-    setTimeout(() => { el.style.display = 'none'; }, 5000);
+    setTimeout(function() { el.style.display = 'none'; }, 5000);
 }
 
-// 绑定事件
+// 初始化
 document.addEventListener('DOMContentLoaded', function() {
     loadData();
     
