@@ -4,33 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - ShoeLink Footwear</title>
-    <meta name="description" content="Browse our wide range of footwear products including sports shoes, sandals, boots, and more.">
+    <meta name="description" content="Browse our wide range of footwear products.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6RG4R8ZM6Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-6RG4R8ZM6Q');
-</script>
-    <!-- Tawk.to 占位 -->
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/YOUR_TAWK_ID/default';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6RG4R8ZM6Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6RG4R8ZM6Q');
     </script>
+    <style>
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 90px;
+        }
+        .tree-category {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            overflow: hidden;
+        }
+        .tree-category-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            cursor: pointer;
+            background: #f8f9fa;
+            transition: background 0.2s;
+        }
+        .tree-category-header:hover {
+            background: #e9ecef;
+        }
+        .tree-category-header .toggle-icon {
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+        .tree-category-header .category-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1F3A5F;
+            flex: 1;
+        }
+        .tree-subcategories {
+            display: none;
+            padding: 8px 12px 10px 35px;
+            background: white;
+        }
+        .tree-subcategories.show {
+            display: block;
+        }
+        .subcategory-link {
+            display: block;
+            padding: 5px 10px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .subcategory-link:hover {
+            background: #f0f4f8;
+            color: #1F3A5F;
+        }
+        .subcategory-link.active {
+            background: #1F3A5F;
+            color: white;
+        }
+        .current-filter {
+            background: #e9ecef;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- 顶部导航 -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1F3A5F;">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">ShoeLink</a>
@@ -49,195 +105,174 @@
         </div>
     </nav>
 
-    <!-- 页面标题 -->
-    <header class="py-5 text-white" style="background-color:#1F3A5F; padding-top: 100px !important;">
+    <header class="py-4 text-white" style="background-color:#1F3A5F; padding-top: 90px !important;">
         <div class="container">
-            <h1 class="fw-bold">Our Products</h1>
-            <p class="lead mb-0">Browse our wide range of footwear for global markets.</p>
+            <h1 class="fw-bold h3 mb-0">Our Products</h1>
         </div>
     </header>
 
-    <!-- 产品列表区域 -->
-    <section class="py-5">
+    <section class="py-4">
         <div class="container">
-            <!-- 分类筛选按钮 -->
-            <div class="mb-4" id="categoryFilters">
-                <button class="btn btn-outline-primary me-2 mb-2 active-filter" data-category="all" style="border-color:#1F3A5F; color:#1F3A5F;">All Products</button>
-                <!-- 由 JS 动态生成分类按钮 -->
-            </div>
-            
-            <!-- 产品网格 -->
-            <div class="row g-4" id="productGrid">
-                <!-- 由 JS 动态渲染产品 -->
+            <div class="row">
+                <!-- 左侧树状分类 -->
+                <div class="col-lg-3 mb-4">
+                    <div class="sidebar">
+                        <h5 class="mb-3" style="color:#1F3A5F;">📂 Categories</h5>
+                        <div class="current-filter" id="currentFilter">Showing: All Products</div>
+                        <div id="categoryTree"></div>
+                    </div>
+                </div>
+                
+                <!-- 右侧产品网格 -->
+                <div class="col-lg-9">
+                    <div class="row g-4" id="productGrid"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 行动号召 -->
-    <section class="py-4 text-white text-center" style="background-color:#1F3A5F;">
-        <div class="container">
-            <h4>Can't find what you're looking for?</h4>
-            <p class="mb-3">Contact us for custom orders and special requirements.</p>
-            <a href="contact.html" class="btn btn-warning text-dark fw-bold">Contact Us</a>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
     <footer class="bg-dark text-white py-4">
         <div class="container text-center">
             <p class="mb-1">&copy; 2025 ShoeLink. All rights reserved.</p>
-            <p class="mb-1">
-                <a href="#" class="text-white me-2">Facebook</a>
-                <a href="#" class="text-white me-2">Instagram</a>
-                <a href="#" class="text-white">LinkedIn</a>
-            </p>
-            <p class="small mb-0">Contact us: info@shoelink.com | WhatsApp: +123456789</p>
+            <p class="small mb-0" id="footerContact">Contact us: info@shoelink.com | WhatsApp: +123456789</p>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- 产品列表页 JS -->
     <script>
-        // 加载站点信息
-        async function loadSiteInfo() {
-            try {
-                const response = await fetch('_data/site.json');
-                const siteData = await response.json();
-                document.querySelectorAll('.navbar-brand').forEach(el => {
-                    el.textContent = siteData.brandName || 'ShoeLink';
-                });
-                const footerContact = document.querySelector('footer .small');
-                if (footerContact && siteData.contactEmail) {
-                    footerContact.textContent = `Contact us: ${siteData.contactEmail} | WhatsApp: ${siteData.whatsapp || ''}`;
-                }
-                const socialLinks = siteData.socialLinks || {};
-                const footerLinks = document.querySelectorAll('footer a');
-                footerLinks.forEach(link => {
-                    const text = link.textContent.trim().toLowerCase();
-                    if (text === 'facebook' && socialLinks.facebook) link.href = socialLinks.facebook;
-                    else if (text === 'instagram' && socialLinks.instagram) link.href = socialLinks.instagram;
-                    else if (text === 'linkedin' && socialLinks.linkedin) link.href = socialLinks.linkedin;
-                });
-            } catch (error) {
-                console.error('Error loading site info:', error);
-            }
-        }
+    let allProducts = [];
+    let currentCategory = '';
+    let currentSubcategory = '';
 
-        // 加载分类
-        async function loadCategories() {
-            try {
-                const response = await fetch('_data/categories.json');
-                const data = await response.json();
-                return data.categories || data;
-            } catch (error) {
-                console.error('Error loading categories:', error);
-                return [];
-            }
-        }
+    async function loadSiteInfo() {
+        try {
+            const res = await fetch('_data/site.json');
+            const data = await res.json();
+            document.querySelectorAll('.navbar-brand').forEach(el => el.textContent = data.brandName || 'ShoeLink');
+            document.getElementById('footerContact').textContent = 'Contact us: ' + (data.contactEmail || '') + ' | WhatsApp: ' + (data.whatsapp || '');
+        } catch(e) {}
+    }
 
-        // 加载产品
-        async function loadProducts() {
-            try {
-                const response = await fetch('_data/products.json');
-                const data = await response.json();
-                return data.products || data;
-            } catch (error) {
-                console.error('Error loading products:', error);
-                return [];
-            }
-        }
+    async function loadCategories() {
+        try {
+            const res = await fetch('_data/categories.json');
+            const data = await res.json();
+            return data.categories || data;
+        } catch(e) { return []; }
+    }
 
-        // 渲染分类筛选按钮
-        async function renderCategoryFilters() {
-            const container = document.getElementById('categoryFilters');
-            const categories = await loadCategories();
+    async function loadProducts() {
+        try {
+            const res = await fetch('_data/products.json');
+            const data = await res.json();
+            return data.products || data;
+        } catch(e) { return []; }
+    }
+
+    async function renderCategoryTree() {
+        const container = document.getElementById('categoryTree');
+        const categories = await loadCategories();
+        const urlParams = new URLSearchParams(window.location.search);
+        currentCategory = urlParams.get('category') || '';
+        currentSubcategory = urlParams.get('subcategory') || '';
+        
+        let html = '<a href="products.html" class="subcategory-link' + (!currentCategory ? ' active' : '') + '" style="display:block;margin-bottom:8px;">All Products</a>';
+        
+        categories.forEach(function(cat, i) {
+            const subs = cat.subcategories || [];
+            const isActive = currentCategory === cat.name;
             
-            categories.forEach(category => {
-                const button = document.createElement('button');
-                button.className = 'btn btn-outline-primary me-2 mb-2';
-                button.style.borderColor = '#1F3A5F';
-                button.style.color = '#1F3A5F';
-                button.textContent = category;
-                button.dataset.category = category;
-                button.addEventListener('click', () => filterProducts(category, button));
-                container.appendChild(button);
+            html += '<div class="tree-category">';
+            html += '  <div class="tree-category-header" data-index="' + i + '">';
+            html += '    <span class="toggle-icon" id="icon_' + i + '">' + (isActive ? '▼' : '▶') + '</span>';
+            html += '    <span class="category-name">' + cat.name + '</span>';
+            html += '  </div>';
+            html += '  <div class="tree-subcategories' + (isActive ? ' show' : '') + '" id="subs_' + i + '">';
+            
+            subs.forEach(function(sub) {
+                const isSubActive = currentSubcategory === sub;
+                html += '    <a href="products.html?category=' + encodeURIComponent(cat.name) + '&subcategory=' + encodeURIComponent(sub) + '" class="subcategory-link' + (isSubActive ? ' active' : '') + '">' + sub + '</a>';
             });
             
-            // 为 "All Products" 按钮添加事件
-            const allButton = container.querySelector('[data-category="all"]');
-            if (allButton) {
-                allButton.addEventListener('click', () => filterProducts('all', allButton));
-            }
-        }
-
-        // 筛选产品
-        async function filterProducts(category, activeButton) {
-            const allButtons = document.querySelectorAll('#categoryFilters button');
-            allButtons.forEach(btn => {
-                btn.classList.remove('active-filter');
-                btn.style.backgroundColor = '';
-                btn.style.color = '#1F3A5F';
-            });
-            
-            activeButton.classList.add('active-filter');
-            activeButton.style.backgroundColor = '#1F3A5F';
-            activeButton.style.color = 'white';
-            
-            const products = await loadProducts();
-            const filtered = category === 'all' ? products : products.filter(p => p.category === category);
-            renderProducts(filtered);
-        }
-
-        // 渲染产品网格
-        function renderProducts(products) {
-            const container = document.getElementById('productGrid');
-            
-            if (products.length === 0) {
-                container.innerHTML = '<div class="col-12 text-center"><p>No products found.</p></div>';
-                return;
+            if (subs.length === 0) {
+                html += '    <a href="products.html?category=' + encodeURIComponent(cat.name) + '" class="subcategory-link">查看全部</a>';
             }
             
-            container.innerHTML = products.map(product => `
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card product-card">
-                        <img src="${product.image || 'https://via.placeholder.com/600x400?text=Product'}" class="product-img" alt="${product.name}">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.name}</h5>
-                            <p class="card-text text-muted small">${product.category || ''}</p>
-                            <p class="card-text small">${product.description ? product.description.substring(0, 80) + '...' : ''}</p>
-                            <p class="card-text"><strong>${product.priceRange || 'Price on request'}</strong></p>
-                            <a href="product-detail.html?id=${product.id}" class="btn btn-outline-primary btn-sm w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // 检查 URL 中的分类参数
-        function checkCategoryParam() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('category');
-            if (category) {
-                // 延迟执行，等待按钮渲染完成
-                setTimeout(() => {
-                    const targetButton = document.querySelector(`[data-category="${category}"]`);
-                    if (targetButton) {
-                        targetButton.click();
-                    }
-                }, 500);
-            } else {
-                // 默认加载所有产品
-                loadProducts().then(renderProducts);
-            }
-        }
-
-        // 页面加载
-        document.addEventListener('DOMContentLoaded', async function() {
-            await loadSiteInfo();
-            await renderCategoryFilters();
-            checkCategoryParam();
+            html += '  </div>';
+            html += '</div>';
         });
+        
+        container.innerHTML = html;
+        
+        document.querySelectorAll('.tree-category-header').forEach(function(header) {
+            header.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                const subsContainer = document.getElementById('subs_' + index);
+                const icon = document.getElementById('icon_' + index);
+                if (subsContainer.classList.contains('show')) {
+                    subsContainer.classList.remove('show');
+                    icon.textContent = '▶';
+                } else {
+                    subsContainer.classList.add('show');
+                    icon.textContent = '▼';
+                }
+            });
+        });
+    }
+
+    async function renderProducts() {
+        const container = document.getElementById('productGrid');
+        allProducts = await loadProducts();
+        
+        let filtered = allProducts;
+        
+        if (currentCategory) {
+            filtered = filtered.filter(function(p) { return p.category === currentCategory; });
+            document.getElementById('currentFilter').textContent = 'Category: ' + currentCategory + (currentSubcategory ? ' > ' + currentSubcategory : '');
+        } else {
+            document.getElementById('currentFilter').textContent = 'Showing: All Products';
+        }
+        
+        if (currentSubcategory) {
+            filtered = filtered.filter(function(p) { return p.subcategory === currentSubcategory; });
+        }
+        
+        // 应用展示数量限制
+        const categoriesData = await loadCategories();
+        const activeCat = categoriesData.find(function(c) { return c.name === currentCategory; });
+        if (activeCat && activeCat.displayCount) {
+            filtered = filtered.slice(0, activeCat.displayCount);
+        }
+        
+        if (filtered.length === 0) {
+            container.innerHTML = '<div class="col-12 text-center py-5"><p class="text-muted">No products found in this category.</p></div>';
+            return;
+        }
+        
+        let html = '';
+        filtered.forEach(function(p) {
+            html += '<div class="col-md-4 col-sm-6">';
+            html += '  <div class="card product-card">';
+            html += '    <img src="' + (p.image || 'https://placehold.co/600x400?text=Product') + '" class="product-img" alt="' + p.name + '">';
+            html += '    <div class="card-body">';
+            html += '      <h5 class="card-title">' + p.name + '</h5>';
+            html += '      <p class="card-text text-muted small">' + (p.category || '') + (p.subcategory ? ' > ' + p.subcategory : '') + '</p>';
+            html += '      <p class="card-text small">' + (p.description ? p.description.substring(0, 60) + '...' : '') + '</p>';
+            html += '      <p class="card-text"><strong>' + (p.priceRange || 'Price on request') + '</strong></p>';
+            html += '      <a href="product-detail.html?id=' + p.id + '" class="btn btn-outline-primary btn-sm w-100">View Details</a>';
+            html += '    </div>';
+            html += '  </div>';
+            html += '</div>';
+        });
+        
+        container.innerHTML = html;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSiteInfo();
+        renderCategoryTree();
+        renderProducts();
+    });
     </script>
 </body>
 </html>
