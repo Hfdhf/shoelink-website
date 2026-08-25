@@ -59,13 +59,13 @@
                 <h4 class="section-title">📂 分类与子类管理</h4>
                 <p class="help-text">管理网站分类和子类。每个分类下可以有多个子类，可以设置每个子类展示多少款产品。</p>
                 <div id="categoriesEditor"></div>
-                <button class="btn btn-success-custom mt-3" onclick="addCategory()">➕ 添加新分类</button>
+                <button class="btn btn-success-custom mt-3" id="btnAddCategory">➕ 添加新分类</button>
                 <hr>
-                <button class="btn btn-primary-custom" onclick="generateCategoriesJson()">📄 生成 categories.json 代码</button>
+                <button class="btn btn-primary-custom" id="btnGenCategories">📄 生成 categories.json 代码</button>
                 <div id="categoriesJsonOutput" class="mt-3" style="display:none;">
                     <p class="mb-2">复制以下内容到 <code>_data/categories.json</code>：</p>
                     <textarea class="form-control" id="categoriesJsonText" rows="15"></textarea>
-                    <button class="btn btn-warning-custom mt-2" onclick="copyText('categoriesJsonText')">📋 复制代码</button>
+                    <button class="btn btn-warning-custom mt-2" id="btnCopyCategories">📋 复制代码</button>
                     <a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/categories.json" target="_blank" class="btn btn-primary-custom mt-2">🔗 打开 GitHub 文件</a>
                 </div>
             </div>
@@ -77,11 +77,11 @@
                 <p class="help-text">修改产品信息。添加新产品请在 GitHub 上编辑 products.json。</p>
                 <div id="productList"></div>
                 <hr>
-                <button class="btn btn-primary-custom" onclick="generateProductsJson()">📄 生成 products.json 代码</button>
+                <button class="btn btn-primary-custom" id="btnGenProducts">📄 生成 products.json 代码</button>
                 <div id="productsJsonOutput" class="mt-3" style="display:none;">
                     <p class="mb-2">复制以下内容到 <code>_data/products.json</code>：</p>
                     <textarea class="form-control" id="productsJsonText" rows="15"></textarea>
-                    <button class="btn btn-warning-custom mt-2" onclick="copyText('productsJsonText')">📋 复制代码</button>
+                    <button class="btn btn-warning-custom mt-2" id="btnCopyProducts">📋 复制代码</button>
                     <a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/products.json" target="_blank" class="btn btn-primary-custom mt-2">🔗 打开 GitHub 文件</a>
                 </div>
             </div>
@@ -131,11 +131,11 @@
                         <input type="text" class="form-control" id="linkedinLink">
                     </div>
                 </div>
-                <button class="btn btn-primary-custom" onclick="generateSiteJson()">📄 生成 site.json 代码</button>
+                <button class="btn btn-primary-custom" id="btnGenSite">📄 生成 site.json 代码</button>
                 <div id="siteJsonOutput" class="mt-3" style="display:none;">
                     <p class="mb-2">复制以下内容到 <code>_data/site.json</code>：</p>
                     <textarea class="form-control" id="siteJsonText" rows="10"></textarea>
-                    <button class="btn btn-warning-custom mt-2" onclick="copyText('siteJsonText')">📋 复制代码</button>
+                    <button class="btn btn-warning-custom mt-2" id="btnCopySite">📋 复制代码</button>
                     <a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/site.json" target="_blank" class="btn btn-primary-custom mt-2">🔗 打开 GitHub 文件</a>
                 </div>
             </div>
@@ -231,31 +231,50 @@ function renderCategories() {
                     <input type="number" class="form-control form-control-sm cat-count" data-index="${i}" value="${cat.displayCount || 20}" min="1" max="100">
                 </div>
                 <div class="col-md-3 text-end pt-4">
-                    <button class="btn btn-danger-custom btn-sm" onclick="removeCategory(${i})">🗑️ 删除</button>
+                    <button class="btn btn-danger-custom btn-sm btn-remove-cat" data-index="${i}">🗑️ 删除</button>
                 </div>
             </div>
             <div class="subs-container" data-index="${i}">
                 ${(cat.subcategories || []).map((sub, j) => `
                     <div class="subcategory-item">
                         <input type="text" class="form-control form-control-sm sub-name" data-cat="${i}" data-sub="${j}" value="${sub}">
-                        <button class="btn btn-danger-custom btn-sm" onclick="removeSubcategory(${i}, ${j})">🗑️</button>
+                        <button class="btn btn-danger-custom btn-sm btn-remove-sub" data-cat="${i}" data-sub="${j}">🗑️</button>
                     </div>
                 `).join('')}
             </div>
-            <button class="btn btn-success-custom btn-sm mt-2" onclick="addSubcategory(${i})">➕ 添加子类</button>
+            <button class="btn btn-success-custom btn-sm btn-add-sub" data-index="${i}">➕ 添加子类</button>
         </div>
     `).join('');
+    
+    // 绑定事件
+    document.querySelectorAll('.btn-remove-cat').forEach(btn => {
+        btn.addEventListener('click', function() {
+            removeCategory(parseInt(this.dataset.index));
+        });
+    });
+    document.querySelectorAll('.btn-add-sub').forEach(btn => {
+        btn.addEventListener('click', function() {
+            addSubcategory(parseInt(this.dataset.index));
+        });
+    });
+    document.querySelectorAll('.btn-remove-sub').forEach(btn => {
+        btn.addEventListener('click', function() {
+            removeSubcategory(parseInt(this.dataset.cat), parseInt(this.dataset.sub));
+        });
+    });
 }
 
 function addCategory() {
     categoriesData.push({ name: '新分类', subcategories: [], displayCount: 20 });
     renderCategories();
+    showStatus('✅ 已添加新分类，请修改名称', 'success');
 }
 
 function removeCategory(i) {
     if (confirm('确定删除此分类？')) {
         categoriesData.splice(i, 1);
         renderCategories();
+        showStatus('✅ 分类已删除', 'success');
     }
 }
 
@@ -263,11 +282,13 @@ function addSubcategory(i) {
     if (!categoriesData[i].subcategories) categoriesData[i].subcategories = [];
     categoriesData[i].subcategories.push('新子类');
     renderCategories();
+    showStatus('✅ 已添加新子类，请修改名称', 'success');
 }
 
 function removeSubcategory(i, j) {
     categoriesData[i].subcategories.splice(j, 1);
     renderCategories();
+    showStatus('✅ 子类已删除', 'success');
 }
 
 function generateCategoriesJson() {
@@ -421,7 +442,18 @@ function showStatus(msg, type) {
     setTimeout(() => { el.style.display = 'none'; }, 5000);
 }
 
-document.addEventListener('DOMContentLoaded', loadData);
+// 绑定事件
+document.addEventListener('DOMContentLoaded', function() {
+    loadData();
+    
+    document.getElementById('btnAddCategory').addEventListener('click', addCategory);
+    document.getElementById('btnGenCategories').addEventListener('click', generateCategoriesJson);
+    document.getElementById('btnCopyCategories').addEventListener('click', function() { copyText('categoriesJsonText'); });
+    document.getElementById('btnGenProducts').addEventListener('click', generateProductsJson);
+    document.getElementById('btnCopyProducts').addEventListener('click', function() { copyText('productsJsonText'); });
+    document.getElementById('btnGenSite').addEventListener('click', generateSiteJson);
+    document.getElementById('btnCopySite').addEventListener('click', function() { copyText('siteJsonText'); });
+});
 </script>
 </body>
 </html>
