@@ -25,8 +25,6 @@
         .help-text { font-size: 0.85rem; color: #666; }
         .nav-tabs .nav-link { color: #1F3A5F; font-weight: 500; }
         .nav-tabs .nav-link.active { background-color: #1F3A5F; color: white; }
-        .copy-btn { cursor: pointer; }
-        textarea { font-family: monospace; font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -36,21 +34,19 @@
     
     <div id="statusMsg" class="status-msg"></div>
 
-    <!-- 使用说明 -->
     <div class="section-card bg-light">
-        <h5>📖 使用说明（请仔细阅读）</h5>
+        <h5>📖 使用说明</h5>
         <ol class="mb-0">
             <li>在下方各标签页中修改内容</li>
-            <li>修改后点击对应区域的 <strong>"生成代码"</strong> 按钮</li>
-            <li>点击 <strong>"复制代码"</strong> 按钮复制生成的代码</li>
-            <li>点击 <strong>"打开 GitHub 文件"</strong> 链接，粘贴代码并保存</li>
+            <li>修改后点击 <strong>"生成代码"</strong> 按钮</li>
+            <li>点击 <strong>"复制代码"</strong> 按钮</li>
+            <li>点击 <strong>"打开 GitHub 文件"</strong>，粘贴代码并保存</li>
             <li>等待 1-2 分钟，网站自动更新</li>
         </ol>
-        <p class="text-danger mt-2 mb-0">⚠️ 因为网站托管在 GitHub，无法直接保存，必须复制代码粘贴到 GitHub 对应文件。</p>
+        <p class="text-danger mt-2 mb-0">⚠️ 必须复制代码粘贴到 GitHub 对应文件才能生效。</p>
     </div>
 
-    <!-- 标签页导航 -->
-    <ul class="nav nav-tabs mb-4" id="mainTabs" role="tablist">
+    <ul class="nav nav-tabs mb-4" id="mainTabs">
         <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-categories">📂 分类与子类</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-products">👟 产品管理</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-settings">⚙️ 网站设置</a></li>
@@ -58,47 +54,42 @@
     </ul>
 
     <div class="tab-content">
-
-        <!-- 分类与子类管理 -->
         <div class="tab-pane fade show active" id="tab-categories">
             <div class="section-card">
                 <h4 class="section-title">📂 分类与子类管理</h4>
-                <p class="help-text">在这里管理网站的分类和子类。每个分类下可以有多个子类。你可以增删改分类和子类，设置每个子类展示多少款产品。</p>
+                <p class="help-text">管理网站分类和子类。每个分类下可以有多个子类，可以设置每个子类展示多少款产品。</p>
                 <div id="categoriesEditor"></div>
                 <button class="btn btn-success-custom mt-3" onclick="addCategory()">➕ 添加新分类</button>
                 <hr>
                 <button class="btn btn-primary-custom" onclick="generateCategoriesJson()">📄 生成 categories.json 代码</button>
                 <div id="categoriesJsonOutput" class="mt-3" style="display:none;">
-                    <p class="mb-2">请复制以下内容到 <code>_data/categories.json</code>：</p>
+                    <p class="mb-2">复制以下内容到 <code>_data/categories.json</code>：</p>
                     <textarea class="form-control" id="categoriesJsonText" rows="15"></textarea>
-                    <button class="btn btn-warning-custom mt-2 copy-btn" onclick="copyText('categoriesJsonText')">📋 复制代码</button>
+                    <button class="btn btn-warning-custom mt-2" onclick="copyText('categoriesJsonText')">📋 复制代码</button>
                     <a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/categories.json" target="_blank" class="btn btn-primary-custom mt-2">🔗 打开 GitHub 文件</a>
                 </div>
             </div>
         </div>
 
-        <!-- 产品管理 -->
         <div class="tab-pane fade" id="tab-products">
             <div class="section-card">
                 <h4 class="section-title">👟 产品管理</h4>
-                <p class="help-text">在这里管理产品信息。你可以修改产品名称、分类、子类、价格、图片路径和描述。添加新产品请在 GitHub 上复制现有产品记录进行添加。</p>
+                <p class="help-text">修改产品信息。添加新产品请在 GitHub 上编辑 products.json。</p>
                 <div id="productList"></div>
                 <hr>
                 <button class="btn btn-primary-custom" onclick="generateProductsJson()">📄 生成 products.json 代码</button>
                 <div id="productsJsonOutput" class="mt-3" style="display:none;">
-                    <p class="mb-2">请复制以下内容到 <code>_data/products.json</code>：</p>
+                    <p class="mb-2">复制以下内容到 <code>_data/products.json</code>：</p>
                     <textarea class="form-control" id="productsJsonText" rows="15"></textarea>
-                    <button class="btn btn-warning-custom mt-2 copy-btn" onclick="copyText('productsJsonText')">📋 复制代码</button>
+                    <button class="btn btn-warning-custom mt-2" onclick="copyText('productsJsonText')">📋 复制代码</button>
                     <a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/products.json" target="_blank" class="btn btn-primary-custom mt-2">🔗 打开 GitHub 文件</a>
                 </div>
             </div>
         </div>
 
-        <!-- 网站设置 -->
         <div class="tab-pane fade" id="tab-settings">
             <div class="section-card">
                 <h4 class="section-title">⚙️ 网站设置</h4>
-                <p class="help-text">在这里修改网站的基本信息，包括品牌名称、联系方式、域名设置等。</p>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">品牌名称</label>
@@ -110,24 +101,22 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">WhatsApp 号码</label>
-                        <input type="text" class="form-control" id="whatsapp" placeholder="+8613800138000">
+                        <input type="text" class="form-control" id="whatsapp">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">公司地址</label>
                         <input type="text" class="form-control" id="address">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">自定义域名（以后购买域名后填写）</label>
+                        <label class="form-label">自定义域名</label>
                         <input type="text" class="form-control" id="customDomain" placeholder="例如：www.yourbrand.com">
-                        <small class="help-text">购买域名后，在这里填写，然后去 GitHub Pages 设置中绑定</small>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Google Analytics ID</label>
                         <input type="text" class="form-control" id="gaId" placeholder="G-XXXXXXXXXX">
                     </div>
                 </div>
-                <hr>
-                <h5>社交媒体链接</h5>
+                <h5 class="mt-3">社交媒体</h5>
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label">Facebook</label>
@@ -144,76 +133,51 @@
                 </div>
                 <button class="btn btn-primary-custom" onclick="generateSiteJson()">📄 生成 site.json 代码</button>
                 <div id="siteJsonOutput" class="mt-3" style="display:none;">
-                    <p class="mb-2">请复制以下内容到 <code>_data/site.json</code>：</p>
+                    <p class="mb-2">复制以下内容到 <code>_data/site.json</code>：</p>
                     <textarea class="form-control" id="siteJsonText" rows="10"></textarea>
-                    <button class="btn btn-warning-custom mt-2 copy-btn" onclick="copyText('siteJsonText')">📋 复制代码</button>
+                    <button class="btn btn-warning-custom mt-2" onclick="copyText('siteJsonText')">📋 复制代码</button>
                     <a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/site.json" target="_blank" class="btn btn-primary-custom mt-2">🔗 打开 GitHub 文件</a>
                 </div>
             </div>
         </div>
 
-        <!-- 帮助中心 -->
         <div class="tab-pane fade" id="tab-help">
             <div class="section-card">
                 <h4 class="section-title">❓ 帮助中心</h4>
-                
-                <h5 class="mt-4">📷 如何上传产品图片？</h5>
+                <h5 class="mt-3">📷 上传产品图片</h5>
                 <ol>
-                    <li>打开：<a href="https://github.com/hfdhf/shoelink-website/new/main" target="_blank">https://github.com/hfdhf/shoelink-website/new/main</a></li>
-                    <li>在文件名输入：<code>images/产品名.jpg</code>（例如：<code>images/running-shoe-01.jpg</code>）</li>
-                    <li>点击上传区域选择图片文件</li>
-                    <li>点击 <strong>Commit new file</strong> 提交</li>
-                    <li>然后在产品管理中将图片路径改为：<code>images/产品名.jpg</code></li>
+                    <li>打开：<a href="https://github.com/hfdhf/shoelink-website/new/main" target="_blank">github.com/hfdhf/shoelink-website/new/main</a></li>
+                    <li>文件名输入：<code>images/产品名.jpg</code></li>
+                    <li>点击上传区域选择图片</li>
+                    <li>点击 Commit new file</li>
+                    <li>在产品管理中修改图片路径为 <code>images/产品名.jpg</code></li>
                 </ol>
-                
-                <h5 class="mt-4">👟 如何添加新产品？</h5>
+                <h5 class="mt-3">👟 添加新产品</h5>
                 <ol>
-                    <li>打开：<a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/products.json" target="_blank">https://github.com/hfdhf/shoelink-website/edit/main/_data/products.json</a></li>
-                    <li>复制最后一条产品记录（从 <code>{</code> 到 <code>}</code>）</li>
-                    <li>在最后一条记录后添加逗号</li>
-                    <li>粘贴复制的记录，修改产品信息</li>
-                    <li>点击 <strong>Commit changes</strong> 保存</li>
+                    <li>打开：<a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/products.json" target="_blank">编辑 products.json</a></li>
+                    <li>复制最后一条产品记录</li>
+                    <li>添加逗号后粘贴，修改内容</li>
+                    <li>保存</li>
                 </ol>
-                
-                <h5 class="mt-4">🌐 如何绑定自定义域名？</h5>
+                <h5 class="mt-3">🌐 绑定域名</h5>
                 <ol>
-                    <li>购买域名（推荐 Namecheap、GoDaddy、阿里云）</li>
+                    <li>购买域名</li>
                     <li>打开：<a href="https://github.com/hfdhf/shoelink-website/settings/pages" target="_blank">GitHub Pages 设置</a></li>
-                    <li>在 Custom domain 输入框中填入你的域名</li>
-                    <li>点击 Save</li>
-                    <li>在域名服务商处添加 CNAME 记录指向：<code>hfdhf.github.io</code></li>
-                    <li>等待生效（10分钟到24小时）</li>
+                    <li>Custom domain 填入域名，保存</li>
+                    <li>域名服务商处添加 CNAME 指向 <code>hfdhf.github.io</code></li>
                 </ol>
-                
-                <h5 class="mt-4">📊 如何查看网站数据统计？</h5>
-                <ol>
-                    <li>访问：<a href="https://analytics.google.com" target="_blank">Google Analytics</a></li>
-                    <li>用 Google 账号登录</li>
-                    <li>查看访问人数、来源、浏览页面等数据</li>
-                </ol>
-                
-                <h5 class="mt-4">🔗 重要链接汇总</h5>
-                <ul>
-                    <li>网站首页：<a href="https://hfdhf.github.io/shoelink-website/" target="_blank">https://hfdhf.github.io/shoelink-website/</a></li>
-                    <li>管理后台：<a href="https://hfdhf.github.io/shoelink-website/manage.html" target="_blank">https://hfdhf.github.io/shoelink-website/manage.html</a></li>
-                    <li>GitHub 仓库：<a href="https://github.com/hfdhf/shoelink-website" target="_blank">https://github.com/hfdhf/shoelink-website</a></li>
-                    <li>产品数据：<a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/products.json" target="_blank">编辑 products.json</a></li>
-                    <li>分类数据：<a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/categories.json" target="_blank">编辑 categories.json</a></li>
-                    <li>网站设置：<a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/site.json" target="_blank">编辑 site.json</a></li>
-                </ul>
+                <h5 class="mt-3">📊 查看数据</h5>
+                <p>访问：<a href="https://analytics.google.com" target="_blank">Google Analytics</a></p>
             </div>
         </div>
-
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// ========== 全局变量 ==========
 let categoriesData = [];
 let productsData = [];
 
-// ========== 加载数据 ==========
 async function loadData() {
     try {
         const [catRes, prodRes, siteRes] = await Promise.all([
@@ -226,7 +190,6 @@ async function loadData() {
         const prodData = await prodRes.json();
         const siteData = await siteRes.json();
         
-        // 处理分类数据
         if (Array.isArray(catData)) {
             categoriesData = catData.map(name => ({ name: name, subcategories: [], displayCount: 20 }));
         } else if (catData.categories) {
@@ -235,149 +198,143 @@ async function loadData() {
         
         productsData = prodData.products || prodData;
         
-        // 填充网站设置
         document.getElementById('brandName').value = siteData.brandName || 'ShoeLink';
         document.getElementById('contactEmail').value = siteData.contactEmail || '';
         document.getElementById('whatsapp').value = siteData.whatsapp || '';
         document.getElementById('address').value = siteData.address || '';
         document.getElementById('customDomain').value = siteData.customDomain || '';
-        document.getElementById('gaId').value = siteData.gaId || 'G-6RG4R8ZM6Q';
+        document.getElementById('gaId').value = siteData.gaId || '';
         
         const social = siteData.socialLinks || {};
         document.getElementById('facebookLink').value = social.facebook || '';
         document.getElementById('instagramLink').value = social.instagram || '';
         document.getElementById('linkedinLink').value = social.linkedin || '';
         
-        renderCategoriesEditor();
+        renderCategories();
         renderProducts();
     } catch (error) {
         showStatus('加载数据失败：' + error.message, 'error');
     }
 }
 
-// ========== 分类编辑 ==========
-function renderCategoriesEditor() {
+function renderCategories() {
     const container = document.getElementById('categoriesEditor');
-    container.innerHTML = categoriesData.map((cat, catIndex) => `
-        <div class="category-editor border p-3 mb-3 rounded" style="background:#f9f9f9;">
-            <div class="row align-items-center mb-2">
-                <div class="col-md-4">
+    container.innerHTML = categoriesData.map((cat, i) => `
+        <div class="border p-3 mb-3 rounded" style="background:#f9f9f9;">
+            <div class="row mb-2">
+                <div class="col-md-5">
                     <label class="form-label small fw-bold">分类名称</label>
-                    <input type="text" class="form-control form-control-sm" value="${cat.name}" data-cat-index="${catIndex}" data-field="name">
+                    <input type="text" class="form-control form-control-sm cat-name" data-index="${i}" value="${cat.name || ''}">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label small fw-bold">每子类展示数量</label>
-                    <input type="number" class="form-control form-control-sm" value="${cat.displayCount || 20}" min="1" max="100" data-cat-index="${catIndex}" data-field="displayCount">
+                    <input type="number" class="form-control form-control-sm cat-count" data-index="${i}" value="${cat.displayCount || 20}" min="1" max="100">
                 </div>
-                <div class="col-md-4 text-end">
-                    <button class="btn btn-danger-custom btn-sm" onclick="removeCategory(${catIndex})">🗑️ 删除分类</button>
+                <div class="col-md-3 text-end pt-4">
+                    <button class="btn btn-danger-custom btn-sm" onclick="removeCategory(${i})">🗑️ 删除</button>
                 </div>
             </div>
-            <div class="subcategories-list" data-cat-index="${catIndex}">
-                ${(cat.subcategories || []).map((sub, subIndex) => `
+            <div class="subs-container" data-index="${i}">
+                ${(cat.subcategories || []).map((sub, j) => `
                     <div class="subcategory-item">
-                        <input type="text" class="form-control form-control-sm" value="${sub}" data-cat-index="${catIndex}" data-sub-index="${subIndex}" placeholder="子类名称">
-                        <button class="btn btn-danger-custom btn-sm" onclick="removeSubcategory(${catIndex}, ${subIndex})">🗑️</button>
+                        <input type="text" class="form-control form-control-sm sub-name" data-cat="${i}" data-sub="${j}" value="${sub}">
+                        <button class="btn btn-danger-custom btn-sm" onclick="removeSubcategory(${i}, ${j})">🗑️</button>
                     </div>
                 `).join('')}
             </div>
-            <button class="btn btn-success-custom btn-sm mt-2" onclick="addSubcategory(${catIndex})">➕ 添加子类</button>
+            <button class="btn btn-success-custom btn-sm mt-2" onclick="addSubcategory(${i})">➕ 添加子类</button>
         </div>
     `).join('');
 }
 
 function addCategory() {
-    categoriesData.push({ name: 'New Category', subcategories: [], displayCount: 20 });
-    renderCategoriesEditor();
+    categoriesData.push({ name: '新分类', subcategories: [], displayCount: 20 });
+    renderCategories();
 }
 
-function removeCategory(index) {
-    if (confirm('确定删除这个分类吗？')) {
-        categoriesData.splice(index, 1);
-        renderCategoriesEditor();
+function removeCategory(i) {
+    if (confirm('确定删除此分类？')) {
+        categoriesData.splice(i, 1);
+        renderCategories();
     }
 }
 
-function addSubcategory(catIndex) {
-    if (!categoriesData[catIndex].subcategories) {
-        categoriesData[catIndex].subcategories = [];
-    }
-    categoriesData[catIndex].subcategories.push('New Subcategory');
-    renderCategoriesEditor();
+function addSubcategory(i) {
+    if (!categoriesData[i].subcategories) categoriesData[i].subcategories = [];
+    categoriesData[i].subcategories.push('新子类');
+    renderCategories();
 }
 
-function removeSubcategory(catIndex, subIndex) {
-    categoriesData[catIndex].subcategories.splice(subIndex, 1);
-    renderCategoriesEditor();
+function removeSubcategory(i, j) {
+    categoriesData[i].subcategories.splice(j, 1);
+    renderCategories();
 }
 
 function generateCategoriesJson() {
-    // 从界面收集数据
-    document.querySelectorAll('.category-editor').forEach((editor, index) => {
-        const nameInput = editor.querySelector(`input[data-field="name"]`);
-        const countInput = editor.querySelector(`input[data-field="displayCount"]`);
-        if (nameInput) categoriesData[index].name = nameInput.value;
-        if (countInput) categoriesData[index].displayCount = parseInt(countInput.value) || 20;
-        
-        const subInputs = editor.querySelectorAll(`.subcategory-item input`);
-        const subs = [];
-        subInputs.forEach(input => {
-            if (input.value.trim() !== '') subs.push(input.value.trim());
-        });
-        categoriesData[index].subcategories = subs;
+    document.querySelectorAll('.cat-name').forEach(input => {
+        const i = parseInt(input.dataset.index);
+        if (categoriesData[i]) categoriesData[i].name = input.value.trim() || '未命名分类';
     });
-    
-    const data = { categories: categoriesData };
-    document.getElementById('categoriesJsonText').value = JSON.stringify(data, null, 2);
+    document.querySelectorAll('.cat-count').forEach(input => {
+        const i = parseInt(input.dataset.index);
+        if (categoriesData[i]) categoriesData[i].displayCount = parseInt(input.value) || 20;
+    });
+    document.querySelectorAll('.sub-name').forEach(input => {
+        const i = parseInt(input.dataset.cat);
+        const j = parseInt(input.dataset.sub);
+        if (categoriesData[i] && categoriesData[i].subcategories && categoriesData[i].subcategories[j] !== undefined) {
+            categoriesData[i].subcategories[j] = input.value.trim() || '未命名子类';
+        }
+    });
+    document.getElementById('categoriesJsonText').value = JSON.stringify({ categories: categoriesData }, null, 2);
     document.getElementById('categoriesJsonOutput').style.display = 'block';
-    showStatus('✅ 代码已生成！请复制并粘贴到 GitHub 对应的文件中。', 'success');
+    showStatus('✅ 代码已生成！', 'success');
 }
 
-// ========== 产品管理 ==========
 function renderProducts() {
     const container = document.getElementById('productList');
-    container.innerHTML = productsData.map((p, index) => `
+    container.innerHTML = productsData.map((p, i) => `
         <div class="product-item">
             <div class="row align-items-center">
                 <div class="col-md-2 text-center">
-                    <img src="${p.image || 'https://placehold.co/80x80?text=No+Image'}" class="product-image" alt="${p.name}">
+                    <img src="${p.image || 'https://placehold.co/80x80?text=No+Image'}" class="product-image" alt="${p.name || ''}">
                 </div>
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-md-4 mb-2">
                             <label class="form-label small">产品名称</label>
-                            <input type="text" class="form-control form-control-sm" value="${p.name || ''}" data-prod-index="${index}" data-field="name">
+                            <input type="text" class="form-control form-control-sm prod-name" data-index="${i}" value="${p.name || ''}">
                         </div>
                         <div class="col-md-3 mb-2">
                             <label class="form-label small">分类</label>
-                            <input type="text" class="form-control form-control-sm" value="${p.category || ''}" data-prod-index="${index}" data-field="category">
+                            <input type="text" class="form-control form-control-sm prod-cat" data-index="${i}" value="${p.category || ''}">
                         </div>
                         <div class="col-md-2 mb-2">
                             <label class="form-label small">子类</label>
-                            <input type="text" class="form-control form-control-sm" value="${p.subcategory || ''}" data-prod-index="${index}" data-field="subcategory">
+                            <input type="text" class="form-control form-control-sm prod-sub" data-index="${i}" value="${p.subcategory || ''}">
                         </div>
                         <div class="col-md-3 mb-2">
                             <label class="form-label small">价格区间</label>
-                            <input type="text" class="form-control form-control-sm" value="${p.priceRange || ''}" data-prod-index="${index}" data-field="priceRange">
+                            <input type="text" class="form-control form-control-sm prod-price" data-index="${i}" value="${p.priceRange || ''}">
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label small">图片路径</label>
-                            <input type="text" class="form-control form-control-sm" value="${p.image || ''}" data-prod-index="${index}" data-field="image">
+                            <input type="text" class="form-control form-control-sm prod-img" data-index="${i}" value="${p.image || ''}">
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label small">产品编号</label>
-                            <input type="text" class="form-control form-control-sm" value="${p.id || ''}" data-prod-index="${index}" data-field="id">
+                            <input type="text" class="form-control form-control-sm prod-id" data-index="${i}" value="${p.id || ''}">
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="form-label small">精选（显示在首页）</label>
-                            <select class="form-control form-control-sm" data-prod-index="${index}" data-field="featured">
+                            <label class="form-label small">首页精选</label>
+                            <select class="form-control form-control-sm prod-featured" data-index="${i}">
                                 <option value="false" ${!p.featured ? 'selected' : ''}>否</option>
                                 <option value="true" ${p.featured ? 'selected' : ''}>是</option>
                             </select>
                         </div>
                         <div class="col-md-12 mb-2">
                             <label class="form-label small">描述</label>
-                            <textarea class="form-control form-control-sm" rows="2" data-prod-index="${index}" data-field="description">${p.description || ''}</textarea>
+                            <textarea class="form-control form-control-sm prod-desc" rows="2" data-index="${i}">${p.description || ''}</textarea>
                         </div>
                     </div>
                 </div>
@@ -387,54 +344,75 @@ function renderProducts() {
 }
 
 function generateProductsJson() {
-    document.querySelectorAll('.product-item').forEach((item, index) => {
-        item.querySelectorAll('input, textarea, select').forEach(input => {
-            const field = input.dataset.field;
-            let value = input.value;
-            if (field === 'featured') value = value === 'true';
-            productsData[index][field] = value;
-        });
+    document.querySelectorAll('.prod-name').forEach(input => {
+        const i = parseInt(input.dataset.index);
+        if (productsData[i]) productsData[i].name = input.value.trim();
+    });
+    document.querySelectorAll('.prod-cat').forEach(input => {
+        const i = parseInt(input.dataset.index);
+        if (productsData[i]) productsData[i].category = input.value.trim();
+    });
+    document.querySelectorAll('.prod-sub').forEach(input => {
+        const i = parseInt(input.dataset.index);
+        if (productsData[i]) productsData[i].subcategory = input.value.trim();
+    });
+    document.querySelectorAll('.prod-price').forEach(input => {
+        const i = parseInt(input.dataset.index);
+        if (productsData[i]) productsData[i].priceRange = input.value.trim();
+    });
+    document.querySelectorAll('.prod-img').forEach(input => {
+        const i = parseInt(input.dataset.index);
+        if (productsData[i]) productsData[i].image = input.value.trim();
+    });
+    document.querySelectorAll('.prod-id').forEach(input => {
+        const i = parseInt(input.dataset.index);
+        if (productsData[i]) productsData[i].id = input.value.trim();
+    });
+    document.querySelectorAll('.prod-featured').forEach(select => {
+        const i = parseInt(select.dataset.index);
+        if (productsData[i]) productsData[i].featured = select.value === 'true';
+    });
+    document.querySelectorAll('.prod-desc').forEach(textarea => {
+        const i = parseInt(textarea.dataset.index);
+        if (productsData[i]) productsData[i].description = textarea.value.trim();
     });
     document.getElementById('productsJsonText').value = JSON.stringify(productsData, null, 2);
     document.getElementById('productsJsonOutput').style.display = 'block';
-    showStatus('✅ 代码已生成！请复制并粘贴到 GitHub 对应的文件中。', 'success');
+    showStatus('✅ 代码已生成！', 'success');
 }
 
-// ========== 网站设置 ==========
 function generateSiteJson() {
     const data = {
-        brandName: document.getElementById('brandName').value,
-        contactEmail: document.getElementById('contactEmail').value,
-        whatsapp: document.getElementById('whatsapp').value,
-        address: document.getElementById('address').value,
-        customDomain: document.getElementById('customDomain').value,
-        gaId: document.getElementById('gaId').value,
+        brandName: document.getElementById('brandName').value.trim() || 'ShoeLink',
+        contactEmail: document.getElementById('contactEmail').value.trim(),
+        whatsapp: document.getElementById('whatsapp').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        customDomain: document.getElementById('customDomain').value.trim(),
+        gaId: document.getElementById('gaId').value.trim(),
         socialLinks: {
-            facebook: document.getElementById('facebookLink').value || '#',
-            instagram: document.getElementById('instagramLink').value || '#',
-            linkedin: document.getElementById('linkedinLink').value || '#'
+            facebook: document.getElementById('facebookLink').value.trim() || '#',
+            instagram: document.getElementById('instagramLink').value.trim() || '#',
+            linkedin: document.getElementById('linkedinLink').value.trim() || '#'
         },
         tawkToId: "YOUR_TAWK_ID"
     };
     document.getElementById('siteJsonText').value = JSON.stringify(data, null, 2);
     document.getElementById('siteJsonOutput').style.display = 'block';
-    showStatus('✅ 代码已生成！请复制并粘贴到 GitHub 对应的文件中。', 'success');
+    showStatus('✅ 代码已生成！', 'success');
 }
 
-// ========== 复制功能 ==========
-function copyText(elementId) {
-    const textarea = document.getElementById(elementId);
+function copyText(id) {
+    const textarea = document.getElementById(id);
     textarea.select();
     textarea.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(textarea.value).then(() => {
-        showStatus('✅ 已复制到剪贴板！', 'success');
+        showStatus('✅ 已复制！', 'success');
     }).catch(() => {
         document.execCommand('copy');
-        showStatus('✅ 已复制到剪贴板！', 'success');
+        showStatus('✅ 已复制！', 'success');
     });
 }
 
-// ========== 状态提示 ==========
 function showStatus(msg, type) {
     const el = document.getElementById('statusMsg');
     el.textContent = msg;
@@ -445,6 +423,5 @@ function showStatus(msg, type) {
 
 document.addEventListener('DOMContentLoaded', loadData);
 </script>
-
 </body>
 </html>
