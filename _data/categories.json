@@ -2,36 +2,43 @@
   "categories": [
     {
       "name": "Men's Shoes",
+      "icon": "👞",
       "subcategories": ["Running", "Casual", "Formal"],
       "displayCount": 20
     },
     {
       "name": "Women's Shoes",
+      "icon": "👠",
       "subcategories": ["Sandals", "Heels", "Flats"],
       "displayCount": 20
     },
     {
       "name": "Sports Shoes",
+      "icon": "👟",
       "subcategories": ["Running", "Basketball", "Training"],
       "displayCount": 20
     },
     {
       "name": "Sandals & Slippers",
+      "icon": "🩴",
       "subcategories": ["Summer", "Beach", "Indoor"],
       "displayCount": 20
     },
     {
       "name": "Boots",
+      "icon": "🥾",
       "subcategories": ["Fashion", "Winter", "Work"],
       "displayCount": 20
     },
     {
       "name": "Kids' Shoes",
+      "icon": "👶",
       "subcategories": ["Boys", "Girls", "Baby"],
       "displayCount": 20
     },
     {
       "name": "Work & Safety Shoes",
+      "icon": "🛡️",
       "subcategories": ["Steel Toe", "Waterproof", "Anti-slip"],
       "displayCount": 20
     }
