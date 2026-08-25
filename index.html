@@ -5,36 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShoeLink - Global Footwear Supplier</title>
     <meta name="description" content="ShoeLink is a professional footwear manufacturer and exporter, offering a wide range of shoes for global markets.">
-    <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6RG4R8ZM6Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-6RG4R8ZM6Q');
-</script>
-    <!-- Tawk.to 占位（后续填入你的ID） -->
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/YOUR_TAWK_ID/default';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6RG4R8ZM6Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6RG4R8ZM6Q');
     </script>
-    <!--End of Tawk.to Script-->
+    <style>
+        .tree-category {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            overflow: hidden;
+            background: white;
+        }
+        .tree-category-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 18px;
+            cursor: pointer;
+            background: #f8f9fa;
+            transition: background 0.2s;
+            text-decoration: none;
+            color: #1F3A5F;
+        }
+        .tree-category-header:hover {
+            background: #e9ecef;
+        }
+        .tree-category-header .toggle-icon {
+            margin-right: 12px;
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+        .tree-category-header .toggle-icon.expanded {
+            transform: rotate(90deg);
+        }
+        .tree-category-header .category-name {
+            font-weight: bold;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+        .tree-category-header .product-count {
+            font-size: 0.85rem;
+            color: #666;
+            margin-right: 10px;
+        }
+        .tree-subcategories {
+            display: none;
+            padding: 10px 20px 15px 45px;
+            background: white;
+        }
+        .tree-subcategories.show {
+            display: block;
+        }
+        .subcategory-link {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px 6px 4px 0;
+            background: #f0f4f8;
+            border: 1px solid #d0d8e0;
+            border-radius: 20px;
+            color: #1F3A5F;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .subcategory-link:hover {
+            background: #1F3A5F;
+            color: white;
+            border-color: #1F3A5F;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- 顶部导航 -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1F3A5F;">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">ShoeLink</a>
@@ -53,13 +101,12 @@
         </div>
     </nav>
 
-    <!-- Hero 区域 -->
-    <header class="hero d-flex align-items-center text-center text-md-start" style="background: url('https://placehold.co/1920x800/1F3A5F/C9A24B?text=ShoeLink+Footwear') center/cover no-repeat; min-height: 80vh;">
+    <header class="hero d-flex align-items-center" style="background: linear-gradient(135deg, #1F3A5F 0%, #2a4a6f 100%); min-height: 60vh; padding-top: 76px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 text-white">
                     <h1 class="display-4 fw-bold">Global Footwear Manufacturer & Exporter</h1>
-                    <p class="lead my-4">We produce and export all types of shoes to Middle East, Russia, Central Asia, Africa, and Americas. With over 10 partner factories and strong production capacity, we deliver quality and reliability.</p>
+                    <p class="lead my-4">We produce and export all types of shoes to Middle East, Russia, Central Asia, Africa, and Americas.</p>
                     <a href="products.html" class="btn btn-warning btn-lg text-dark fw-bold me-2">View Products</a>
                     <a href="contact.html" class="btn btn-outline-light btn-lg">Get a Quote</a>
                 </div>
@@ -67,17 +114,20 @@
         </div>
     </header>
 
-    <!-- 产品分类入口 -->
     <section class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5" style="color:#1F3A5F;">Our Categories</h2>
-            <div class="row g-4" id="categoryCards">
-                <!-- 由 JS 动态渲染分类 -->
+            <h2 class="text-center mb-4" style="color:#1F3A5F;">Browse Our Categories</h2>
+            <p class="text-center text-muted mb-5">Click a category to expand and see subcategories</p>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div id="categoryTree">
+                        <!-- 由 JS 动态渲染树状分类 -->
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 公司优势 -->
     <section class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-5" style="color:#1F3A5F;">Why Choose Us</h2>
@@ -102,7 +152,7 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">Global Export Experience</h5>
-                            <p class="card-text">Serving clients in Middle East, Russia, Africa, and Americas with custom solutions.</p>
+                            <p class="card-text">Serving clients in Middle East, Russia, Africa, and Americas.</p>
                         </div>
                     </div>
                 </div>
@@ -110,17 +160,15 @@
         </div>
     </section>
 
-    <!-- 精选产品 -->
     <section class="py-5">
         <div class="container">
             <h2 class="text-center mb-5" style="color:#1F3A5F;">Featured Products</h2>
             <div class="row g-4" id="featuredProducts">
-                <!-- 由 JS 动态渲染精选产品 -->
+                <!-- 由 JS 动态渲染 -->
             </div>
         </div>
     </section>
 
-    <!-- 行动号召 -->
     <section class="py-5 text-white text-center" style="background-color:#1F3A5F;">
         <div class="container">
             <h2>Ready to Start Your Order?</h2>
@@ -130,22 +178,129 @@
         </div>
     </section>
 
-    <!-- 页脚 -->
     <footer class="bg-dark text-white py-4">
         <div class="container text-center">
             <p class="mb-1">&copy; 2025 ShoeLink. All rights reserved.</p>
-            <p class="mb-1">
-                <a href="#" class="text-white me-2">Facebook</a>
-                <a href="#" class="text-white me-2">Instagram</a>
-                <a href="#" class="text-white">LinkedIn</a>
-            </p>
-            <p class="small mb-0">Contact us: info@shoelink.com | WhatsApp: +123456789</p>
+            <p class="small mb-0" id="footerContact">Contact us: info@shoelink.com | WhatsApp: +123456789</p>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- 自定义 JS -->
-    <script src="js/main.js"></script>
+    <script>
+    async function loadSiteInfo() {
+        try {
+            const response = await fetch('_data/site.json');
+            const siteData = await response.json();
+            document.querySelectorAll('.navbar-brand').forEach(el => {
+                el.textContent = siteData.brandName || 'ShoeLink';
+            });
+            const footerContact = document.getElementById('footerContact');
+            if (footerContact && siteData.contactEmail) {
+                footerContact.textContent = 'Contact us: ' + siteData.contactEmail + ' | WhatsApp: ' + (siteData.whatsapp || '');
+            }
+        } catch (e) { console.error('Site info load failed', e); }
+    }
+
+    async function loadCategories() {
+        try {
+            const response = await fetch('_data/categories.json');
+            const data = await response.json();
+            return data.categories || data;
+        } catch (e) {
+            console.error('Categories load failed', e);
+            return [];
+        }
+    }
+
+    async function loadProducts() {
+        try {
+            const response = await fetch('_data/products.json');
+            const data = await response.json();
+            return data.products || data;
+        } catch (e) {
+            console.error('Products load failed', e);
+            return [];
+        }
+    }
+
+    async function renderCategoryTree() {
+        const container = document.getElementById('categoryTree');
+        const categories = await loadCategories();
+        const products = await loadProducts();
+        
+        let html = '';
+        categories.forEach(function(cat, i) {
+            const subs = cat.subcategories || [];
+            const catProducts = products.filter(function(p) { return p.category === cat.name; });
+            const count = catProducts.length;
+            
+            html += '<div class="tree-category">';
+            html += '  <div class="tree-category-header" data-index="' + i + '">';
+            html += '    <span class="toggle-icon" id="icon_' + i + '">▶</span>';
+            html += '    <span class="category-name">' + cat.name + '</span>';
+            html += '    <span class="product-count">' + count + ' products</span>';
+            html += '  </div>';
+            html += '  <div class="tree-subcategories" id="subs_' + i + '">';
+            
+            subs.forEach(function(sub) {
+                html += '    <a href="products.html?category=' + encodeURIComponent(cat.name) + '&subcategory=' + encodeURIComponent(sub) + '" class="subcategory-link">' + sub + '</a>';
+            });
+            
+            if (subs.length === 0) {
+                html += '    <span class="text-muted">暂无子类</span>';
+            }
+            
+            html += '  </div>';
+            html += '</div>';
+        });
+        
+        container.innerHTML = html;
+        
+        // 绑定展开/收起
+        document.querySelectorAll('.tree-category-header').forEach(function(header) {
+            header.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                const subsContainer = document.getElementById('subs_' + index);
+                const icon = document.getElementById('icon_' + index);
+                if (subsContainer.classList.contains('show')) {
+                    subsContainer.classList.remove('show');
+                    icon.textContent = '▶';
+                } else {
+                    subsContainer.classList.add('show');
+                    icon.textContent = '▼';
+                }
+            });
+        });
+    }
+
+    async function renderFeaturedProducts() {
+        const container = document.getElementById('featuredProducts');
+        const products = await loadProducts();
+        const featured = products.filter(function(p) { return p.featured === true; });
+        const display = featured.length > 0 ? featured : products.slice(0, 4);
+        
+        let html = '';
+        display.forEach(function(p) {
+            html += '<div class="col-md-3 col-sm-6 mb-4">';
+            html += '  <div class="card product-card">';
+            html += '    <img src="' + (p.image || 'https://placehold.co/600x400?text=Product') + '" class="product-img" alt="' + p.name + '">';
+            html += '    <div class="card-body">';
+            html += '      <h5 class="card-title">' + p.name + '</h5>';
+            html += '      <p class="card-text text-muted small">' + (p.category || '') + '</p>';
+            html += '      <a href="product-detail.html?id=' + p.id + '" class="btn btn-outline-primary btn-sm">View Details</a>';
+            html += '    </div>';
+            html += '  </div>';
+            html += '</div>';
+        });
+        
+        container.innerHTML = html;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSiteInfo();
+        renderCategoryTree();
+        renderFeaturedProducts();
+    });
+    </script>
 </body>
 </html>
