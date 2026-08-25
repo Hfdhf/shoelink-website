@@ -50,16 +50,6 @@
         </div>
     </header>
 
-    <!-- Browse Our Categories 分类入口 -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5" style="color:#1F3A5F;">Browse Our Categories</h2>
-            <div class="row g-4" id="categoryCards">
-                <!-- 由 JS 动态渲染分类卡片 -->
-            </div>
-        </div>
-    </section>
-
     <!-- 公司优势 -->
     <section class="py-5 bg-light">
         <div class="container">
@@ -93,13 +83,12 @@
         </div>
     </section>
 
-    <!-- 产品大类展示（Featured Categories） -->
+    <!-- Featured Categories 分类卡片 -->
     <section class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5" style="color:#1F3A5F;">Our Product Categories</h2>
-            <p class="text-center text-muted mb-5">Click "View Details" to explore subcategories and products</p>
+            <h2 class="text-center mb-5" style="color:#1F3A5F;">Featured Categories</h2>
             <div class="row g-4" id="featuredCategories">
-                <!-- 由 JS 动态渲染大类卡片 -->
+                <!-- 由 JS 动态渲染分类卡片 -->
             </div>
         </div>
     </section>
@@ -149,24 +138,7 @@
         } catch(e) { return []; }
     }
 
-    // 渲染 Browse Our Categories 分类卡片
-    async function renderCategoryCards() {
-        const container = document.getElementById('categoryCards');
-        const categories = await loadCategories();
-        
-        let html = '';
-        categories.forEach(function(cat) {
-            html += '<div class="col-md-3 col-sm-6 mb-3">';
-            html += '  <a href="products.html?category=' + encodeURIComponent(cat.name) + '" class="category-card">';
-            html += '    <h5>' + cat.name + '</h5>';
-            html += '  </a>';
-            html += '</div>';
-        });
-        
-        container.innerHTML = html;
-    }
-
-    // 渲染 Our Product Categories 大类卡片（带查看详情按钮）
+    // 渲染分类卡片
     async function renderFeaturedCategories() {
         const container = document.getElementById('featuredCategories');
         const categories = await loadCategories();
@@ -176,15 +148,13 @@
         categories.forEach(function(cat) {
             const catProducts = products.filter(function(p) { return p.category === cat.name; });
             const count = catProducts.length;
-            const displayCount = cat.displayCount || 20;
             
             html += '<div class="col-md-3 col-sm-6 mb-4">';
-            html += '  <div class="card product-card">';
-            html += '    <div class="card-body text-center">';
+            html += '  <div class="card product-card h-100">';
+            html += '    <div class="card-body text-center d-flex flex-column">';
             html += '      <h5 class="card-title">' + cat.name + '</h5>';
             html += '      <p class="card-text text-muted">' + count + ' products</p>';
-            html += '      <p class="card-text text-muted small">展示 ' + displayCount + ' 款</p>';
-            html += '      <a href="products.html?category=' + encodeURIComponent(cat.name) + '" class="btn btn-outline-primary btn-sm w-100">View Details</a>';
+            html += '      <a href="products.html?category=' + encodeURIComponent(cat.name) + '" class="btn btn-outline-primary btn-sm mt-auto w-100">View Details</a>';
             html += '    </div>';
             html += '  </div>';
             html += '</div>';
@@ -195,7 +165,6 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         loadSiteInfo();
-        renderCategoryCards();
         renderFeaturedCategories();
     });
     </script>
