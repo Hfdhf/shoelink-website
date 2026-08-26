@@ -6,8 +6,8 @@
     <title>Products - ShoeLink Footwear</title>
     <meta name="description" content="Browse our wide range of footwear products.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6RG4R8ZM6Q"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,263 +16,128 @@
       gtag('config', 'G-6RG4R8ZM6Q');
     </script>
     <style>
-        .sidebar {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-            position: sticky;
-            top: 90px;
-        }
-        .tree-category {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 6px;
-            overflow: hidden;
-        }
-        .tree-category-header {
-            display: flex;
-            align-items: center;
-            padding: 10px 14px;
-            cursor: pointer;
-            background: #f8f9fa;
-            transition: background 0.2s;
-        }
-        .tree-category-header:hover {
-            background: #e9ecef;
-        }
-        .tree-category-header .toggle-icon {
-            margin-right: 10px;
-            font-size: 0.8rem;
-        }
-        .tree-category-header .category-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #1F3A5F;
-            flex: 1;
-        }
-        .tree-subcategories {
-            display: none;
-            padding: 8px 12px 10px 35px;
-            background: white;
-        }
-        .tree-subcategories.show {
-            display: block;
-        }
-        .subcategory-link {
-            display: block;
-            padding: 5px 10px;
-            color: #555;
-            text-decoration: none;
-            font-size: 0.9rem;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-        .subcategory-link:hover {
-            background: #f0f4f8;
-            color: #1F3A5F;
-        }
-        .subcategory-link.active {
-            background: #1F3A5F;
-            color: white;
-        }
-        .current-filter {
-            background: #e9ecef;
-            border-radius: 6px;
-            padding: 8px 12px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
+        body { font-family: 'Inter', sans-serif; color: #2d3748; }
+        .navbar-custom { background: rgba(15,26,46,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        .page-header { background: linear-gradient(135deg, #1F3A5F, #2a4a6f); padding: 100px 0 40px; }
+        .product-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #edf2f7; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s; text-decoration: none; display: block; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(31,58,95,0.12); }
+        .product-card img { width: 100%; height: 220px; object-fit: cover; }
+        .product-card-body { padding: 15px; }
+        .product-id { font-size: 0.8rem; color: #C9A24B; font-weight: 600; }
+        .product-name { color: #1F3A5F; font-weight: 700; margin: 5px 0; }
+        .product-price { color: #1F3A5F; font-weight: 800; font-size: 1.1rem; }
+        .footer-custom { background: #0f1a2e; }
+        .footer-social a { color: rgba(255,255,255,0.7); text-decoration: none; margin: 0 10px; font-size: 1.5rem; transition: color 0.3s; }
+        .footer-social a:hover { color: #C9A24B; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1F3A5F;">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">ShoeLink</a>
+            <a class="navbar-brand fw-bold" href="index.html" style="font-size:1.3rem;">ShoeLink</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link active" href="products.html">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-warning btn-sm ms-2 text-dark fw-bold" href="sample-request.html">Request Sample</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link btn btn-warning btn-sm text-dark fw-bold px-3" href="sample-request.html" style="border-radius:25px;">Request Sample</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <header class="py-4 text-white" style="background-color:#1F3A5F; padding-top: 90px !important;">
+    <!-- 页面标题 -->
+    <header class="page-header text-white">
         <div class="container">
-            <h1 class="fw-bold h3 mb-0">Our Products</h1>
+            <h1 class="fw-bold h3 mb-0" id="pageTitle">Our Products</h1>
         </div>
     </header>
 
-    <section class="py-4">
+    <!-- 产品网格 -->
+    <section class="py-5">
         <div class="container">
-            <div class="row">
-                <!-- 左侧树状分类 -->
-                <div class="col-lg-3 mb-4">
-                    <div class="sidebar">
-                        <h5 class="mb-3" style="color:#1F3A5F;">📂 Categories</h5>
-                        <div class="current-filter" id="currentFilter">Showing: All Products</div>
-                        <div id="categoryTree"></div>
-                    </div>
-                </div>
-                
-                <!-- 右侧产品网格 -->
-                <div class="col-lg-9">
-                    <div class="row g-4" id="productGrid"></div>
-                </div>
-            </div>
+            <div class="row g-4" id="productGrid"></div>
         </div>
     </section>
 
-    <footer class="bg-dark text-white py-4">
+    <!-- 页脚 -->
+    <footer class="footer-custom text-white py-5">
         <div class="container text-center">
-            <p class="mb-1">&copy; 2025 ShoeLink. All rights reserved.</p>
-            <p class="small mb-0" id="footerContact">Contact us: info@shoelink.com | WhatsApp: +123456789</p>
+            <p class="fw-bold mb-3" style="font-size:1.2rem;">ShoeLink</p>
+            <div class="footer-social mb-3" id="footerSocial"></div>
+            <p class="small mb-1" id="footerContact"></p>
+            <p class="small opacity-50">© 2026 ShoeLink. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    let allProducts = [];
-    let currentCategory = '';
-    let currentSubcategory = '';
-
-    async function loadSiteInfo() {
-        try {
-            const res = await fetch('_data/site.json');
-            const data = await res.json();
-            document.querySelectorAll('.navbar-brand').forEach(el => el.textContent = data.brandName || 'ShoeLink');
-            document.getElementById('footerContact').textContent = 'Contact us: ' + (data.contactEmail || '') + ' | WhatsApp: ' + (data.whatsapp || '');
-        } catch(e) {}
+    async function loadJSON(url) {
+        try { const r = await fetch(url); return await r.json(); } catch(e) { return null; }
     }
 
-    async function loadCategories() {
-        try {
-            const res = await fetch('_data/categories.json');
-            const data = await res.json();
-            return data.categories || data;
-        } catch(e) { return []; }
+    function getCategoryParam() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('category') || '';
     }
 
-    async function loadProducts() {
-        try {
-            const res = await fetch('_data/products.json');
-            const data = await res.json();
-            return data.products || data;
-        } catch(e) { return []; }
-    }
+    async function init() {
+        const site = await loadJSON('_data/site.json') || {};
+        const prods = await loadJSON('_data/products.json') || [];
+        const currentCategory = getCategoryParam();
 
-    async function renderCategoryTree() {
-        const container = document.getElementById('categoryTree');
-        const categories = await loadCategories();
-        const urlParams = new URLSearchParams(window.location.search);
-        currentCategory = urlParams.get('category') || '';
-        currentSubcategory = urlParams.get('subcategory') || '';
-        
-        let html = '<a href="products.html" class="subcategory-link' + (!currentCategory ? ' active' : '') + '" style="display:block;margin-bottom:8px;">All Products</a>';
-        
-        categories.forEach(function(cat, i) {
-            const subs = cat.subcategories || [];
-            const isActive = currentCategory === cat.name;
-            
-            html += '<div class="tree-category">';
-            html += '  <div class="tree-category-header" data-index="' + i + '">';
-            html += '    <span class="toggle-icon" id="icon_' + i + '">' + (isActive ? '▼' : '▶') + '</span>';
-            html += '    <span class="category-name">' + cat.name + '</span>';
-            html += '  </div>';
-            html += '  <div class="tree-subcategories' + (isActive ? ' show' : '') + '" id="subs_' + i + '">';
-            
-            subs.forEach(function(sub) {
-                const isSubActive = currentSubcategory === sub;
-                html += '    <a href="products.html?category=' + encodeURIComponent(cat.name) + '&subcategory=' + encodeURIComponent(sub) + '" class="subcategory-link' + (isSubActive ? ' active' : '') + '">' + sub + '</a>';
-            });
-            
-            if (subs.length === 0) {
-                html += '    <a href="products.html?category=' + encodeURIComponent(cat.name) + '" class="subcategory-link">查看全部</a>';
-            }
-            
-            html += '  </div>';
-            html += '</div>';
-        });
-        
-        container.innerHTML = html;
-        
-        document.querySelectorAll('.tree-category-header').forEach(function(header) {
-            header.addEventListener('click', function() {
-                const index = this.getAttribute('data-index');
-                const subsContainer = document.getElementById('subs_' + index);
-                const icon = document.getElementById('icon_' + index);
-                if (subsContainer.classList.contains('show')) {
-                    subsContainer.classList.remove('show');
-                    icon.textContent = '▶';
-                } else {
-                    subsContainer.classList.add('show');
-                    icon.textContent = '▼';
-                }
-            });
-        });
-    }
-
-    async function renderProducts() {
-        const container = document.getElementById('productGrid');
-        allProducts = await loadProducts();
-        
-        let filtered = allProducts;
-        
+        // 页面标题
         if (currentCategory) {
-            filtered = filtered.filter(function(p) { return p.category === currentCategory; });
-            document.getElementById('currentFilter').textContent = 'Category: ' + currentCategory + (currentSubcategory ? ' > ' + currentSubcategory : '');
-        } else {
-            document.getElementById('currentFilter').textContent = 'Showing: All Products';
+            document.getElementById('pageTitle').textContent = currentCategory;
         }
-        
-        if (currentSubcategory) {
-            filtered = filtered.filter(function(p) { return p.subcategory === currentSubcategory; });
+
+        // 筛选产品
+        let filtered = prods;
+        if (currentCategory) {
+            filtered = prods.filter(function(p) { return p.category === currentCategory; });
         }
-        
-        // 应用展示数量限制
-        const categoriesData = await loadCategories();
-        const activeCat = categoriesData.find(function(c) { return c.name === currentCategory; });
-        if (activeCat && activeCat.displayCount) {
-            filtered = filtered.slice(0, activeCat.displayCount);
-        }
-        
+
+        // 渲染产品
+        const container = document.getElementById('productGrid');
         if (filtered.length === 0) {
             container.innerHTML = '<div class="col-12 text-center py-5"><p class="text-muted">No products found in this category.</p></div>';
-            return;
+        } else {
+            container.innerHTML = filtered.map(function(p) {
+                return '<div class="col-md-3 col-sm-6">' +
+                    '<a class="product-card" href="product-detail.html?id=' + encodeURIComponent(p.id) + '">' +
+                    '<img src="' + p.image + '" alt="' + p.name + '">' +
+                    '<div class="product-card-body">' +
+                    '<span class="product-id">' + p.id + '</span>' +
+                    '<h5 class="product-name">' + p.name + '</h5>' +
+                    '<span class="product-price">' + p.price + '</span>' +
+                    '</div></a></div>';
+            }).join('');
         }
-        
-        let html = '';
-        filtered.forEach(function(p) {
-            html += '<div class="col-md-4 col-sm-6">';
-            html += '  <div class="card product-card">';
-            html += '    <img src="' + (p.image || 'https://placehold.co/600x400?text=Product') + '" class="product-img" alt="' + p.name + '">';
-            html += '    <div class="card-body">';
-            html += '      <h5 class="card-title">' + p.name + '</h5>';
-            html += '      <p class="card-text text-muted small">' + (p.category || '') + (p.subcategory ? ' > ' + p.subcategory : '') + '</p>';
-            html += '      <p class="card-text small">' + (p.description ? p.description.substring(0, 60) + '...' : '') + '</p>';
-            html += '      <p class="card-text"><strong>' + (p.priceRange || 'Price on request') + '</strong></p>';
-            html += '      <a href="product-detail.html?id=' + p.id + '" class="btn btn-outline-primary btn-sm w-100">View Details</a>';
-            html += '    </div>';
-            html += '  </div>';
-            html += '</div>';
-        });
-        
-        container.innerHTML = html;
+
+        // 页脚
+        const social = site.socialLinks || {};
+        const icons = { facebook: '📘', tiktok: '🎵', linkedin: '💼', instagram: '📸' };
+        let socialHtml = '';
+        for (const key in icons) {
+            if (social[key] && social[key] !== '#') {
+                socialHtml += '<a href="' + social[key] + '" target="_blank">' + icons[key] + '</a>';
+            }
+        }
+        if (site.whatsapp) {
+            socialHtml += '<a href="https://wa.me/' + site.whatsapp.replace(/[^0-9]/g,'') + '" target="_blank">💬</a>';
+        }
+        document.getElementById('footerSocial').innerHTML = socialHtml;
+        document.getElementById('footerContact').textContent = 'Email: ' + (site.contactEmail || '') + ' | Phone: ' + (site.phone || '');
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        loadSiteInfo();
-        renderCategoryTree();
-        renderProducts();
-    });
+    document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
+
