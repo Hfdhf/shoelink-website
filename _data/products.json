@@ -1,56 +1,131 @@
 [
   {
-    "id": "sports-runner-001",
-    "name": "Men's Sports Running Shoe",
-    "category": "Sports Shoes",
-    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Running+Shoe",
-    "description": "Lightweight running shoe with breathable mesh upper and durable rubber outsole. Suitable for daily training and casual wear.",
-    "priceRange": "$5 - $8 / pair (depending on quantity)",
-    "featured": true
-  },
-  {
-    "id": "women-sandal-002",
-    "name": "Women's Summer Sandal",
-    "category": "Sandals & Slippers",
-    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Summer+Sandal",
-    "description": "Elegant summer sandal with soft insole and anti-slip sole. Perfect for hot climates and daily use.",
-    "priceRange": "$3 - $5 / pair",
-    "featured": true
-  },
-  {
-    "id": "work-boot-003",
-    "name": "Safety Work Boot",
-    "category": "Work & Safety Shoes",
-    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Work+Boot",
-    "description": "Steel toe work boot with puncture-resistant sole, meeting international safety standards for industrial use.",
-    "priceRange": "$8 - $12 / pair",
-    "featured": false
-  },
-  {
-    "id": "men-casual-004",
-    "name": "Men's Casual Leather Shoe",
+    "id": "MS-001",
+    "name": "Men's Classic Leather Shoe",
     "category": "Men's Shoes",
-    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Casual+Leather+Shoe",
-    "description": "Classic casual leather shoe with comfortable lining and durable sole. Suitable for business and daily wear.",
-    "priceRange": "$6 - $9 / pair",
-    "featured": true
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=MS-001",
+    "price": "$8.50",
+    "description": "Classic men's leather shoe with comfortable lining and durable rubber sole. Suitable for business and casual wear."
   },
   {
-    "id": "women-boot-005",
+    "id": "MS-002",
+    "name": "Men's Casual Sneaker",
+    "category": "Men's Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=MS-002",
+    "price": "$6.80",
+    "description": "Lightweight casual sneaker with breathable mesh upper. Perfect for daily wear."
+  },
+  {
+    "id": "MS-003",
+    "name": "Men's Formal Oxford Shoe",
+    "category": "Men's Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=MS-003",
+    "price": "$9.20",
+    "description": "Elegant formal oxford shoe with genuine leather upper. Ideal for business meetings and formal occasions."
+  },
+  {
+    "id": "WS-001",
+    "name": "Women's Fashion Sandal",
+    "category": "Women's Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=WS-001",
+    "price": "$5.50",
+    "description": "Stylish women's sandal with soft insole and anti-slip sole. Perfect for summer."
+  },
+  {
+    "id": "WS-002",
+    "name": "Women's High Heel Pump",
+    "category": "Women's Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=WS-002",
+    "price": "$7.80",
+    "description": "Elegant high heel pump with comfortable cushioning. Suitable for office and evening wear."
+  },
+  {
+    "id": "WS-003",
+    "name": "Women's Ballet Flat",
+    "category": "Women's Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=WS-003",
+    "price": "$4.90",
+    "description": "Comfortable ballet flat with flexible sole. Easy to wear all day long."
+  },
+  {
+    "id": "SP-001",
+    "name": "Men's Running Shoe",
+    "category": "Sports Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=SP-001",
+    "price": "$7.20",
+    "description": "Professional running shoe with shock absorption and breathable mesh. Suitable for daily training."
+  },
+  {
+    "id": "SP-002",
+    "name": "Women's Training Shoe",
+    "category": "Sports Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=SP-002",
+    "price": "$6.90",
+    "description": "Versatile training shoe with stable grip. Perfect for gym and outdoor activities."
+  },
+  {
+    "id": "SS-001",
+    "name": "Summer Beach Sandal",
+    "category": "Sandals & Slippers",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=SS-001",
+    "price": "$3.20",
+    "description": "Lightweight beach sandal with quick-dry material. Ideal for summer and beach use."
+  },
+  {
+    "id": "SS-002",
+    "name": "Indoor Home Slipper",
+    "category": "Sandals & Slippers",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=SS-002",
+    "price": "$2.80",
+    "description": "Soft indoor slipper with warm lining. Comfortable for home use."
+  },
+  {
+    "id": "BT-001",
+    "name": "Men's Winter Boot",
+    "category": "Boots",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=BT-001",
+    "price": "$11.50",
+    "description": "Warm winter boot with water-resistant upper. Suitable for cold weather conditions."
+  },
+  {
+    "id": "BT-002",
     "name": "Women's Fashion Boot",
     "category": "Boots",
-    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Fashion+Boot",
-    "description": "Stylish fashion boot with quality synthetic leather and warm lining. Ideal for autumn and winter seasons.",
-    "priceRange": "$7 - $10 / pair",
-    "featured": false
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=BT-002",
+    "price": "$10.80",
+    "description": "Stylish fashion boot with quality synthetic leather. Ideal for autumn and winter."
   },
   {
-    "id": "kids-sneaker-006",
+    "id": "KS-001",
     "name": "Kids' Sports Sneaker",
     "category": "Kids' Shoes",
-    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Kids+Sneaker",
-    "description": "Comfortable and durable sneaker for children. Lightweight with non-slip sole, perfect for active kids.",
-    "priceRange": "$3 - $5 / pair",
-    "featured": true
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=KS-001",
+    "price": "$4.50",
+    "description": "Durable kids' sneaker with non-slip sole. Perfect for active children."
+  },
+  {
+    "id": "KS-002",
+    "name": "Kids' Casual Shoe",
+    "category": "Kids' Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=KS-002",
+    "price": "$4.20",
+    "description": "Comfortable kids' casual shoe with easy fastening. Great for everyday wear."
+  },
+  {
+    "id": "WK-001",
+    "name": "Safety Work Boot",
+    "category": "Work & Safety Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=WK-001",
+    "price": "$12.50",
+    "description": "Steel toe work boot with puncture-resistant sole. Meets international safety standards."
+  },
+  {
+    "id": "WK-002",
+    "name": "Waterproof Work Shoe",
+    "category": "Work & Safety Shoes",
+    "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=WK-002",
+    "price": "$11.80",
+    "description": "Waterproof work shoe with anti-slip outsole. Suitable for wet working environments."
   }
 ]
+
