@@ -8,9 +8,9 @@
     "description": "Classic men's leather shoe with comfortable lining and durable rubber sole. Suitable for business and casual wear."
   },
   {
-    "id": "MS-002",
+    "id": "WS-100",
     "name": "Men's Casual Sneaker",
-    "category": "Men's Shoes",
+    "category": "Women's Shoes",
     "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=MS-002",
     "price": "$6.80",
     "description": "Lightweight casual sneaker with breathable mesh upper. Perfect for daily wear."
@@ -128,4 +128,3 @@
     "description": "Waterproof work shoe with anti-slip outsole. Suitable for wet working environments."
   }
 ]
-
