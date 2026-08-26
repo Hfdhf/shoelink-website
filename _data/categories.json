@@ -2,45 +2,31 @@
   "categories": [
     {
       "name": "Men's Shoes",
-      "icon": "👞",
-      "subcategories": ["Running", "Casual", "Formal"],
-      "displayCount": 20
+      "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Men's+Shoes"
     },
     {
       "name": "Women's Shoes",
-      "icon": "👠",
-      "subcategories": ["Sandals", "Heels", "Flats"],
-      "displayCount": 20
+      "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Women's+Shoes"
     },
     {
       "name": "Sports Shoes",
-      "icon": "👟",
-      "subcategories": ["Running", "Basketball", "Training"],
-      "displayCount": 20
+      "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Sports+Shoes"
     },
     {
       "name": "Sandals & Slippers",
-      "icon": "🩴",
-      "subcategories": ["Summer", "Beach", "Indoor"],
-      "displayCount": 20
+      "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Sandals+%26+Slippers"
     },
     {
       "name": "Boots",
-      "icon": "🥾",
-      "subcategories": ["Fashion", "Winter", "Work"],
-      "displayCount": 20
+      "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Boots"
     },
     {
       "name": "Kids' Shoes",
-      "icon": "👶",
-      "subcategories": ["Boys", "Girls", "Baby"],
-      "displayCount": 20
+      "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Kids'+Shoes"
     },
     {
       "name": "Work & Safety Shoes",
-      "icon": "🛡️",
-      "subcategories": ["Steel Toe", "Waterproof", "Anti-slip"],
-      "displayCount": 20
+      "image": "https://placehold.co/600x400/1F3A5F/FFFFFF?text=Work+%26+Safety+Shoes"
     }
   ]
 }
