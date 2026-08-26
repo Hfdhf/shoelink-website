@@ -43,7 +43,9 @@
     "description": "We specialize in producing and exporting a wide range of footwear including sports shoes, casual shoes, sandals, boots, kids' shoes, and safety work shoes. Our goal is to provide high-quality products at competitive prices with reliable delivery.",
     "factoryImage": "https://placehold.co/800x500/1F3A5F/FFFFFF?text=Factory+Overview",
     "galleryImages": [
-      "document.getElementById('btnAddGalleryImage').addEventListener('click', function() {         if (!siteData.aboutContent) siteData.aboutContent = {};         if (!siteData.aboutContent.galleryImages) siteData.aboutContent.galleryImages = [];         siteData.aboutContent.galleryImages.push('');         renderGalleryEditor(siteData.aboutContent.galleryImages);         showStatus('✅ 已添加图片输入框，填写路径', 'success');     });"
+      "https://placehold.co/400x300/1F3A5F/FFFFFF?text=Factory+1",
+      "https://placehold.co/400x300/1F3A5F/FFFFFF?text=Factory+2",
+      "https://placehold.co/400x300/1F3A5F/FFFFFF?text=Factory+3"
     ]
   },
   "socialLinks": {
