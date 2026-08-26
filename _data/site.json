@@ -42,10 +42,7 @@
     "intro": "ShoeLink is a professional footwear manufacturer and exporter, serving clients across Middle East, Russia, Central Asia, Africa, and Americas.",
     "description": "We specialize in producing and exporting a wide range of footwear including sports shoes, casual shoes, sandals, boots, kids' shoes, and safety work shoes. Our goal is to provide high-quality products at competitive prices with reliable delivery.",
     "factoryImage": "https://placehold.co/800x500/1F3A5F/FFFFFF?text=Factory+Overview",
-    "galleryImages": [
-      "https://placehold.co/400x300/1F3A5F/FFFFFF?text=Factory+2",
-      "https://placehold.co/400x300/1F3A5F/FFFFFF?text=Factory+3"
-    ]
+    "galleryImages": []
   },
   "socialLinks": {
     "facebook": "https://facebook.com/yourpage",
