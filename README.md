@@ -1,6 +1,6 @@
 # ShoeLink 鞋类外贸展示网站
 
-专业的 B2B 鞋类出口展示网站，托管于 GitHub Pages，免费稳定。
+专业的 B2B 鞋类出口展示网站，托管于 GitHub Pages。
 
 ---
 
