@@ -7,97 +7,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background-color: #f5f5f5; font-family: 'Segoe UI', sans-serif; }
-        .admin-container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+        .admin-container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
         .section-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
         .section-title { color: #1F3A5F; font-weight: bold; margin-bottom: 20px; font-size: 1.3rem; }
         .btn-primary-custom { background-color: #1F3A5F; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
-        .btn-primary-custom:hover { background-color: #152a47; }
-        .btn-success-custom { background-color: #28a745; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
-        .btn-danger-custom { background-color: #dc3545; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+        .btn-success-custom { background-color: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+        .btn-danger-custom { background-color: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
         .btn-warning-custom { background-color: #ffc107; color: #212529; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
         .status-msg { padding: 12px; border-radius: 6px; margin-bottom: 15px; display: none; }
         .status-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .status-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .help-text { font-size: 0.85rem; color: #666; }
         .nav-tabs .nav-link { color: #1F3A5F; font-weight: 500; }
         .nav-tabs .nav-link.active { background-color: #1F3A5F; color: white; }
-        
-        /* 树状结构样式 */
-        .tree-category {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            background: #fafafa;
-            overflow: hidden;
-        }
-        .tree-category-header {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            cursor: pointer;
-            background: #f0f4f8;
-            transition: background 0.2s;
-        }
-        .tree-category-header:hover {
-            background: #e2e8f0;
-        }
-        .tree-category-header .toggle-icon {
-            margin-right: 10px;
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-        }
-        .tree-category-header .toggle-icon.expanded {
-            transform: rotate(90deg);
-        }
-        .tree-category-header .category-name-input {
-            flex: 1;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 6px 10px;
-            font-size: 0.95rem;
-            background: white;
-        }
-        .tree-category-header .display-count-input {
-            width: 80px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 6px 10px;
-            font-size: 0.85rem;
-            background: white;
-            margin-left: 10px;
-            text-align: center;
-        }
-        .tree-subcategories {
-            padding: 0 15px 15px 40px;
-            display: none;
-        }
-        .tree-subcategories.show {
-            display: block;
-        }
-        .subcategory-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 8px;
-        }
-        .subcategory-row input {
-            flex: 1;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 6px 10px;
-            font-size: 0.9rem;
-            background: white;
-        }
-        .subcategory-label {
-            font-size: 0.85rem;
-            color: #555;
-            min-width: 60px;
-        }
-        .tree-actions {
-            display: flex;
-            gap: 8px;
-            margin-left: 10px;
-        }
+        .product-item { border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa; }
+        .product-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
+        .category-item { border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa; }
+        .category-item img { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; }
+        textarea { font-family: monospace; font-size: 0.85rem; }
+        .help-text { font-size: 0.85rem; color: #666; }
     </style>
 </head>
 <body>
@@ -110,137 +37,127 @@
     <div class="section-card bg-light">
         <h5>📖 使用说明</h5>
         <ol class="mb-0">
-            <li>点击分类名称可以<strong>展开/收起</strong>子类列表</li>
-            <li>在分类名称输入框中修改分类名称</li>
-            <li>在子类输入框中修改子类名称</li>
-            <li>修改后点击 <strong>"生成代码"</strong>，然后复制粘贴到 GitHub</li>
+            <li>在下方各标签页中修改内容</li>
+            <li>修改后点击 <strong>"生成代码"</strong> 按钮</li>
+            <li>点击 <strong>"复制代码"</strong> 按钮</li>
+            <li>点击 <strong>"打开 GitHub 文件"</strong>，粘贴代码并保存</li>
+            <li>等待 1-2 分钟，网站自动更新</li>
         </ol>
+        <p class="text-danger mt-2 mb-0">⚠️ 必须复制代码粘贴到 GitHub 对应文件才能生效。</p>
     </div>
 
     <ul class="nav nav-tabs mb-4" id="mainTabs">
-        <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-categories">📂 分类与子类</a></li>
+        <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-categories">📂 分类管理</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-products">👟 产品管理</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-settings">⚙️ 网站设置</a></li>
-        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-help">❓ 帮助中心</a></li>
+        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-help">❓ 帮助</a></li>
     </ul>
 
     <div class="tab-content">
+
+        <!-- 分类管理 -->
         <div class="tab-pane fade show active" id="tab-categories">
             <div class="section-card">
-                <h4 class="section-title">📂 分类与子类管理（树状结构）</h4>
-                <p class="help-text">点击分类展开子类。你可以增删改分类和子类。</p>
-                <div id="categoriesEditor"></div>
+                <h4 class="section-title">📂 分类管理</h4>
+                <p class="help-text">增删分类、修改分类名称和封面图片。封面图片上传到 images 文件夹后填写路径。</p>
+                <div id="categoryList"></div>
                 <button class="btn btn-success-custom mt-3" id="btnAddCategory">➕ 添加新分类</button>
                 <hr>
                 <button class="btn btn-primary-custom" id="btnGenCategories">📄 生成 categories.json 代码</button>
-                <div id="categoriesJsonOutput" class="mt-3" style="display:none;">
-                    <p class="mb-2">复制以下内容到 <code>_data/categories.json</code>：</p>
-                    <textarea class="form-control" id="categoriesJsonText" rows="15"></textarea>
+                <div id="categoriesOutput" class="mt-3" style="display:none;">
+                    <textarea class="form-control" id="categoriesText" rows="15"></textarea>
                     <button class="btn btn-warning-custom mt-2" id="btnCopyCategories">📋 复制代码</button>
                     <a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/categories.json" target="_blank" class="btn btn-primary-custom mt-2">🔗 打开 GitHub 文件</a>
                 </div>
             </div>
         </div>
 
+        <!-- 产品管理 -->
         <div class="tab-pane fade" id="tab-products">
             <div class="section-card">
                 <h4 class="section-title">👟 产品管理</h4>
-                <p class="help-text">修改产品信息。添加新产品请在 GitHub 上编辑 products.json。</p>
+                <p class="help-text">增删产品、修改编号/名称/分类/价格/图片/描述。图片上传到 images 文件夹后填写路径。</p>
                 <div id="productList"></div>
+                <button class="btn btn-success-custom mt-3" id="btnAddProduct">➕ 添加新产品</button>
                 <hr>
                 <button class="btn btn-primary-custom" id="btnGenProducts">📄 生成 products.json 代码</button>
-                <div id="productsJsonOutput" class="mt-3" style="display:none;">
-                    <p class="mb-2">复制以下内容到 <code>_data/products.json</code>：</p>
-                    <textarea class="form-control" id="productsJsonText" rows="15"></textarea>
+                <div id="productsOutput" class="mt-3" style="display:none;">
+                    <textarea class="form-control" id="productsText" rows="20"></textarea>
                     <button class="btn btn-warning-custom mt-2" id="btnCopyProducts">📋 复制代码</button>
                     <a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/products.json" target="_blank" class="btn btn-primary-custom mt-2">🔗 打开 GitHub 文件</a>
                 </div>
             </div>
         </div>
 
+        <!-- 网站设置 -->
         <div class="tab-pane fade" id="tab-settings">
             <div class="section-card">
                 <h4 class="section-title">⚙️ 网站设置</h4>
+                
+                <h5 class="mt-3">基本信息</h5>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">品牌名称</label>
-                        <input type="text" class="form-control" id="brandName">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">联系邮箱</label>
-                        <input type="email" class="form-control" id="contactEmail">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">WhatsApp 号码</label>
-                        <input type="text" class="form-control" id="whatsapp">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">公司地址</label>
-                        <input type="text" class="form-control" id="address">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">自定义域名</label>
-                        <input type="text" class="form-control" id="customDomain" placeholder="例如：www.yourbrand.com">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Google Analytics ID</label>
-                        <input type="text" class="form-control" id="gaId" placeholder="G-XXXXXXXXXX">
-                    </div>
+                    <div class="col-md-4 mb-3"><label class="form-label">品牌名称</label><input type="text" class="form-control" id="set_brandName"></div>
+                    <div class="col-md-4 mb-3"><label class="form-label">联系邮箱</label><input type="email" class="form-control" id="set_contactEmail"></div>
+                    <div class="col-md-4 mb-3"><label class="form-label">电话号码</label><input type="text" class="form-control" id="set_phone"></div>
+                    <div class="col-md-4 mb-3"><label class="form-label">WhatsApp</label><input type="text" class="form-control" id="set_whatsapp"></div>
+                    <div class="col-md-4 mb-3"><label class="form-label">公司地址</label><input type="text" class="form-control" id="set_address"></div>
+                    <div class="col-md-4 mb-3"><label class="form-label">Google Analytics ID</label><input type="text" class="form-control" id="set_gaId"></div>
                 </div>
-                <h5 class="mt-3">社交媒体</h5>
+
+                <h5 class="mt-3">社媒链接</h5>
                 <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">Facebook</label>
-                        <input type="text" class="form-control" id="facebookLink">
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">Instagram</label>
-                        <input type="text" class="form-control" id="instagramLink">
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">LinkedIn</label>
-                        <input type="text" class="form-control" id="linkedinLink">
-                    </div>
+                    <div class="col-md-3 mb-3"><label class="form-label">Facebook</label><input type="text" class="form-control" id="set_fb"></div>
+                    <div class="col-md-3 mb-3"><label class="form-label">TikTok</label><input type="text" class="form-control" id="set_tiktok"></div>
+                    <div class="col-md-3 mb-3"><label class="form-label">LinkedIn</label><input type="text" class="form-control" id="set_linkedin"></div>
+                    <div class="col-md-3 mb-3"><label class="form-label">Instagram</label><input type="text" class="form-control" id="set_ig"></div>
                 </div>
+
+                <h5 class="mt-3">Hero 统计数字</h5>
+                <div class="row" id="heroStatsEditor"></div>
+                <button class="btn btn-success-custom btn-sm mt-2" id="btnAddHeroStat">➕ 添加统计</button>
+
+                <h5 class="mt-4">Why Choose Us</h5>
+                <div id="whyChooseUsEditor"></div>
+                <button class="btn btn-success-custom btn-sm mt-2" id="btnAddWhy">➕ 添加条目</button>
+
+                <h5 class="mt-4">About Us 内容</h5>
+                <div class="row">
+                    <div class="col-md-6 mb-3"><label class="form-label">标题</label><input type="text" class="form-control" id="about_title"></div>
+                    <div class="col-md-6 mb-3"><label class="form-label">工厂图片路径</label><input type="text" class="form-control" id="about_image"></div>
+                    <div class="col-md-12 mb-3"><label class="form-label">简介</label><textarea class="form-control" id="about_intro" rows="2"></textarea></div>
+                    <div class="col-md-12 mb-3"><label class="form-label">详细描述</label><textarea class="form-control" id="about_desc" rows="3"></textarea></div>
+                </div>
+
+                <hr>
                 <button class="btn btn-primary-custom" id="btnGenSite">📄 生成 site.json 代码</button>
-                <div id="siteJsonOutput" class="mt-3" style="display:none;">
-                    <p class="mb-2">复制以下内容到 <code>_data/site.json</code>：</p>
-                    <textarea class="form-control" id="siteJsonText" rows="10"></textarea>
+                <div id="siteOutput" class="mt-3" style="display:none;">
+                    <textarea class="form-control" id="siteText" rows="20"></textarea>
                     <button class="btn btn-warning-custom mt-2" id="btnCopySite">📋 复制代码</button>
                     <a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/site.json" target="_blank" class="btn btn-primary-custom mt-2">🔗 打开 GitHub 文件</a>
                 </div>
             </div>
         </div>
 
+        <!-- 帮助 -->
         <div class="tab-pane fade" id="tab-help">
             <div class="section-card">
-                <h4 class="section-title">❓ 帮助中心</h4>
-                <h5 class="mt-3">📷 上传产品图片</h5>
+                <h4 class="section-title">❓ 帮助</h4>
+                <h5>📷 上传图片</h5>
                 <ol>
                     <li>打开：<a href="https://github.com/hfdhf/shoelink-website/new/main" target="_blank">github.com/hfdhf/shoelink-website/new/main</a></li>
-                    <li>文件名输入：<code>images/产品名.jpg</code></li>
+                    <li>文件名输入：<code>images/图片名.jpg</code>（如 <code>images/men-shoe-01.jpg</code>）</li>
                     <li>点击上传区域选择图片</li>
                     <li>点击 Commit new file</li>
-                    <li>在产品管理中修改图片路径为 <code>images/产品名.jpg</code></li>
+                    <li>在后台对应位置填写路径：<code>images/图片名.jpg</code></li>
                 </ol>
-                <h5 class="mt-3">👟 添加新产品</h5>
-                <ol>
-                    <li>打开：<a href="https://github.com/hfdhf/shoelink-website/edit/main/_data/products.json" target="_blank">编辑 products.json</a></li>
-                    <li>复制最后一条产品记录</li>
-                    <li>添加逗号后粘贴，修改内容</li>
-                    <li>保存</li>
-                </ol>
-                <h5 class="mt-3">🌐 绑定域名</h5>
-                <ol>
-                    <li>购买域名</li>
-                    <li>打开：<a href="https://github.com/hfdhf/shoelink-website/settings/pages" target="_blank">GitHub Pages 设置</a></li>
-                    <li>Custom domain 填入域名，保存</li>
-                    <li>域名服务商处添加 CNAME 指向 <code>hfdhf.github.io</code></li>
-                </ol>
-                <h5 class="mt-3">📊 查看数据</h5>
-                <p>访问：<a href="https://analytics.google.com" target="_blank">Google Analytics</a></p>
+                <h5>🔗 重要链接</h5>
+                <ul>
+                    <li>网站：<a href="https://hfdhf.github.io/shoelink-website/" target="_blank">hfdhf.github.io/shoelink-website/</a></li>
+                    <li>后台：<a href="https://hfdhf.github.io/shoelink-website/manage.html" target="_blank">hfdhf.github.io/shoelink-website/manage.html</a></li>
+                </ul>
             </div>
         </div>
+
     </div>
 </div>
 
@@ -248,210 +165,116 @@
 <script>
 let categoriesData = [];
 let productsData = [];
+let siteData = {};
 
-async function loadData() {
-    try {
-        const [catRes, prodRes, siteRes] = await Promise.all([
-            fetch('_data/categories.json'),
-            fetch('_data/products.json'),
-            fetch('_data/site.json')
-        ]);
-        
-        const catData = await catRes.json();
-        const prodData = await prodRes.json();
-        const siteData = await siteRes.json();
-        
-        if (Array.isArray(catData)) {
-            categoriesData = catData.map(name => ({ name: name, subcategories: [], displayCount: 20 }));
-        } else if (catData.categories) {
-            categoriesData = catData.categories;
-        }
-        
-        productsData = prodData.products || prodData;
-        
-        document.getElementById('brandName').value = siteData.brandName || 'ShoeLink';
-        document.getElementById('contactEmail').value = siteData.contactEmail || '';
-        document.getElementById('whatsapp').value = siteData.whatsapp || '';
-        document.getElementById('address').value = siteData.address || '';
-        document.getElementById('customDomain').value = siteData.customDomain || '';
-        document.getElementById('gaId').value = siteData.gaId || '';
-        
-        const social = siteData.socialLinks || {};
-        document.getElementById('facebookLink').value = social.facebook || '';
-        document.getElementById('instagramLink').value = social.instagram || '';
-        document.getElementById('linkedinLink').value = social.linkedin || '';
-        
-        renderCategories();
-        renderProducts();
-    } catch (error) {
-        showStatus('加载数据失败：' + error.message, 'error');
-    }
+async function loadJSON(url) {
+    try { const r = await fetch(url); return await r.json(); } catch(e) { return null; }
 }
 
+async function loadAllData() {
+    const catData = await loadJSON('_data/categories.json');
+    const prodData = await loadJSON('_data/products.json');
+    const site = await loadJSON('_data/site.json');
+
+    categoriesData = catData.categories || catData || [];
+    productsData = prodData.products || prodData || [];
+    siteData = site || {};
+
+    renderCategories();
+    renderProducts();
+    renderSettings();
+}
+
+// ========== 分类 ==========
 function renderCategories() {
-    const container = document.getElementById('categoriesEditor');
+    const container = document.getElementById('categoryList');
     let html = '';
-    
     categoriesData.forEach(function(cat, i) {
-        const subs = cat.subcategories || [];
-        html += '<div class="tree-category">';
-        html += '  <div class="tree-category-header" data-index="' + i + '">';
-        html += '    <span class="toggle-icon" id="toggleIcon_' + i + '">▶</span>';
-        html += '    <input type="text" class="category-name-input cat-name" data-index="' + i + '" value="' + escapeHtml(cat.name || '') + '" placeholder="分类名称">';
-        html += '    <span class="subcategory-label" style="margin-left:10px;">展示数:</span>';
-        html += '    <input type="number" class="display-count-input cat-count" data-index="' + i + '" value="' + (cat.displayCount || 20) + '" min="1" max="100">';
-        html += '    <div class="tree-actions">';
-        html += '      <button class="btn btn-success-custom btn-add-sub" data-index="' + i + '">➕子类</button>';
-        html += '      <button class="btn btn-danger-custom btn-remove-cat" data-index="' + i + '">🗑️</button>';
-        html += '    </div>';
-        html += '  </div>';
-        html += '  <div class="tree-subcategories" id="subsContainer_' + i + '">';
-        
-        subs.forEach(function(sub, j) {
-            html += '    <div class="subcategory-row">';
-            html += '      <span class="subcategory-label">子类 ' + (j+1) + ':</span>';
-            html += '      <input type="text" class="form-control sub-name" data-cat="' + i + '" data-sub="' + j + '" value="' + escapeHtml(sub) + '" placeholder="子类名称">';
-            html += '      <button class="btn btn-danger-custom btn-remove-sub" data-cat="' + i + '" data-sub="' + j + '">🗑️</button>';
-            html += '    </div>';
-        });
-        
-        html += '  </div>';
-        html += '</div>';
+        html += '<div class="category-item">';
+        html += '<div class="row align-items-center">';
+        html += '<div class="col-md-2"><img src="' + (cat.image || '') + '" alt=""></div>';
+        html += '<div class="col-md-4"><label class="form-label small">分类名称</label><input type="text" class="form-control form-control-sm cat-name" data-index="' + i + '" value="' + (cat.name || '') + '"></div>';
+        html += '<div class="col-md-4"><label class="form-label small">封面图片路径</label><input type="text" class="form-control form-control-sm cat-image" data-index="' + i + '" value="' + (cat.image || '') + '" placeholder="images/xxx.jpg"></div>';
+        html += '<div class="col-md-2 text-end pt-3"><button class="btn btn-danger-custom btn-sm btn-del-cat" data-index="' + i + '">🗑️</button></div>';
+        html += '</div></div>';
     });
-    
     container.innerHTML = html;
-    
-    // 绑定分类头部点击展开/收起
-    document.querySelectorAll('.tree-category-header').forEach(function(header) {
-        header.addEventListener('click', function(e) {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
-            const index = this.getAttribute('data-index');
-            const subsContainer = document.getElementById('subsContainer_' + index);
-            const toggleIcon = document.getElementById('toggleIcon_' + index);
-            if (subsContainer.classList.contains('show')) {
-                subsContainer.classList.remove('show');
-                toggleIcon.classList.remove('expanded');
-                toggleIcon.textContent = '▶';
-            } else {
-                subsContainer.classList.add('show');
-                toggleIcon.classList.add('expanded');
-                toggleIcon.textContent = '▼';
+
+    document.querySelectorAll('.btn-del-cat').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const i = parseInt(this.getAttribute('data-index'));
+            if (confirm('删除此分类？')) {
+                categoriesData.splice(i, 1);
+                renderCategories();
+                showStatus('分类已删除', 'success');
             }
         });
     });
-    
-    // 绑定删除分类
-    document.querySelectorAll('.btn-remove-cat').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            removeCategory(index);
-        });
-    });
-    
-    // 绑定添加子类
-    document.querySelectorAll('.btn-add-sub').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            addSubcategory(index);
-        });
-    });
-    
-    // 绑定删除子类
-    document.querySelectorAll('.btn-remove-sub').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            const catIndex = parseInt(this.getAttribute('data-cat'));
-            const subIndex = parseInt(this.getAttribute('data-sub'));
-            removeSubcategory(catIndex, subIndex);
-        });
-    });
 }
 
-function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
-
-function addCategory() {
-    categoriesData.push({ name: '新分类', subcategories: [], displayCount: 20 });
-    renderCategories();
-    showStatus('✅ 已添加新分类，点击展开后修改名称', 'success');
-}
-
-function removeCategory(index) {
-    if (confirm('确定删除此分类？')) {
-        categoriesData.splice(index, 1);
-        renderCategories();
-        showStatus('✅ 分类已删除', 'success');
-    }
-}
-
-function addSubcategory(index) {
-    if (!categoriesData[index].subcategories) {
-        categoriesData[index].subcategories = [];
-    }
-    categoriesData[index].subcategories.push('新子类');
-    renderCategories();
-    showStatus('✅ 已添加新子类', 'success');
-}
-
-function removeSubcategory(catIndex, subIndex) {
-    categoriesData[catIndex].subcategories.splice(subIndex, 1);
-    renderCategories();
-    showStatus('✅ 子类已删除', 'success');
-}
-
-function generateCategoriesJson() {
+function generateCategories() {
     document.querySelectorAll('.cat-name').forEach(function(input) {
-        const index = parseInt(input.getAttribute('data-index'));
-        if (categoriesData[index]) {
-            categoriesData[index].name = input.value.trim() || '未命名分类';
-        }
+        const i = parseInt(input.getAttribute('data-index'));
+        if (categoriesData[i]) categoriesData[i].name = input.value.trim();
     });
-    document.querySelectorAll('.cat-count').forEach(function(input) {
-        const index = parseInt(input.getAttribute('data-index'));
-        if (categoriesData[index]) {
-            categoriesData[index].displayCount = parseInt(input.value) || 20;
-        }
+    document.querySelectorAll('.cat-image').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        if (categoriesData[i]) categoriesData[i].image = input.value.trim();
     });
-    document.querySelectorAll('.sub-name').forEach(function(input) {
-        const catIndex = parseInt(input.getAttribute('data-cat'));
-        const subIndex = parseInt(input.getAttribute('data-sub'));
-        if (categoriesData[catIndex] && categoriesData[catIndex].subcategories && categoriesData[catIndex].subcategories[subIndex] !== undefined) {
-            categoriesData[catIndex].subcategories[subIndex] = input.value.trim() || '未命名子类';
-        }
-    });
-    document.getElementById('categoriesJsonText').value = JSON.stringify({ categories: categoriesData }, null, 2);
-    document.getElementById('categoriesJsonOutput').style.display = 'block';
-    showStatus('✅ 代码已生成！', 'success');
+    document.getElementById('categoriesText').value = JSON.stringify({ categories: categoriesData }, null, 2);
+    document.getElementById('categoriesOutput').style.display = 'block';
+    showStatus('✅ 代码已生成', 'success');
 }
 
+// ========== 产品 ==========
 function renderProducts() {
     const container = document.getElementById('productList');
     let html = '';
-    
     productsData.forEach(function(p, i) {
         html += '<div class="product-item">';
         html += '<div class="row align-items-center">';
-        html += '<div class="col-md-2 text-center">';
-        html += '<img src="' + (p.image || 'https://placehold.co/80x80?text=No+Image') + '" class="product-image" alt="">';
-        html += '</div>';
-        html += '<div class="col-md-10">';
-        html += '<div class="row">';
-        html += '<div class="col-md-4 mb-2"><label class="form-label small">产品名称</label><input type="text" class="form-control form-control-sm prod-name" data-index="' + i + '" value="' + escapeHtml(p.name || '') + '"></div>';
-        html += '<div class="col-md-3 mb-2"><label class="form-label small">分类</label><input type="text" class="form-control form-control-sm prod-cat" data-index="' + i + '" value="' + escapeHtml(p.category || '') + '"></div>';
-        html += '<div class="col-md-2 mb-2"><label class="form-label small">子类</label><input type="text" class="form-control form-control-sm prod-sub" data-index="' + i + '" value="' + escapeHtml(p.subcategory || '') + '"></div>';
-        html += '<div class="col-md-3 mb-2"><label class="form-label small">价格区间</label><input type="text" class="form-control form-control-sm prod-price" data-index="' + i + '" value="' + escapeHtml(p.priceRange || '') + '"></div>';
-        html += '<div class="col-md-4 mb-2"><label class="form-label small">图片路径</label><input type="text" class="form-control form-control-sm prod-img" data-index="' + i + '" value="' + escapeHtml(p.image || '') + '"></div>';
-        html += '<div class="col-md-4 mb-2"><label class="form-label small">产品编号</label><input type="text" class="form-control form-control-sm prod-id" data-index="' + i + '" value="' + escapeHtml(p.id || '') + '"></div>';
-        html += '<div class="col-md-4 mb-2"><label class="form-label small">首页精选</label><select class="form-control form-control-sm prod-featured" data-index="' + i + '"><option value="false"' + (!p.featured ? ' selected' : '') + '>否</option><option value="true"' + (p.featured ? ' selected' : '') + '>是</option></select></div>';
-        html += '<div class="col-md-12 mb-2"><label class="form-label small">描述</label><textarea class="form-control form-control-sm prod-desc" rows="2" data-index="' + i + '">' + escapeHtml(p.description || '') + '</textarea></div>';
-        html += '</div></div></div></div>';
+        html += '<div class="col-md-1"><img src="' + (p.image || '') + '" alt=""></div>';
+        html += '<div class="col-md-2"><label class="form-label small">编号</label><input type="text" class="form-control form-control-sm prod-id" data-index="' + i + '" value="' + (p.id || '') + '"></div>';
+        html += '<div class="col-md-3"><label class="form-label small">名称</label><input type="text" class="form-control form-control-sm prod-name" data-index="' + i + '" value="' + (p.name || '') + '"></div>';
+        html += '<div class="col-md-2"><label class="form-label small">分类</label><input type="text" class="form-control form-control-sm prod-cat" data-index="' + i + '" value="' + (p.category || '') + '"></div>';
+        html += '<div class="col-md-2"><label class="form-label small">价格</label><input type="text" class="form-control form-control-sm prod-price" data-index="' + i + '" value="' + (p.price || '') + '"></div>';
+        html += '<div class="col-md-2"><label class="form-label small">图片路径</label><input type="text" class="form-control form-control-sm prod-img" data-index="' + i + '" value="' + (p.image || '') + '"></div>';
+        html += '<div class="col-md-10"><label class="form-label small">描述</label><input type="text" class="form-control form-control-sm prod-desc" data-index="' + i + '" value="' + (p.description || '') + '"></div>';
+        html += '<div class="col-md-2 text-end pt-3"><button class="btn btn-danger-custom btn-sm btn-del-prod" data-index="' + i + '">🗑️</button></div>';
+        html += '</div></div>';
     });
-    
     container.innerHTML = html;
+
+    document.querySelectorAll('.btn-del-prod').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const i = parseInt(this.getAttribute('data-index'));
+            if (confirm('删除此产品？')) {
+                productsData.splice(i, 1);
+                renderProducts();
+                showStatus('产品已删除', 'success');
+            }
+        });
+    });
 }
 
-function generateProductsJson() {
+function addProduct() {
+    productsData.push({
+        id: 'NEW-001',
+        name: '新产品',
+        category: categoriesData.length > 0 ? categoriesData[0].name : '',
+        image: '',
+        price: '$0.00',
+        description: ''
+    });
+    renderProducts();
+    showStatus('✅ 已添加新产品，请修改信息', 'success');
+}
+
+function generateProducts() {
+    document.querySelectorAll('.prod-id').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].id = input.value.trim();
+    });
     document.querySelectorAll('.prod-name').forEach(function(input) {
         const i = parseInt(input.getAttribute('data-index'));
         if (productsData[i]) productsData[i].name = input.value.trim();
@@ -460,55 +283,149 @@ function generateProductsJson() {
         const i = parseInt(input.getAttribute('data-index'));
         if (productsData[i]) productsData[i].category = input.value.trim();
     });
-    document.querySelectorAll('.prod-sub').forEach(function(input) {
-        const i = parseInt(input.getAttribute('data-index'));
-        if (productsData[i]) productsData[i].subcategory = input.value.trim();
-    });
     document.querySelectorAll('.prod-price').forEach(function(input) {
         const i = parseInt(input.getAttribute('data-index'));
-        if (productsData[i]) productsData[i].priceRange = input.value.trim();
+        if (productsData[i]) productsData[i].price = input.value.trim();
     });
     document.querySelectorAll('.prod-img').forEach(function(input) {
         const i = parseInt(input.getAttribute('data-index'));
         if (productsData[i]) productsData[i].image = input.value.trim();
     });
-    document.querySelectorAll('.prod-id').forEach(function(input) {
+    document.querySelectorAll('.prod-desc').forEach(function(input) {
         const i = parseInt(input.getAttribute('data-index'));
-        if (productsData[i]) productsData[i].id = input.value.trim();
+        if (productsData[i]) productsData[i].description = input.value.trim();
     });
-    document.querySelectorAll('.prod-featured').forEach(function(select) {
-        const i = parseInt(select.getAttribute('data-index'));
-        if (productsData[i]) productsData[i].featured = select.value === 'true';
-    });
-    document.querySelectorAll('.prod-desc').forEach(function(textarea) {
-        const i = parseInt(textarea.getAttribute('data-index'));
-        if (productsData[i]) productsData[i].description = textarea.value.trim();
-    });
-    document.getElementById('productsJsonText').value = JSON.stringify(productsData, null, 2);
-    document.getElementById('productsJsonOutput').style.display = 'block';
-    showStatus('✅ 代码已生成！', 'success');
+    document.getElementById('productsText').value = JSON.stringify(productsData, null, 2);
+    document.getElementById('productsOutput').style.display = 'block';
+    showStatus('✅ 代码已生成', 'success');
 }
 
-function generateSiteJson() {
-    const data = {
-        brandName: document.getElementById('brandName').value.trim() || 'ShoeLink',
-        contactEmail: document.getElementById('contactEmail').value.trim(),
-        whatsapp: document.getElementById('whatsapp').value.trim(),
-        address: document.getElementById('address').value.trim(),
-        customDomain: document.getElementById('customDomain').value.trim(),
-        gaId: document.getElementById('gaId').value.trim(),
-        socialLinks: {
-            facebook: document.getElementById('facebookLink').value.trim() || '#',
-            instagram: document.getElementById('instagramLink').value.trim() || '#',
-            linkedin: document.getElementById('linkedinLink').value.trim() || '#'
-        },
-        tawkToId: "YOUR_TAWK_ID"
+// ========== 网站设置 ==========
+function renderSettings() {
+    document.getElementById('set_brandName').value = siteData.brandName || '';
+    document.getElementById('set_contactEmail').value = siteData.contactEmail || '';
+    document.getElementById('set_phone').value = siteData.phone || '';
+    document.getElementById('set_whatsapp').value = siteData.whatsapp || '';
+    document.getElementById('set_address').value = siteData.address || '';
+    document.getElementById('set_gaId').value = siteData.gaId || '';
+    
+    const social = siteData.socialLinks || {};
+    document.getElementById('set_fb').value = social.facebook || '';
+    document.getElementById('set_tiktok').value = social.tiktok || '';
+    document.getElementById('set_linkedin').value = social.linkedin || '';
+    document.getElementById('set_ig').value = social.instagram || '';
+
+    // Hero stats
+    const stats = siteData.heroStats || [];
+    let statsHtml = '';
+    stats.forEach(function(s, i) {
+        statsHtml += '<div class="col-md-4 mb-2"><div class="d-flex gap-2">';
+        statsHtml += '<input type="text" class="form-control form-control-sm hero-stat-num" data-index="' + i + '" value="' + s.number + '" placeholder="数字">';
+        statsHtml += '<input type="text" class="form-control form-control-sm hero-stat-label" data-index="' + i + '" value="' + s.label + '" placeholder="标签">';
+        statsHtml += '<button class="btn btn-danger-custom btn-sm btn-del-stat" data-index="' + i + '">🗑️</button>';
+        statsHtml += '</div></div>';
+    });
+    document.getElementById('heroStatsEditor').innerHTML = statsHtml;
+
+    document.querySelectorAll('.btn-del-stat').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const i = parseInt(this.getAttribute('data-index'));
+            siteData.heroStats.splice(i, 1);
+            renderSettings();
+        });
+    });
+
+    // Why Choose Us
+    const why = siteData.whyChooseUs || [];
+    let whyHtml = '';
+    why.forEach(function(w, i) {
+        whyHtml += '<div class="row mb-2">';
+        whyHtml += '<div class="col-md-1"><input type="text" class="form-control form-control-sm why-icon" data-index="' + i + '" value="' + w.icon + '" placeholder="图标"></div>';
+        whyHtml += '<div class="col-md-3"><input type="text" class="form-control form-control-sm why-title" data-index="' + i + '" value="' + w.title + '" placeholder="标题"></div>';
+        whyHtml += '<div class="col-md-6"><input type="text" class="form-control form-control-sm why-desc" data-index="' + i + '" value="' + w.description + '" placeholder="描述"></div>';
+        whyHtml += '<div class="col-md-2"><button class="btn btn-danger-custom btn-sm btn-del-why" data-index="' + i + '">🗑️</button></div>';
+        whyHtml += '</div>';
+    });
+    document.getElementById('whyChooseUsEditor').innerHTML = whyHtml;
+
+    document.querySelectorAll('.btn-del-why').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const i = parseInt(this.getAttribute('data-index'));
+            siteData.whyChooseUs.splice(i, 1);
+            renderSettings();
+        });
+    });
+
+    // About
+    const about = siteData.aboutContent || {};
+    document.getElementById('about_title').value = about.title || '';
+    document.getElementById('about_image').value = about.factoryImage || '';
+    document.getElementById('about_intro').value = about.intro || '';
+    document.getElementById('about_desc').value = about.description || '';
+}
+
+function generateSite() {
+    siteData.brandName = document.getElementById('set_brandName').value.trim();
+    siteData.contactEmail = document.getElementById('set_contactEmail').value.trim();
+    siteData.phone = document.getElementById('set_phone').value.trim();
+    siteData.whatsapp = document.getElementById('set_whatsapp').value.trim();
+    siteData.address = document.getElementById('set_address').value.trim();
+    siteData.gaId = document.getElementById('set_gaId').value.trim();
+
+    siteData.socialLinks = {
+        facebook: document.getElementById('set_fb').value.trim(),
+        tiktok: document.getElementById('set_tiktok').value.trim(),
+        linkedin: document.getElementById('set_linkedin').value.trim(),
+        instagram: document.getElementById('set_ig').value.trim()
     };
-    document.getElementById('siteJsonText').value = JSON.stringify(data, null, 2);
-    document.getElementById('siteJsonOutput').style.display = 'block';
-    showStatus('✅ 代码已生成！', 'success');
+
+    // Hero stats
+    const stats = [];
+    document.querySelectorAll('.hero-stat-num').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        stats[i] = stats[i] || { number: '', label: '' };
+        stats[i].number = input.value.trim();
+    });
+    document.querySelectorAll('.hero-stat-label').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        stats[i] = stats[i] || { number: '', label: '' };
+        stats[i].label = input.value.trim();
+    });
+    siteData.heroStats = stats.filter(function(s) { return s; });
+
+    // Why Choose Us
+    const why = [];
+    document.querySelectorAll('.why-icon').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        why[i] = why[i] || { icon: '', title: '', description: '' };
+        why[i].icon = input.value.trim();
+    });
+    document.querySelectorAll('.why-title').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        why[i] = why[i] || { icon: '', title: '', description: '' };
+        why[i].title = input.value.trim();
+    });
+    document.querySelectorAll('.why-desc').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        why[i] = why[i] || { icon: '', title: '', description: '' };
+        why[i].description = input.value.trim();
+    });
+    siteData.whyChooseUs = why.filter(function(w) { return w; });
+
+    // About
+    siteData.aboutContent = {
+        title: document.getElementById('about_title').value.trim(),
+        intro: document.getElementById('about_intro').value.trim(),
+        description: document.getElementById('about_desc').value.trim(),
+        factoryImage: document.getElementById('about_image').value.trim()
+    };
+
+    document.getElementById('siteText').value = JSON.stringify(siteData, null, 2);
+    document.getElementById('siteOutput').style.display = 'block';
+    showStatus('✅ 代码已生成', 'success');
 }
 
+// ========== 通用 ==========
 function copyText(id) {
     const textarea = document.getElementById(id);
     textarea.select();
@@ -529,15 +446,34 @@ function showStatus(msg, type) {
     setTimeout(function() { el.style.display = 'none'; }, 5000);
 }
 
+// ========== 初始化 ==========
 document.addEventListener('DOMContentLoaded', function() {
-    loadData();
-    document.getElementById('btnAddCategory').addEventListener('click', addCategory);
-    document.getElementById('btnGenCategories').addEventListener('click', generateCategoriesJson);
-    document.getElementById('btnCopyCategories').addEventListener('click', function() { copyText('categoriesJsonText'); });
-    document.getElementById('btnGenProducts').addEventListener('click', generateProductsJson);
-    document.getElementById('btnCopyProducts').addEventListener('click', function() { copyText('productsJsonText'); });
-    document.getElementById('btnGenSite').addEventListener('click', generateSiteJson);
-    document.getElementById('btnCopySite').addEventListener('click', function() { copyText('siteJsonText'); });
+    loadAllData();
+    
+    document.getElementById('btnAddCategory').addEventListener('click', function() {
+        categoriesData.push({ name: '新分类', image: '' });
+        renderCategories();
+        showStatus('✅ 已添加新分类', 'success');
+    });
+    document.getElementById('btnGenCategories').addEventListener('click', generateCategories);
+    document.getElementById('btnCopyCategories').addEventListener('click', function() { copyText('categoriesText'); });
+    
+    document.getElementById('btnAddProduct').addEventListener('click', addProduct);
+    document.getElementById('btnGenProducts').addEventListener('click', generateProducts);
+    document.getElementById('btnCopyProducts').addEventListener('click', function() { copyText('productsText'); });
+    
+    document.getElementById('btnAddHeroStat').addEventListener('click', function() {
+        if (!siteData.heroStats) siteData.heroStats = [];
+        siteData.heroStats.push({ number: '0', label: 'New' });
+        renderSettings();
+    });
+    document.getElementById('btnAddWhy').addEventListener('click', function() {
+        if (!siteData.whyChooseUs) siteData.whyChooseUs = [];
+        siteData.whyChooseUs.push({ icon: '📦', title: 'New', description: '' });
+        renderSettings();
+    });
+    document.getElementById('btnGenSite').addEventListener('click', generateSite);
+    document.getElementById('btnCopySite').addEventListener('click', function() { copyText('siteText'); });
 });
 </script>
 </body>
