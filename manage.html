@@ -362,11 +362,37 @@ function renderSettings() {
     });
 
     // About
+    // About
     const about = siteData.aboutContent || {};
     document.getElementById('about_title').value = about.title || '';
     document.getElementById('about_image').value = about.factoryImage || '';
     document.getElementById('about_intro').value = about.intro || '';
     document.getElementById('about_desc').value = about.description || '';
+    
+    // Gallery images
+    renderGalleryEditor(about.galleryImages || []);
+}
+function renderGalleryEditor(images) {
+    const container = document.getElementById('aboutGalleryEditor');
+    let html = '';
+    images.forEach(function(img, i) {
+        html += '<div class="d-flex gap-2 mb-2">';
+        html += '<input type="text" class="form-control form-control-sm gallery-img" data-index="' + i + '" value="' + img + '" placeholder="images/gallery-1.jpg">';
+        html += '<button class="btn btn-danger-custom btn-sm btn-del-gallery" data-index="' + i + '">🗑️</button>';
+        html += '</div>';
+    });
+    container.innerHTML = html;
+    
+    document.querySelectorAll('.btn-del-gallery').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const i = parseInt(this.getAttribute('data-index'));
+            if (!siteData.aboutContent) siteData.aboutContent = {};
+            if (!siteData.aboutContent.galleryImages) siteData.aboutContent.galleryImages = [];
+            siteData.aboutContent.galleryImages.splice(i, 1);
+            renderGalleryEditor(siteData.aboutContent.galleryImages);
+            showStatus('✅ 图片已删除', 'success');
+        });
+    });
 }
 
 function generateSite() {
@@ -418,11 +444,19 @@ function generateSite() {
     siteData.whyChooseUs = why.filter(function(w) { return w; });
 
     // About
+    const galleryImages = [];
+    document.querySelectorAll('.gallery-img').forEach(function(input) {
+        if (input.value.trim() !== '') {
+            galleryImages.push(input.value.trim());
+        }
+    });
+    
     siteData.aboutContent = {
         title: document.getElementById('about_title').value.trim(),
         intro: document.getElementById('about_intro').value.trim(),
         description: document.getElementById('about_desc').value.trim(),
-        factoryImage: document.getElementById('about_image').value.trim()
+        factoryImage: document.getElementById('about_image').value.trim(),
+        galleryImages: galleryImages
     };
 
     document.getElementById('siteText').value = JSON.stringify(siteData, null, 2);
@@ -478,6 +512,13 @@ document.addEventListener('DOMContentLoaded', function() {
         renderSettings();
     });
     document.getElementById('btnGenSite').addEventListener('click', generateSite);
+    document.getElementById('btnAddGalleryImage').addEventListener('click', function() {
+        if (!siteData.aboutContent) siteData.aboutContent = {};
+        if (!siteData.aboutContent.galleryImages) siteData.aboutContent.galleryImages = [];
+        siteData.aboutContent.galleryImages.push('');
+        renderGalleryEditor(siteData.aboutContent.galleryImages);
+        showStatus('✅ 已添加图片输入框，填写路径', 'success');
+    });
     document.getElementById('btnCopySite').addEventListener('click', function() { copyText('siteText'); });
 });
 </script>
