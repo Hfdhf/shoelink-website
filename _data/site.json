@@ -2,44 +2,43 @@
   "brandName": "ShoeLink",
   "contactEmail": "info@shoelink.com",
   "whatsapp": "+123456789",
+  "phone": "+123456789",
   "address": "ShoeLink Footwear Co., Ltd.",
   "customDomain": "",
   "gaId": "G-6RG4R8ZM6Q",
   "heroStats": [
-    {
-      "number": "10+",
-      "label": "Partner Factories"
-    },
-    {
-      "number": "7",
-      "label": "Product Categories"
-    },
-    {
-      "number": "5+",
-      "label": "Export Regions"
-    }
+    { "number": "10+", "label": "Partner Factories" },
+    { "number": "7", "label": "Product Categories" },
+    { "number": "5+", "label": "Export Regions" }
   ],
   "whyChooseUs": [
     {
       "icon": "🏭",
       "title": "Strong Production Capacity",
-      "description": "Partnered with 10+ factories, ensuring timely delivery for large orders and consistent quality control."
+      "description": "Partnered with 10+ factories, ensuring timely delivery for large orders."
     },
     {
       "icon": "👟",
       "title": "Wide Product Range",
-      "description": "From sports shoes to boots, sandals, and safety shoes — we cover all major footwear categories."
+      "description": "From sports shoes to boots, sandals, and safety shoes — we cover all categories."
     },
     {
       "icon": "🌍",
       "title": "Global Export Experience",
-      "description": "Serving clients in Middle East, Russia, Africa, and Americas with custom solutions and competitive pricing."
+      "description": "Serving clients in Middle East, Russia, Africa, and Americas."
     }
   ],
+  "aboutContent": {
+    "title": "Who We Are",
+    "intro": "ShoeLink is a professional footwear manufacturer and exporter, serving clients across Middle East, Russia, Central Asia, Africa, and Americas.",
+    "description": "We specialize in producing and exporting a wide range of footwear including sports shoes, casual shoes, sandals, boots, kids' shoes, and safety work shoes. Our goal is to provide high-quality products at competitive prices with reliable delivery.",
+    "factoryImage": "https://placehold.co/800x500/1F3A5F/FFFFFF?text=Factory+Overview"
+  },
   "socialLinks": {
     "facebook": "https://facebook.com/yourpage",
-    "instagram": "https://instagram.com/yourpage",
-    "linkedin": "https://linkedin.com/company/yourpage"
+    "tiktok": "https://tiktok.com/@yourpage",
+    "linkedin": "https://linkedin.com/company/yourpage",
+    "instagram": "https://instagram.com/yourpage"
   },
-  "tawkToId": "YOUR_TAWK_ID"
+  "tawkToId": ""
 }
