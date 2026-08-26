@@ -123,11 +123,16 @@
                 <h5 class="mt-4">About Us 内容</h5>
                 <div class="row">
                     <div class="col-md-6 mb-3"><label class="form-label">标题</label><input type="text" class="form-control" id="about_title"></div>
-                    <div class="col-md-6 mb-3"><label class="form-label">工厂图片路径</label><input type="text" class="form-control" id="about_image"></div>
+                    <div class="col-md-6 mb-3"><label class="form-label">主图路径</label><input type="text" class="form-control" id="about_image" placeholder="images/main.jpg"></div>
                     <div class="col-md-12 mb-3"><label class="form-label">简介</label><textarea class="form-control" id="about_intro" rows="2"></textarea></div>
                     <div class="col-md-12 mb-3"><label class="form-label">详细描述</label><textarea class="form-control" id="about_desc" rows="3"></textarea></div>
                 </div>
-
+                
+                <h6 class="mt-3">📷 工厂画廊图片（可添加多张，不上传则不显示）</h6>
+                <p class="help-text">上传图片到 images 文件夹后，在下方填写图片路径。可添加多张。</p>
+                <div id="aboutGalleryEditor"></div>
+                <button class="btn btn-success-custom btn-sm mt-2" id="btnAddGalleryImage">➕ 添加图片</button>
+                
                 <hr>
                 <button class="btn btn-primary-custom" id="btnGenSite">📄 生成 site.json 代码</button>
                 <div id="siteOutput" class="mt-3" style="display:none;">
