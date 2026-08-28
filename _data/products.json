@@ -1,50 +1,50 @@
 [
   {
     "id": "2312",
-    "name": "Flyknit men's shoes",
+    "name": "Flyknit Men's Shoes",
     "category": "Men's Shoes",
-    "image": "images/Man's-shoes/2312.jpg",
-    "price": "$3.8",
-    "description": "Lightweight casual sneaker with breathable mesh upper. Perfect for daily wear."
+    "image": "images/mens-shoes/2312.jpg",
+    "price": "$3.80",
+    "description": "Lightweight flyknit men's shoes with breathable upper. Suitable for daily wear and sports."
   },
   {
     "id": "2321",
     "name": "Flyknit Women's Shoes",
     "category": "Women's Shoes",
-    "image": "images/Women's Shoes/2321.jpg",
-    "price": "$3.7",
-    "description": "Lightweight casual sneaker with breathable mesh upper. Perfect for daily wear."
+    "image": "images/womens-shoes/2321.jpg",
+    "price": "$3.70",
+    "description": "Lightweight flyknit women's shoes with breathable upper. Comfortable for all-day wear."
   },
   {
     "id": "2322",
-    "name": "Flyknit men's shoes",
+    "name": "Flyknit Men's Shoes",
     "category": "Men's Shoes",
-    "image": "images/Man's-shoes/2322.jpg",
-    "price": "$0.00",
-    "description": ""
+    "image": "images/mens-shoes/2322.jpg",
+    "price": "Price on request",
+    "description": "Flyknit men's shoes with modern design and durable sole."
   },
   {
     "id": "8813",
     "name": "Canvas Men's Shoes",
     "category": "Men's Shoes",
-    "image": "images/Man's-shoes/8813.jpg",
-    "price": "$0.00",
-    "description": ""
+    "image": "images/mens-shoes/8813.jpg",
+    "price": "Price on request",
+    "description": "Classic canvas men's shoes, lightweight and breathable."
   },
   {
     "id": "A-15",
     "name": "Flyknit Women's Shoes",
     "category": "Women's Shoes",
-    "image": "images/Women's Shoes/A-15.jpg",
-    "price": "$0.00",
-    "description": ""
+    "image": "images/womens-shoes/A-15.jpg",
+    "price": "Price on request",
+    "description": "Stylish flyknit women's shoes for casual and sport use."
   },
   {
     "id": "E-11",
-    "name": "cloth shoes",
+    "name": "Cloth Shoes",
     "category": "Men's Shoes",
-    "image": "images/Man's-shoes/E-11.jpg",
-    "price": "$0.00",
-    "description": ""
+    "image": "images/mens-shoes/E-11.jpg",
+    "price": "Price on request",
+    "description": "Comfortable cloth shoes, simple and easy to match."
   }
 ]
