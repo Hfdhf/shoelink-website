@@ -38,5 +38,13 @@
     "image": "images/Women's Shoes/A-15.jpg",
     "price": "$0.00",
     "description": ""
+  },
+  {
+    "id": "E-11",
+    "name": "cloth shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/E-11.jpg",
+    "price": "$0.00",
+    "description": ""
   }
 ]
