@@ -4,7 +4,7 @@
     "name": "Flyknit men's shoes",
     "category": "Men's Shoes",
     "image": "images/Man's-shoes/2312.jpg",
-    "price": "$3.8",
+    "price": "Price on request",
     "description": "Lightweight casual sneaker with breathable mesh upper. Perfect for daily wear."
   },
   {
@@ -12,7 +12,7 @@
     "name": "Flyknit Women's Shoes",
     "category": "Women's Shoes",
     "image": "images/Women's Shoes/2321.jpg",
-    "price": "$3.7",
+    "price": "Price on request",
     "description": "Lightweight casual sneaker with breathable mesh upper. Perfect for daily wear."
   },
   {
@@ -20,7 +20,7 @@
     "name": "Flyknit men's shoes",
     "category": "Men's Shoes",
     "image": "images/Man's-shoes/2322.jpg",
-    "price": "$0.00",
+    "price": "Price on request",
     "description": ""
   },
   {
@@ -28,7 +28,7 @@
     "name": "Canvas Men's Shoes",
     "category": "Men's Shoes",
     "image": "images/Man's-shoes/8813.jpg",
-    "price": "$0.00",
+    "price": "Price on request",
     "description": ""
   },
   {
@@ -36,7 +36,7 @@
     "name": "Flyknit Women's Shoes",
     "category": "Women's Shoes",
     "image": "images/Women's Shoes/A-15.jpg",
-    "price": "$0.00",
+    "price": "Price on request",
     "description": ""
   },
   {
@@ -44,7 +44,7 @@
     "name": "cloth shoes",
     "category": "Men's Shoes",
     "image": "images/Man's-shoes/E-11.jpg",
-    "price": "$0.00",
+    "price": "Price on request",
     "description": ""
   }
 ]
