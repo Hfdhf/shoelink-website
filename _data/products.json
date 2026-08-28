@@ -62,5 +62,13 @@
     "image": "images/Women's Shoes/E-27.jpg",
     "price": "Price on request",
     "description": ""
+  },
+  {
+    "id": "E-50",
+    "name": "Flyknit Men's shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/E-50.jpg",
+    "price": "Price on request",
+    "description": ""
   }
 ]
