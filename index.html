@@ -123,9 +123,15 @@
     
             // Why Choose Us
             const why = site.whyChooseUs || [];
-            document.getElementById('whyChooseUs').innerHTML = why.map(w =>
-                '<div class="col-md-4"><a class="why-card text-center" href="about.html"><div class="why-icon">' + w.icon + '</div><h5>' + w.title + '</h5><p>' + w.description + '</p></a></div>'
-            ).join('');
+            const whyLinks = [
+                'about.html',
+                'products.html',
+                'certificates.html'
+            ];
+            document.getElementById('whyChooseUs').innerHTML = why.map(function(w, i) {
+                const link = whyLinks[i] || 'about.html';
+                return '<div class="col-md-4"><a class="why-card text-center" href="' + link + '"><div class="why-icon">' + w.icon + '</div><h5>' + w.title + '</h5><p>' + w.description + '</p></a></div>';
+            }).join('');
     
             // Categories
             const catList = cats.categories || cats;
