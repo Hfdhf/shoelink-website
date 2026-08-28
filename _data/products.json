@@ -46,5 +46,13 @@
     "image": "images/Man's-shoes/E-11.jpg",
     "price": "Price on request",
     "description": ""
+  },
+  {
+    "id": "E-23",
+    "name": "cloth shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/E-23.jpg",
+    "price": "Price on request",
+    "description": ""
   }
 ]
