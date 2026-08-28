@@ -80,6 +80,21 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <div id="imageOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; cursor: zoom-out; align-items:center; justify-content:center;" onclick="closeImageFullscreen()">
+    <img id="overlayImage" src="" style="max-width:95%; max-height:95%; border-radius:8px;">
+</div>
+
+<script>
+function openImageFullscreen(src) {
+    document.getElementById('overlayImage').src = src;
+    document.getElementById('imageOverlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function closeImageFullscreen() {
+    document.getElementById('imageOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+}
+</script>
     <script>
     async function loadJSON(url) {
         try { const r = await fetch(url); return await r.json(); } catch(e) { return null; }
@@ -105,7 +120,7 @@
             container.innerHTML = 
                 '<div class="row">' +
                 '  <div class="col-lg-6 mb-4">' +
-                '    <img src="' + product.image + '" alt="' + product.name + '" class="product-detail-img">' +
+                '    <img src="' + product.image + '" alt="' + product.name + '" class="product-detail-img" style="cursor: zoom-in;" onclick="openImageFullscreen(this.src)">' +
                 '  </div>' +
                 '  <div class="col-lg-6">' +
                 '    <span class="product-id-badge">' + product.id + '</span>' +
