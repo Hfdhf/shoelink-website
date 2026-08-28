@@ -1,9 +1,9 @@
 {
   "brandName": "ShoeLink",
-  "contactEmail": "info@shoelink.com",
-  "whatsapp": "+123456789",
-  "phone": "+123456789",
-  "address": "ShoeLink Footwear Co., Ltd.",
+  "contactEmail": "tingki.wang@gmail.com",
+  "whatsapp": "+8616639430008",
+  "phone": "16639430008",
+  "address": "Luoyang City, Henan Province, China",
   "customDomain": "",
   "gaId": "G-6RG4R8ZM6Q",
   "heroStats": [
@@ -45,10 +45,10 @@
     "galleryImages": []
   },
   "socialLinks": {
-    "facebook": "https://facebook.com/yourpage",
+    "facebook": "",
     "tiktok": "https://tiktok.com/@yourpage",
-    "linkedin": "https://linkedin.com/company/yourpage",
-    "instagram": "https://instagram.com/yourpage"
+    "linkedin": "",
+    "instagram": ""
   },
   "tawkToId": ""
 }
