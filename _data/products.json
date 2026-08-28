@@ -14,5 +14,21 @@
     "image": "images/Women's Shoes/2321.jpg",
     "price": "$3.7",
     "description": "Lightweight casual sneaker with breathable mesh upper. Perfect for daily wear."
+  },
+  {
+    "id": "2322",
+    "name": "Flyknit men's shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/2322.jpg",
+    "price": "$0.00",
+    "description": ""
+  },
+  {
+    "id": "8813",
+    "name": "Canvas Men's Shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/8813.jpg",
+    "price": "$0.00",
+    "description": ""
   }
 ]
