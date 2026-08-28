@@ -54,5 +54,13 @@
     "image": "images/Man's-shoes/E-23.jpg",
     "price": "Price on request",
     "description": ""
+  },
+  {
+    "id": "E-27",
+    "name": "cloth shoes",
+    "category": "Women's Shoes",
+    "image": "images/Women's Shoes/E-27.jpg",
+    "price": "Price on request",
+    "description": ""
   }
 ]
