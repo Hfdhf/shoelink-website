@@ -1,7 +1,7 @@
 [
   {
     "id": "2312",
-    "name": "Flyknit men's shoes",
+    "name": "Flyknit Men's shoes",
     "category": "Men's Shoes",
     "image": "images/Man's-shoes/2312.jpg",
     "price": "Price on request",
@@ -17,7 +17,7 @@
   },
   {
     "id": "2322",
-    "name": "Flyknit men's shoes",
+    "name": "Flyknit Men's shoes",
     "category": "Men's Shoes",
     "image": "images/Man's-shoes/2322.jpg",
     "price": "Price on request",
@@ -68,6 +68,54 @@
     "name": "Flyknit Women's Shoes",
     "category": "Women's Shoes",
     "image": "images/Women's Shoes/E-50.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "8809",
+    "name": "Flyknit Men's shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/8809.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "8813",
+    "name": "Cloth Shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/8813.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "8820",
+    "name": "Flyknit Men's shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/8820.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "25811",
+    "name": "Cloth Shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/25811.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "25812",
+    "name": "Cloth Shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/25812.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "25815",
+    "name": "Cloth Shoes",
+    "category": "Men's Shoes",
+    "image": "images/Man's-shoes/25815.jpg",
     "price": "Price on request",
     "description": ""
   }
