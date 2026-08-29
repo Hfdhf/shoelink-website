@@ -251,9 +251,9 @@ function renderProducts() {
 
 function addProduct() {
     productsData.push({
-        id: 'NEW-' + (productsData.length + 1),
+        id: '',
         name: '',
-        category: categoriesData.length > 0 ? categoriesData[0].name : '',
+        category: '',
         image: '',
         price: '',
         description: ''
@@ -478,7 +478,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('btnAddProduct').addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         addProduct();
+        return false;
     });
 
     document.getElementById('btnGenProducts').addEventListener('click', generateProducts);
