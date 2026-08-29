@@ -55,11 +55,10 @@
 
     <div class="tab-content">
 
-        <!-- 分类管理 -->
         <div class="tab-pane fade show active" id="tab-categories">
             <div class="section-card">
                 <h4 class="section-title">📂 分类管理</h4>
-                <p class="help-text">增删分类、修改分类名称和封面图片。封面图片上传到 images 文件夹后填写路径。</p>
+                <p class="help-text">增删分类、修改分类名称和封面图片。</p>
                 <div id="categoryList"></div>
                 <button class="btn btn-success-custom mt-3" id="btnAddCategory">➕ 添加新分类</button>
                 <hr>
@@ -72,11 +71,10 @@
             </div>
         </div>
 
-        <!-- 产品管理 -->
         <div class="tab-pane fade" id="tab-products">
             <div class="section-card">
                 <h4 class="section-title">👟 产品管理</h4>
-                <p class="help-text">增删产品、修改编号/名称/分类/价格/图片/描述。图片上传到 images 文件夹后填写路径。</p>
+                <p class="help-text">增删产品、修改编号/名称/分类/价格/图片/描述。</p>
                 <div id="productList"></div>
                 <button class="btn btn-success-custom mt-3" id="btnAddProduct">➕ 添加新产品</button>
                 <hr>
@@ -89,7 +87,6 @@
             </div>
         </div>
 
-        <!-- 网站设置 -->
         <div class="tab-pane fade" id="tab-settings">
             <div class="section-card">
                 <h4 class="section-title">⚙️ 网站设置</h4>
@@ -128,8 +125,7 @@
                     <div class="col-md-12 mb-3"><label class="form-label">详细描述</label><textarea class="form-control" id="about_desc" rows="3"></textarea></div>
                 </div>
                 
-                <h6 class="mt-3">📷 工厂画廊图片（可添加多张，不上传则不显示）</h6>
-                <p class="help-text">上传图片到 images 文件夹后，在下方填写图片路径。可添加多张。</p>
+                <h6 class="mt-3">📷 工厂画廊图片</h6>
                 <div id="aboutGalleryEditor"></div>
                 <button class="btn btn-success-custom btn-sm mt-2" id="btnAddGalleryImage">➕ 添加图片</button>
                 
@@ -143,23 +139,16 @@
             </div>
         </div>
 
-        <!-- 帮助 -->
         <div class="tab-pane fade" id="tab-help">
             <div class="section-card">
                 <h4 class="section-title">❓ 帮助</h4>
                 <h5>📷 上传图片</h5>
                 <ol>
-                    <li>打开：<a href="https://github.com/hfdhf/shoelink-website/new/main" target="_blank">github.com/hfdhf/shoelink-website/new/main</a></li>
-                    <li>文件名输入：<code>images/图片名.jpg</code>（如 <code>images/men-shoe-01.jpg</code>）</li>
-                    <li>点击上传区域选择图片</li>
-                    <li>点击 Commit new file</li>
-                    <li>在后台对应位置填写路径：<code>images/图片名.jpg</code></li>
+                    <li>打开：<a href="https://github.com/hfdhf/shoelink-website/upload/main/images" target="_blank">上传图片</a></li>
+                    <li>点击 Add file → Upload files</li>
+                    <li>拖入图片，提交</li>
+                    <li>在后台填写图片路径</li>
                 </ol>
-                <h5>🔗 重要链接</h5>
-                <ul>
-                    <li>网站：<a href="https://hfdhf.github.io/shoelink-website/" target="_blank">hfdhf.github.io/shoelink-website/</a></li>
-                    <li>后台：<a href="https://hfdhf.github.io/shoelink-website/manage.html" target="_blank">hfdhf.github.io/shoelink-website/manage.html</a></li>
-                </ul>
             </div>
         </div>
 
@@ -190,7 +179,6 @@ async function loadAllData() {
     renderSettings();
 }
 
-// ========== 分类 ==========
 function renderCategories() {
     const container = document.getElementById('categoryList');
     let html = '';
@@ -231,7 +219,6 @@ function generateCategories() {
     showStatus('✅ 代码已生成', 'success');
 }
 
-// ========== 产品 ==========
 function renderProducts() {
     const container = document.getElementById('productList');
     let html = '';
@@ -264,15 +251,15 @@ function renderProducts() {
 
 function addProduct() {
     productsData.push({
-        id: 'NEW-001',
-        name: '新产品',
+        id: 'NEW-' + (productsData.length + 1),
+        name: '',
         category: categoriesData.length > 0 ? categoriesData[0].name : '',
         image: '',
-        price: '$0.00',
+        price: '',
         description: ''
     });
     renderProducts();
-    showStatus('✅ 已添加新产品，请修改信息', 'success');
+    showStatus('✅ 已添加新产品，请填写信息', 'success');
 }
 
 function generateProducts() {
@@ -305,7 +292,6 @@ function generateProducts() {
     showStatus('✅ 代码已生成', 'success');
 }
 
-// ========== 网站设置 ==========
 function renderSettings() {
     document.getElementById('set_brandName').value = siteData.brandName || '';
     document.getElementById('set_contactEmail').value = siteData.contactEmail || '';
@@ -320,7 +306,6 @@ function renderSettings() {
     document.getElementById('set_linkedin').value = social.linkedin || '';
     document.getElementById('set_ig').value = social.instagram || '';
 
-    // Hero stats
     const stats = siteData.heroStats || [];
     let statsHtml = '';
     stats.forEach(function(s, i) {
@@ -340,7 +325,6 @@ function renderSettings() {
         });
     });
 
-    // Why Choose Us
     const why = siteData.whyChooseUs || [];
     let whyHtml = '';
     why.forEach(function(w, i) {
@@ -361,17 +345,15 @@ function renderSettings() {
         });
     });
 
-    // About
-    // About
     const about = siteData.aboutContent || {};
     document.getElementById('about_title').value = about.title || '';
     document.getElementById('about_image').value = about.factoryImage || '';
     document.getElementById('about_intro').value = about.intro || '';
     document.getElementById('about_desc').value = about.description || '';
-    
-    // Gallery images
+
     renderGalleryEditor(about.galleryImages || []);
 }
+
 function renderGalleryEditor(images) {
     const container = document.getElementById('aboutGalleryEditor');
     let html = '';
@@ -382,7 +364,7 @@ function renderGalleryEditor(images) {
         html += '</div>';
     });
     container.innerHTML = html;
-    
+
     document.querySelectorAll('.btn-del-gallery').forEach(function(btn) {
         btn.addEventListener('click', function() {
             const i = parseInt(this.getAttribute('data-index'));
@@ -410,7 +392,6 @@ function generateSite() {
         instagram: document.getElementById('set_ig').value.trim()
     };
 
-    // Hero stats
     const stats = [];
     document.querySelectorAll('.hero-stat-num').forEach(function(input) {
         const i = parseInt(input.getAttribute('data-index'));
@@ -424,7 +405,6 @@ function generateSite() {
     });
     siteData.heroStats = stats.filter(function(s) { return s; });
 
-    // Why Choose Us
     const why = [];
     document.querySelectorAll('.why-icon').forEach(function(input) {
         const i = parseInt(input.getAttribute('data-index'));
@@ -443,14 +423,13 @@ function generateSite() {
     });
     siteData.whyChooseUs = why.filter(function(w) { return w; });
 
-    // About
     const galleryImages = [];
     document.querySelectorAll('.gallery-img').forEach(function(input) {
         if (input.value.trim() !== '') {
             galleryImages.push(input.value.trim());
         }
     });
-    
+
     siteData.aboutContent = {
         title: document.getElementById('about_title').value.trim(),
         intro: document.getElementById('about_intro').value.trim(),
@@ -464,7 +443,6 @@ function generateSite() {
     showStatus('✅ 代码已生成', 'success');
 }
 
-// ========== 通用 ==========
 function copyText(id) {
     const textarea = document.getElementById(id);
     textarea.select();
@@ -485,40 +463,51 @@ function showStatus(msg, type) {
     setTimeout(function() { el.style.display = 'none'; }, 5000);
 }
 
-// ========== 初始化 ==========
 document.addEventListener('DOMContentLoaded', function() {
     loadAllData();
-    
-    document.getElementById('btnAddCategory').addEventListener('click', function() {
+
+    document.getElementById('btnAddCategory').addEventListener('click', function(e) {
+        e.preventDefault();
         categoriesData.push({ name: '新分类', image: '' });
         renderCategories();
         showStatus('✅ 已添加新分类', 'success');
     });
+
     document.getElementById('btnGenCategories').addEventListener('click', generateCategories);
     document.getElementById('btnCopyCategories').addEventListener('click', function() { copyText('categoriesText'); });
-    
-    document.getElementById('btnAddProduct').addEventListener('click', addProduct);
+
+    document.getElementById('btnAddProduct').addEventListener('click', function(e) {
+        e.preventDefault();
+        addProduct();
+    });
+
     document.getElementById('btnGenProducts').addEventListener('click', generateProducts);
     document.getElementById('btnCopyProducts').addEventListener('click', function() { copyText('productsText'); });
-    
-    document.getElementById('btnAddHeroStat').addEventListener('click', function() {
+
+    document.getElementById('btnAddHeroStat').addEventListener('click', function(e) {
+        e.preventDefault();
         if (!siteData.heroStats) siteData.heroStats = [];
         siteData.heroStats.push({ number: '0', label: 'New' });
         renderSettings();
     });
-    document.getElementById('btnAddWhy').addEventListener('click', function() {
+
+    document.getElementById('btnAddWhy').addEventListener('click', function(e) {
+        e.preventDefault();
         if (!siteData.whyChooseUs) siteData.whyChooseUs = [];
         siteData.whyChooseUs.push({ icon: '📦', title: 'New', description: '' });
         renderSettings();
     });
-    document.getElementById('btnGenSite').addEventListener('click', generateSite);
-    document.getElementById('btnAddGalleryImage').addEventListener('click', function() {
+
+    document.getElementById('btnAddGalleryImage').addEventListener('click', function(e) {
+        e.preventDefault();
         if (!siteData.aboutContent) siteData.aboutContent = {};
         if (!siteData.aboutContent.galleryImages) siteData.aboutContent.galleryImages = [];
         siteData.aboutContent.galleryImages.push('');
         renderGalleryEditor(siteData.aboutContent.galleryImages);
-        showStatus('✅ 已添加图片输入框，填写路径', 'success');
+        showStatus('✅ 已添加图片输入框', 'success');
     });
+
+    document.getElementById('btnGenSite').addEventListener('click', generateSite);
     document.getElementById('btnCopySite').addEventListener('click', function() { copyText('siteText'); });
 });
 </script>
