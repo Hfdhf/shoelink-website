@@ -116,6 +116,30 @@ function closeImageFullscreen() {
         if (!product) {
             container.innerHTML = '<div class="alert alert-warning">Product not found. <a href="products.html">Go back to Products</a></div>';
         } else {
+            var priceValue = (product.price || '').replace(/[^0-9.]/g, '');
+            if (!priceValue) priceValue = '0';
+            var productSchema = {
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": product.name,
+                "image": "https://hfdhf.github.io/shoelink-website/" + product.image,
+                "description": product.description || '',
+                "sku": product.id,
+                "offers": {
+                    "@type": "Offer",
+                    "price": priceValue,
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock"
+                }
+            };
+            var existingSchema = document.getElementById('productSchema');
+            if (existingSchema) existingSchema.remove();
+            var scriptTag = document.createElement('script');
+            scriptTag.type = 'application/ld+json';
+            scriptTag.id = 'productSchema';
+            scriptTag.text = JSON.stringify(productSchema);
+            document.head.appendChild(scriptTag);
+
             document.getElementById('breadcrumbProduct').textContent = product.id + ' - ' + product.name;
             container.innerHTML = 
                 '<div class="row">' +
