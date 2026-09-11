@@ -118,5 +118,53 @@
     "image": "images/Boots/2501M.jpg",
     "price": "Price on request",
     "description": ""
+  },
+  {
+    "id": "2511M",
+    "name": "Women's cotton boots",
+    "category": "Boots",
+    "image": "images/Boots/2511M.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "2513M",
+    "name": "Women's cotton boots",
+    "category": "Boots",
+    "image": "images/Boots/2513M.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "2523M",
+    "name": "Women's cotton boots",
+    "category": "Boots",
+    "image": "images/Boots/2523M.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "2566M",
+    "name": "Women's cotton boots",
+    "category": "Boots",
+    "image": "images/Boots/2566M.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "2571M",
+    "name": "Women's cotton boots",
+    "category": "Boots",
+    "image": "images/Boots/2571M.jpg",
+    "price": "Price on request",
+    "description": ""
+  },
+  {
+    "id": "2575M",
+    "name": "Women's cotton boots",
+    "category": "Boots",
+    "image": "images/Boots/2575M.jpg",
+    "price": "Price on request",
+    "description": ""
   }
 ]
