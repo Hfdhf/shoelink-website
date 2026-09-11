@@ -162,7 +162,11 @@ let productsData = [];
 let siteData = {};
 
 async function loadJSON(url) {
-    try { const r = await fetch(url); return await r.json(); } catch(e) { return null; }
+    try {
+        const separator = url.indexOf('?') === -1 ? '?' : '&';
+        const r = await fetch(url + separator + 'v=' + Date.now());
+        return await r.json();
+    } catch(e) { return null; }
 }
 
 async function loadAllData() {
