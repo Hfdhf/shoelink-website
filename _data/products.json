@@ -110,5 +110,13 @@
     "image": "images/Man's-shoes/25815.jpg",
     "price": "Price on request",
     "description": ""
+  },
+  {
+    "id": "2501M",
+    "name": "Women's cotton boots",
+    "category": "Boots",
+    "image": "images/Boots/2501M.jpg",
+    "price": "Price on request",
+    "description": ""
   }
 ]
