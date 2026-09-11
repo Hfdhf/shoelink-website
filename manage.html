@@ -282,15 +282,45 @@ function collectProductInputs() {
 
 function addProduct() {
     collectProductInputs();
-    productsData.push({
+    const newProduct = {
         id: '',
         name: '',
         category: '',
         image: '',
         price: '',
         description: ''
-    });
-    renderProducts();
+    };
+    productsData.push(newProduct);
+
+    const container = document.getElementById('productList');
+    const newIndex = productsData.length - 1;
+    const div = document.createElement('div');
+    div.className = 'product-item';
+    div.innerHTML =
+        '<div class="row align-items-center">' +
+        '<div class="col-md-1"><img src="" alt="" style="width:60px;height:60px;object-fit:cover;border-radius:6px;"></div>' +
+        '<div class="col-md-2"><label class="form-label small">编号</label><input type="text" class="form-control form-control-sm prod-id" data-index="' + newIndex + '" value=""></div>' +
+        '<div class="col-md-3"><label class="form-label small">名称</label><input type="text" class="form-control form-control-sm prod-name" data-index="' + newIndex + '" value=""></div>' +
+        '<div class="col-md-2"><label class="form-label small">分类</label><input type="text" class="form-control form-control-sm prod-cat" data-index="' + newIndex + '" value=""></div>' +
+        '<div class="col-md-2"><label class="form-label small">价格</label><input type="text" class="form-control form-control-sm prod-price" data-index="' + newIndex + '" value=""></div>' +
+        '<div class="col-md-2"><label class="form-label small">图片路径</label><input type="text" class="form-control form-control-sm prod-img" data-index="' + newIndex + '" value=""></div>' +
+        '<div class="col-md-10"><label class="form-label small">描述</label><input type="text" class="form-control form-control-sm prod-desc" data-index="' + newIndex + '" value=""></div>' +
+        '<div class="col-md-2 text-end pt-3"><button class="btn btn-danger-custom btn-sm btn-del-prod" data-index="' + newIndex + '">🗑️</button></div>' +
+        '</div>';
+    container.appendChild(div);
+
+    const delBtn = div.querySelector('.btn-del-prod');
+    if (delBtn) {
+        delBtn.addEventListener('click', function() {
+            const i = parseInt(this.getAttribute('data-index'));
+            if (confirm('删除此产品？')) {
+                productsData.splice(i, 1);
+                renderProducts();
+                showStatus('产品已删除', 'success');
+            }
+        });
+    }
+
     showStatus('✅ 已添加新产品，请填写信息', 'success');
 }
 
