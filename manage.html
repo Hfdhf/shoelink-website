@@ -253,7 +253,35 @@ function renderProducts() {
     });
 }
 
+function collectProductInputs() {
+    document.querySelectorAll('.prod-id').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].id = input.value.trim();
+    });
+    document.querySelectorAll('.prod-name').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].name = input.value.trim();
+    });
+    document.querySelectorAll('.prod-cat').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].category = input.value.trim();
+    });
+    document.querySelectorAll('.prod-price').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].price = input.value.trim();
+    });
+    document.querySelectorAll('.prod-img').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].image = input.value.trim();
+    });
+    document.querySelectorAll('.prod-desc').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].description = input.value.trim();
+    });
+}
+
 function addProduct() {
+    collectProductInputs();
     productsData.push({
         id: '',
         name: '',
