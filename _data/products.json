@@ -166,5 +166,13 @@
     "image": "images/Boots/2575M.jpg",
     "price": "Price on request",
     "description": ""
+  },
+  {
+    "id": "2505M",
+    "name": "Men's cotton boots",
+    "category": "Boots",
+    "image": "images/Boots/2505M.jpg",
+    "price": "Price on request",
+    "description": ""
   }
 ]
