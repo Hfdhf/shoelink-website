@@ -141,10 +141,24 @@ function closeImageFullscreen() {
             document.head.appendChild(scriptTag);
 
             document.getElementById('breadcrumbProduct').textContent = product.id + ' - ' + product.name;
+            var videoHtml = '';
+            if (product.video && product.video.trim() !== '') {
+                videoHtml = 
+                    '<div class="mt-4">' +
+                    '  <h5 class="mb-3" style="color:#1F3A5F;">Product Video</h5>' +
+                    '  <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">' +
+                    '    <iframe src="https://www.youtube.com/embed/' + product.video + '" ' +
+                    '      style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" ' +
+                    '      allowfullscreen></iframe>' +
+                    '  </div>' +
+                    '</div>';
+            }
+
             container.innerHTML = 
                 '<div class="row">' +
                 '  <div class="col-lg-6 mb-4">' +
                 '    <img src="' + product.image + '" alt="' + product.name + '" class="product-detail-img" style="cursor: zoom-in;" onclick="openImageFullscreen(this.src)">' +
+                '    ' + videoHtml +
                 '  </div>' +
                 '  <div class="col-lg-6">' +
                 '    <span class="product-id-badge">' + product.id + '</span>' +
