@@ -309,6 +309,7 @@ function addProduct() {
         '<div class="col-md-2"><label class="form-label small">分类</label><input type="text" class="form-control form-control-sm prod-cat" data-index="' + newIndex + '" value=""></div>' +
         '<div class="col-md-2"><label class="form-label small">价格</label><input type="text" class="form-control form-control-sm prod-price" data-index="' + newIndex + '" value=""></div>' +
         '<div class="col-md-2"><label class="form-label small">图片路径</label><input type="text" class="form-control form-control-sm prod-img" data-index="' + newIndex + '" value=""></div>' +
+        '<div class="col-md-2"><label class="form-label small">视频ID(YouTube)</label><input type="text" class="form-control form-control-sm prod-video" data-index="' + newIndex + '" value=""></div>' +
         '<div class="col-md-10"><label class="form-label small">描述</label><input type="text" class="form-control form-control-sm prod-desc" data-index="' + newIndex + '" value=""></div>' +
         '<div class="col-md-2 text-end pt-3"><button class="btn btn-danger-custom btn-sm btn-del-prod" data-index="' + newIndex + '">🗑️</button></div>' +
         '</div>';
@@ -353,6 +354,10 @@ function generateProducts() {
     document.querySelectorAll('.prod-desc').forEach(function(input) {
         const i = parseInt(input.getAttribute('data-index'));
         if (productsData[i]) productsData[i].description = input.value.trim();
+    });
+    document.querySelectorAll('.prod-video').forEach(function(input) {
+        const i = parseInt(input.getAttribute('data-index'));
+        if (productsData[i]) productsData[i].video = input.value.trim();
     });
     document.getElementById('productsText').value = JSON.stringify(productsData, null, 2);
     document.getElementById('productsOutput').style.display = 'block';
